@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/blog"/>
+                <property name="username" value="root"/>
+                <property name="password" value="501021"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="ArticlesMapper.xml"/>
+        <mapper resource="CollectsMapper.xml"/>
+        <mapper resource="Column_articleMapper.xml"/>
+        <mapper resource="ColumnsMapper.xml"/>
+        <mapper resource="CommentsMapper.xml"/>
+        <mapper resource="FollowsMapper.xml"/>
+        <mapper resource="Label_articleMapper.xml"/>
+        <mapper resource="LabelsMapper.xml"/>
+        <mapper resource="LikesMapper.xml"/>
+        <mapper resource="UserMapper.xml"/>
+
+    </mappers>
+</configuration>

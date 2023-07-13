@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p class="my-p"></p>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  axios({
+    url:'http://hmajax.itheima.net/api/province'
+  }).then(result=>{
+    console.log(result)
+    console.log(result.data.list)
+    console.log(result.data.list.join('<br>'))
+    document.querySelector('.my-p').innerHTML=result.data.list.join('<br>')
+  })
+</script>
+</body>
+</html>

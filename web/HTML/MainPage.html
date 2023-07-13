@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="MainPageStyle.css">
+</head>
+<body>
+<header class="header-box">
+  <nav>
+      <ul>
+        <li class="left"><i class="fire icon"></i>博客园</li>
+        <li><a href="#"><i class="location arrow icon"></i>发布</a></li>
+        <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+        <li><a href="#"><i class="bell icon"></i>消息</a></li>
+        <li><a href="#"><i class="home icon"></i>首页</a></li>
+        <li>
+          <div class="ui inline dropdown">
+            <div class="text">
+              <img class="ui avatar image" src="../image/账号.png">
+              未登录
+            </div>
+            <i class="dropdown icon"></i>
+          </div>
+        </li>
+        <li class="right">
+
+          <input type="text" id="acc" class="search" placeholder="查询" name="search">
+          <label for="search-button"><i class="search icon" style="color: white"></i></label>
+          <input type="button" id="search-button" value="搜索">
+        </li>
+      </ul>
+  </nav>
+</header>
+
+<div class="banner">
+  <h2>Welcome to Blog Park</h2><br>
+  <div><p>A small step may lead to a thousand miles</p></div>
+</div>
+
+<div class="container">
+  <section class="left-section">
+    <h3>推荐博客</h3>
+
+    <!--    文章-->
+    <div class="articles">
+      <div class="article">
+        <h4>文章1</h4>
+        <p>内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1.</p>
+        <a href="#">点赞数 图片 作者：</a>
+      </div>
+      <div class="article">
+        <h4>文章2</h4>
+        <p>内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2.</p>
+        <a href="#">点赞数 图片 作者：</a>
+      </div>
+      <div class="article">
+        <h4>文章2</h4>
+        <p>内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2.</p>
+        <a href="#">点赞数 图片 作者：</a>
+      </div>
+      <div class="article">
+        <h4>文章2</h4>
+        <p>内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2内容2.</p>
+        <a href="#">点赞数 图片 作者：</a>
+      </div>
+    </div>
+
+    <!--    分页-->
+    <div class="pagination">
+      <a href="#" class="prev">上一页</a>
+      <a href="#" class="page">1</a>
+      <a href="#" class="page">2</a>
+      <a href="#" class="page">3</a>
+      <a href="#" class="next">下一页</a>
+    </div>
+  </section>
+  <aside class="right-section">
+    <div class="box">
+      <h3>活动</h3>
+      <p>放图片</p>
+    </div>
+    <div class="box">
+      <h3><i class="tags icon"></i>标签</h3>
+      <ul>
+        <li><a href="#">标签1</a></li>
+        <li><a href="#">标签2</a></li>
+        <li><a href="#">标签3</a></li>
+        <li><a href="#">标签4</a></li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3><i class="child icon"></i>作者推荐</h3>
+      <ul class="tags">
+        <li><a href="#">作者1</a></li>
+        <li><a href="#">作者2</a></li>
+        <li><a href="#">作者3</a></li>
+        <li><a href="#">作者4</a></li>
+        <li><a href="#">作者5</a></li>
+        <li><a href="#">作者6</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>&copy; 2023 My Blog. All rights reserved.</p>
+</footer>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../lib/semantic.min.js"></script>
+<script src="../lib/semantic.js"></script>
+
+</body>
+</html>

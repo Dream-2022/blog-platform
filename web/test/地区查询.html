@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box">
+  <form id="editFrom" class="row">
+    <div class="mb-3 col">
+      <label class="form-label">省份名字</label>
+      <input type="text" value="北京" name="province" class="form-control province" placeholder="请输入省份名称">
+    </div>
+    <div class="mb-3 col">
+      <label class="form-label">城市名字</label>
+      <input type="text" value="北京市" name="city" class="form-control city" placeholder="请输入城市名称">
+    </div>
+  </form>
+    <button type="button" class="btn btn-primary sel-btn">查询</button>
+    <br>
+    <br>
+    <p>地区列表：</p>
+    <ul class="list-group">
+      <li class="list-group-item">东城区</li>
+    </ul>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+   <!-- 查询按钮-点击事件-->
+    document.querySelector('.sel-btn').addEventListener
+    ('click',()=>{
+      // 获取省份和城市名字
+      let pName=document.querySelector('.province').value
+      let cName=document.querySelector('.city').value
+
+      //基于axios请求地区列表数据
+      axios({
+        url:'http://hmajax.itheima.net/api/area',
+        params:{
+          pname:pName,
+          cname:cName
+        }
+      }).then(result=>{
+        let list=result.data.list
+        // let theLi=list.map(areaName=>
+        //         '<li class="lst-group-item"> ${areaName} </li>').join('<br>')
+        // console.log(theLi)
+      })
+    })
+
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="LoginStyle.css">
+</head>
+<body>
+<div class="logoHead"></div>
+<div class="logoHead float"></div>
+<div class="logoHead float"></div>
+<div class="logo float" >
+  <img src="image/架构.png" class="logoImg">
+  <span class="logoCh">博客园</span>
+</div>
+<div class="head">
+    <h1 class="title">欢迎回来</h1>
+<form class="acc" method="post" action="login">
+
+    <div class="box boxAcc">
+        <img src="image/账号.png" class="hao" alt="">
+        <input type="text" class="text" placeholder="请输入账号" name="username" required>
+    </div>
+
+    <div class="box boxPas">
+        <img src="image/密码.png" class="pas" alt="">
+        <label for="password">
+           <img src="image/闭眼.png" alt="" class="png">
+       </label>
+       <input type="password" id="password" placeholder="请输入密码" name="password" required>
+       <span class="forget"><a href="#">忘记密码？</a> </span>
+    </div>
+
+    <div class="redDiv">
+      <span>&nbsp;</span>
+    </div>
+
+    <div>
+       <button type="button" class="bu loginForm">登录</button>
+    </div>
+
+    <div>
+       <button type="submit" ><a href="HTML/Register.html">注册</a></button>
+    </div>
+</form>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+<script>
+<!--    密码框和文本框的转换-->
+  var eye=document.querySelector('.png')
+  var acc=document.querySelector('.text');
+  var pwd=document.querySelector('#password');
+  var flag=0;
+  eye.onclick=function (){
+    if(flag===0){
+      pwd.type='text';
+      eye.src='image/睁眼.png'
+      flag=1;
+    }
+    else{
+      pwd.type='password';
+      eye.src='image/闭眼.png'
+      flag=0;
+    }
+  }
+</script>
+<script src="lib/form-serialize.js">
+</script>
+<script src="JavaScript/loginJs.js">
+</script>
+
+</body>
+</html>

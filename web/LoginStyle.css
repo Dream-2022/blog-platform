@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.logoHead {
+    width: 100px;
+    height: 61px;
+}
+.logo{
+    height: 100px;
+    width: 200px;
+}
+.logo .logoImg {
+    width: 43%;
+}
+.logo .logoCh{
+    font-size: 20px;
+    color: #1060ad;
+    font-family: '宋体';
+    font-weight: 600;
+}
+.float {
+    float: left;
+}
+body{
+    /* 径向渐变 */
+    background: linear-gradient(to right, #F1F8FF, #CBDFF3);
+}
+.title{
+    color: #5f6f7c;
+    text-align: center;
+    margin: 55px;
+}
+.head {
+    background-color: white;
+    margin:100px auto;
+    width: 500px;
+    height: 600px;
+    border: 1px #ccc solid;
+    border-radius: 50px;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
+}
+.box{
+    position: relative;
+    width: 400px;
+    border-bottom:1px solid #ccc;
+}
+.boxAcc{
+    margin:80px auto;
+}
+.boxPas{
+    margin: auto;
+}
+input{
+    padding-left: 50px;
+    font-size: 15px;
+    width: 350px;
+    height: 35px;
+    border: 0;
+    font-family: "楷体";
+    border-radius: 5px;
+}
+#password{
+    width: 280px;
+}
+.boxAcc .hao{
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    width: 24px;
+}
+.boxPas .pas{
+    position: absolute;
+    top: 7px;
+    left: 3px;
+    width: 24px;
+}
+.boxPas .png{
+    position: absolute;
+    top: 7px;
+    right: 76px;
+    width: 24px;
+}
+.redDiv {
+    width: 400px;
+    padding-top: 20px;
+    text-align: right;
+    color: #af0909;
+}
+button {
+    margin-top: 40px;
+    margin-left: 46px;
+    width: 400px;
+    height: 35px;
+    padding: 10px;
+    background-color: #B8CDE4;
+    color:#ffffff;
+    border:none;
+    border-radius: 4px;
+    /*鼠标显示小手*/
+    cursor:pointer;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
+}
+button:hover{
+    background-color: #91AFD0;
+}
+button a{
+    color: white;
+    text-decoration: none;
+}
+.forget a{
+    text-decoration:none;
+    font-size:13px;
+    color: #60a9d0;
+}

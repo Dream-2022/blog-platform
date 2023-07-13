@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Details Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="semantic.min.css">
+    <link rel="stylesheet" href="DetailStyle.css">
+    <style>
+        .container-content{
+            margin:138px auto;
+        }
+        .container-content1{
+            background-color: white;
+            margin:20px auto;
+            width: 74%;
+            height:150px;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.05);
+        }
+        .container-content2{
+            background-color: #f6f6f6;
+            margin:0 auto;
+            width: 74%;
+            height:826px;
+        }
+        .content-text {
+            color: #3d6273;
+            width: 307px;
+            height: 34px;
+            border-radius: 20px;
+            padding: 8px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            margin-left: 130px;
+        }
+        .content-button ,
+        .edit-button{
+            width: 67px;
+            height: 34px;
+            background-color: white;
+            color: #828993;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border: 1px solid #dedede;
+            border-radius: 24px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .content-edit{
+            float: right;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            width: 70px;
+            height: 21px;
+            border: none;
+            background-color: #8bb1c5;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border-radius: 24px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .edit-button{
+            float: right;
+            width: 80px;
+            margin-top: 10px;
+            margin-right: 20px;
+            color: #80A1C5;
+        }
+        .content-edit,
+        .edit-button:hover,
+        .content-button:hover{
+            box-shadow: 5px 5px 5px -1px rgb(0,0,0,.05);
+        }
+        .container-content .container-content1 .headSculpture{
+            width: 106px;
+            transform:translateY(-30px);
+            margin-left: 85px;
+            display: inline-block;
+        }
+        .container-content .container-content1 .content-nickname,
+        .container-content .container-content1 .content-age{
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        td .content-detail1,
+        td .content-detail2,
+        td .content-detail3{
+            margin-top: 23px;
+        }
+        span{
+            margin-left: 10px;
+        }
+
+        .username,
+        .email,
+        .fan,
+        .follow{
+            margin-right: 38px;
+        }
+
+        .container-content .container-content2 .content-box{
+            margin-bottom: 10px;
+            height: 158px;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+        }
+        .container-content .container-content2 .content-box .content-image{
+            display: inline-block;
+            height: 158px;
+            width: 300px;
+            object-fit: cover;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 135px;
+            margin: 10px 10px 10px 46px;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #b3c0ce;
+        }
+
+        select option {
+            padding: 8px;
+            font-size: 16px;
+        }
+        tr td h3{
+            margin: 0 0 0 20px;
+            padding: 0;
+
+        }
+        tr td .content-span{
+            display: inline-block;
+            padding: 20px;
+        }
+        .nav{
+            background-color: #fcfcfc;
+            height:53px;
+            color: #4c4c4c;
+            border-top: 3px solid #89e1f1;
+            border-bottom:1px solid #edeef0;
+            line-height: 53px;
+        }
+        .nav a{
+            /*要转换为行内块元素*/
+            display:inline-block;
+            height:53px;
+            font-size:14px;
+            color: #4c4c4c;
+            text-decoration: none;
+            padding:0 130px;
+        }
+        .nav a:hover{
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+  <header class="header-box">
+    <nav>
+      <ul>
+        <li class="left"><i class="fire icon"></i>博客园</li>
+        <li><a href="#"><i class="location arrow icon"></i>发布</a></li>
+        <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+        <li><a href="#"><i class="bell icon"></i>消息</a></li>
+        <li><a href="#"><i class="home icon"></i>首页</a></li>
+        <li>
+          <div class="ui inline dropdown">
+            <div class="text">
+              <img class="ui avatar image" src="../image/账号.png">
+              未登录
+            </div>
+            <i class="dropdown icon"></i>
+          </div>
+        </li>
+        <li class="right">
+          <input type="text" id="acc" class="search" placeholder="查询" name="search">
+          <label for="search-button"><i class="search icon" style="color: white"></i></label>
+          <input type="button" id="search-button" value="搜索">
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <div class="container-content">
+      <div class="container-content1">
+          <button class="edit-button">编辑资料</button>
+          <table>
+              <tr>
+                  <td><img class="ui medium circular image headSculpture" src="../image/image.jpeg" alt=""></td>
+                  <td>
+                      <div class="content-detail1">
+                          <span class="content-nickname">nickname</span>
+                          <span class="content-age">5岁</span>
+                          <span class="content-age">女</span>
+                      </div>
+                      <div class="content-detail2">
+                          <span>账号:</span><span class="username">7894567899</span>
+                          <span>邮箱:</span><span class="email">1243214@qq.com</span>
+                          <span>粉丝:</span><span class="fan">789</span>
+                          <span>关注:</span><span class="follow">456</span>
+                      </div>
+                      <div class="content-detail3">这个人很懒，什么都没有留下</div>
+                  </td>
+              </tr>
+          </table>
+
+      </div>
+      <div class="container-content2">
+
+          <div class="nav">
+              <a href="#">全部</a>
+              <a href="#">草稿箱</a>
+              <a href="#">审核</a>
+              <a href="#">收藏</a>
+          </div>
+          <select>
+              <option>年</option>
+              <option>2023</option>
+              <option>2022</option>
+          </select>
+          <select>
+              <option>标签</option>
+              <option>1号</option>
+              <option>2号</option>
+          </select>
+          <select>
+              <option>分类</option>
+              <option>c++</option>
+              <option>java</option>
+          </select>
+          <input type="text" class="content-text" placeholder="查找的内容">
+          <button class="content-button">搜索</button>
+
+          <div class="content-box">
+              <table>
+                  <tr>
+                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
+                      <td>
+                          <h3>博客</h3>
+                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
+                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
+                          <span><i class="star icon"></i> 收藏</span><span>12</span>
+                          <button class="content-edit">编辑</button>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <div class="content-box">
+              <table>
+                  <tr>
+                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
+                      <td>
+                          <h3>博客</h3>
+                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
+                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
+                          <span><i class="star icon"></i> 收藏</span><span>12</span>
+                          <button class="content-edit">编辑</button>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <div class="content-box">
+              <table>
+                  <tr>
+                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
+                      <td>
+                          <h3>博客</h3>
+                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
+                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
+                          <span><i class="star icon"></i> 收藏</span><span>12</span>
+                          <button class="content-edit">编辑</button>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+          <div class="content-box">
+              <table>
+                  <tr>
+                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
+                      <td>
+                          <h3>博客</h3>
+                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
+                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
+                          <span><i class="star icon"></i> 收藏</span><span>12</span>
+                          <button class="content-edit">编辑</button>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
+  </div>
+
+
+  <footer>
+      <p>&copy; 2023 My Blog. All rights reserved.</p>
+  </footer>
+  <script
+          src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous">
+  </script>
+
+
+</body>
+</html>

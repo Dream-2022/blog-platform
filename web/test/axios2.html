@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p></p>
+<p></p>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  axios({
+    url:'https://hmajax.itheima.net/api/city',
+    params:{
+      pname:'湖南省'
+    }
+  }).then(result=>{
+    //对服务器返回的数据做后序处理
+    console.log(result)
+    console.log(result.data.list)
+    document.querySelector('p').innerHTML=result.data.list.join('<br>')
+  })
+</script>
+</body>
+</html>

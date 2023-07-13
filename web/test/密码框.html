@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="password" id="password">
+<img src="../image/闭眼.png" class="png">
+<script>
+    // className会直接覆盖原先的类名
+    var eye=document.querySelector('.png');
+    eye.onclick=function (){
+        this.className='eye chang';
+    }
+    var pwd=document.querySelector('#password');
+    eye.onclick=function (){
+        pwd.type='text';
+    }
+
+</script>
+</body>
+</html>

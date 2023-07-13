@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+  <link rel="stylesheet" href="RegisterStyle.css">
+</head>
+<body>
+<div class="head">
+  <h1 class="title">立即注册</h1>
+  <form class="acc">
+
+    <div class="box boxAcc">
+        <label for="abc">
+            <img src="../image/邮箱.png" class="hao" alt="">
+        </label>
+        <input type="text" class="text" id="abc" placeholder="请输入邮箱" name="password" required>
+    </div>
+
+    <div class="box boxPas">
+      <label for="password">
+          <img src="../image/时间.png" class="pas" alt="">
+      </label>
+      <input type="password" id="password" placeholder="获取的验证码" name="password" required>
+      <span class="forget"><a href="#">获取验证码</a> </span>
+    </div>
+
+    <div class="box boxPas">
+        <label for="bcd">
+            <img src="../image/密码.png" class="pas" alt="">
+        </label>
+        <input type="password" id="bcd" placeholder="请输入密码" name="password" required>
+    </div>
+
+    <div class="box boxPas">
+      <label for="cde">
+          <img src="../image/确认密码.png" class="pas" alt="">
+      </label>
+      <input type="password" placeholder="请确认密码" id="cde" name="password" required>
+    </div>
+
+    <div class="redDiv">
+      <span class="red">&nbsp;</span>
+    </div>
+
+    <div>
+      <button type="button">注册</button>
+    </div>
+
+    <div>
+      <button type="button" class="btn"><a href="Register.html">返回登录</a> </button>
+    </div>
+  </form>
+</div>
+<script src="../JavaScript/registerJs.js">
+</script>
+</body>
+</html>
