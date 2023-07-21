@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +80,7 @@ public class test {
         //通过SqlSession工厂对象获取SqlSession对象
         SqlSession sqlSession=sqlSessionFactory.openSession(true);
         //执行映射配置文件中的sql语句，并接收结果
-        User user = new User(5,"1","1","1","1","1","1","1","1","1");
+        User user = new User(5,"1","1","1","1","1","1",new Timestamp(System.currentTimeMillis()),"1","1","1");
         int result=sqlSession.insert("insert",user);
         //提交事务
         //sqlSession.commit();
@@ -98,7 +99,7 @@ public class test {
         //通过SqlSession工厂对象获取SqlSession对象
         SqlSession sqlSession=sqlSessionFactory.openSession();
         //执行映射配置文件中的sql语句，并接收结果
-        User user = new User(5,"1","223461","1","1","1","1","1","1","1");
+        User user = new User(5,"1","223461","1","1","1","1",new Timestamp(System.currentTimeMillis()),"1","1","1");
         int result=sqlSession.update("update",user);
         //提交事务
         sqlSession.commit();
@@ -127,7 +128,7 @@ public class test {
         is.close();
     }
     @Test
-    public void selectAlla() throws IOException {
+    public void selectArticle() throws IOException {
         //加载核心配置文件
         InputStream is= Resources.getResourceAsStream("UserConfig.xml");
         //获取SqlSession工厂对象
@@ -135,7 +136,7 @@ public class test {
         //通过SqlSession工厂对象获取SqlSession对象
         SqlSession sqlSession=sqlSessionFactory.openSession();
         //执行映射配置文件中的sql语句，并接收结果
-        List<Articles> lists=sqlSession.selectList("selectAlla");
+        List<Articles> lists=sqlSession.selectList("selectArticle");
         //处理结果
         for(Articles articles:lists){
             System.out.println(articles);

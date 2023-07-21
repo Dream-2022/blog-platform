@@ -1,25 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link rel="stylesheet" href="LoginStyle.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+<!--    <link rel="stylesheet" href="lib/common.css">-->
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <link rel="stylesheet" href="LoginStyle.css">
+
+<style>
+
+    .modal{
+        /*弹窗*/
+        color: #32586c;
+    }
+    .modal-body .obtainCode {
+        margin-top: 8px;
+        border: none;
+        background-color: transparent;
+        float: right;
+        cursor: pointer;
+        font-size: 13px;
+        color: #60a9d0;
+        display: inline;
+        margin-right: 3px;
+    }
+    .modal-body .input-email{
+        padding-left: 10px;
+    }
+    .modal-body .input-code{
+        padding-left: 9px;
+    }
+    .modal-body input{
+        margin: 5px 8px 5px 8px;
+        padding-left: 8px;
+        width: 305px;
+        outline: none;
+    }
+    .modal-body input:focus {
+        border-bottom: 1px solid #ccc;
+        box-shadow: 10px 10px 10px -4px rgb(0,0,0,.03);
+    }
+    .save-button{
+        background-color: #4692cc;
+        border: none;
+    }
+    .save-button:hover{
+        background-color: #4083b6;
+    }
+    .red{
+        font-size: 13px;
+        color: #af0909;
+        float: right;
+        padding-right: 30px;
+    }
+
+/*    登录成功浮窗*/
+    .toast {
+        position: fixed;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: orangered;
+        min-width: 200px;
+
+    }
+    .alert{
+        padding:0;
+        margin-left: 588px;
+        margin-top: 10px;
+        line-height: 40px;
+        height: 40px;
+        width: 264px;
+        font-size: 15px;
+        color: white;
+        text-align:center;
+    }
+
+</style>
 </head>
 <body>
-<div class="logoHead"></div>
+<!--浮窗-->
+<div class="alert"></div>
+
 <div class="logoHead float"></div>
 <div class="logoHead float"></div>
 <div class="logo float" >
-  <img src="image/架构.png" class="logoImg">
+  <img src="image/架构.png" class="logoImg" alt="">
   <span class="logoCh">博客园</span>
 </div>
+
+<!--<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="myToast">-->
+<!--    <div class="toast-body"></div>-->
+<!--</div>-->
+
 <div class="head">
     <h1 class="title">欢迎回来</h1>
-<form class="acc" method="post" action="login">
+<form class="acc" method="post" action="/login">
 
     <div class="box boxAcc">
         <img src="image/账号.png" class="hao" alt="">
-        <input type="text" class="text" placeholder="请输入账号" name="username" required>
+        <input type="text" class="text " placeholder="请输入账号" name="username">
     </div>
 
     <div class="box boxPas">
@@ -27,8 +108,36 @@
         <label for="password">
            <img src="image/闭眼.png" alt="" class="png">
        </label>
-       <input type="password" id="password" placeholder="请输入密码" name="password" required>
-       <span class="forget"><a href="#">忘记密码？</a> </span>
+       <input type="password" id="password" placeholder="请输入密码" name="password">
+       <span class="forget" type="button" data-bs-toggle="modal" data-bs-target=".my-box"><a href="#">忘记密码？</a> </span>
+            <!--    弹框标签-->
+            <!--    bootstrap的modal弹框：添加modal类名（默认隐藏）-->
+            <div class="modal my-box" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">找回密码</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮箱:</span>
+                            <input type="email" placeholder="请输入邮箱" class="input-email" id="abc"><br>
+                            <span>&nbsp;&nbsp;&nbsp;验证码:</span>
+                            <input type="text" class="input-code" placeholder="获取的验证码">
+                            <button type="button" class="obtainCode">获取验证码 </button><br>
+                            <span>重置密码:</span>
+                            <input type="password" placeholder="请输入密码" class="input-password" id="bcd"><br>
+                            <span>确认密码:</span>
+                            <input type="password" placeholder="请确认密码" class="input-confirm" id="cde"><br>
+                            <span class="red">&nbsp;</span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="exit-login-email" data-bs-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary save-button">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
     <div class="redDiv">
@@ -39,11 +148,20 @@
        <button type="button" class="bu loginForm">登录</button>
     </div>
 
-    <div>
-       <button type="submit" ><a href="HTML/Register.html">注册</a></button>
-    </div>
 </form>
+    <div>
+      <button type="submit" class="returnLoginBtn"><a href="HTML/Register.html" class="Login-A">注册</a></button>
+    </div>
 </div>
+<script>
+    var returnLoginBtn = document.querySelector('.returnLoginBtn');
+    var returnLoginA = document.querySelector('.returnLoginBtn .Login-A');
+    var loginUrl = returnLoginA.getAttribute('href');
+    returnLoginBtn.addEventListener('click', function() {
+        window.location.href = loginUrl;
+    });
+</script><!--点击登录（a标签）盒子事件-->
+<script src="lib/bootstrap.js"></script><!--弹窗-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
 <script>
 <!--    密码框和文本框的转换-->
@@ -64,10 +182,13 @@
     }
   }
 </script>
-<script src="lib/form-serialize.js">
-</script>
-<script src="JavaScript/loginJs.js">
-</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="lib/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="JavaScript/Email.js"></script>
+<script src="lib/form-serialize.js"></script>
+<script src="JavaScript/Login.js"></script>
 
 </body>
 </html>

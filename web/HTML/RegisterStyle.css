@@ -29,7 +29,7 @@ body{
 .title{
     color: #5f6f7c;
     text-align: center;
-    margin: 60px 180px 40px 180px;
+    margin: 60px 156px 40px 150px;
 }
 .head {
     background-color: white;
@@ -47,28 +47,29 @@ body{
     margin-bottom: 26px;
     margin-left:48px;
 }
-input{
+.boxPas input,
+.boxAcc input{
     padding-left: 50px;
     font-size: 15px;
-    width: 350px;
+    width: 392px;
     height: 35px;
     border: 0;
     font-family: "楷体";
     border-radius: 5px;
 }
 #password{
-    width: 280px;
+    width: 313px;
 }
 .boxAcc .hao{
     position: absolute;
     top: 5px;
-    left: 3px;
+    left: 7px;
     width: 24px;
 }
 .boxPas .pas{
     position: absolute;
     top: 6px;
-    left: 3px;
+    left: 7px;
     width: 24px;
 }
 .boxPas .png{
@@ -88,7 +89,8 @@ input{
 div .btn{
     margin-top: 32px;
 }
-button {
+.Register-Box button ,
+.Login-Box button{
     margin-top: 15px;
     margin-left: 46px;
     width: 400px;
@@ -101,15 +103,31 @@ button {
     cursor:pointer;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
 }
-button:hover{
+.Register-Box button:hover ,
+.Login-Box button:hover{
     background-color: #91AFD0;
 }
-button a{
+div button a{
     color: white;
     text-decoration: none;
 }
-.forget a{
-    text-decoration:none;
+.boxPas .obtainCode{
+    margin-top: 8px;
+    border: none;
+    background-color: transparent;
+    float: right;
+    cursor: pointer;
     font-size:13px;
     color: #60a9d0;
+    display: inline;
+    margin-right: 3px;
 }
+
+ .toast {
+     position: fixed;
+     top: 50px;
+     left: 50%;
+     transform: translateX(-50%);
+     color: orangered;
+     min-width: 200px;
+ }

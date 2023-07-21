@@ -3,206 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog Details Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+<!--    浮窗-->
+    <link rel="stylesheet" href="stackpath.bootstrapcdn.com_bootstrap_4.5.2_css_bootstrap.min.css">
+    <script src="../JavaScript/code.jquery.com_jquery-3.6.0.min.js"></script>
+    <script src="../JavaScript/cdn.jsdelivr.net_npm_bootstrap@5.0.2_dist_js_bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="cdnjs.cloudflare.com_ajax_libs_font-awesome_5.15.3_css_all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+<!--    -->
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/bootstrap.css">
     <link rel="stylesheet" href="semantic.min.css">
+    <link rel="stylesheet" href="Navigation.css">
+    <link rel="stylesheet" href="Dropdown.css">
     <link rel="stylesheet" href="DetailStyle.css">
     <style>
-        .container-content{
-            margin:138px auto;
+        .modal{
+            /*弹窗*/
+            color: #32586c;
+            font-size: 15px;
         }
-        .container-content1{
-            background-color: white;
-            margin:20px auto;
-            width: 74%;
-            height:150px;
-            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.05);
+        .modal-content{
+            width: 110%;
+            position: relative;
+            flex: 1 1 auto;
+            padding: var(--bs-modal-padding);
         }
-        .container-content2{
-            background-color: #f6f6f6;
-            margin:0 auto;
-            width: 74%;
-            height:826px;
+        .modal-content h3{
+            margin-top: 20px;
+            margin-left: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
         }
-        .content-text {
-            color: #3d6273;
-            width: 307px;
-            height: 34px;
-            border-radius: 20px;
-            padding: 8px;
-            font-size: 14px;
-            border: none;
+        .modal-content span,
+        .modal-content input
+        {
+            display: inline-block;
+        }
+        .modal-content table tr td .collect-avatar{
+            width: 83px;
+        }
+        /*性别元素出现在同一行*/
+        .inline-gender {
+            display: flex;
+            align-items: center;
+        }
+        #nan{
+            margin-left: 40px;
+        }
+        .modal-content .inline-gender label{
+            color: #92b0c0;
+        }
+        .modal-content textarea,
+        .modal-content input {
+            margin: 5px 8px 5px 8px;
+            padding-left: 8px;
+            width: 292px;
             outline: none;
-            margin-left: 130px;
-        }
-        .content-button ,
-        .edit-button{
-            width: 67px;
-            height: 34px;
-            background-color: white;
-            color: #828993;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            border: 1px solid #dedede;
-            border-radius: 24px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        .content-edit{
-            float: right;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            width: 70px;
-            height: 21px;
             border: none;
-            background-color: #8bb1c5;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            border-radius: 24px;
-            cursor: pointer;
-            margin-left: 10px;
+            color: #92b0c0;
         }
-        .edit-button{
-            float: right;
-            width: 80px;
-            margin-top: 10px;
-            margin-right: 20px;
-            color: #80A1C5;
+        .modal-content .upload{
+            width: 182px;
         }
-        .content-edit,
-        .edit-button:hover,
-        .content-button:hover{
-            box-shadow: 5px 5px 5px -1px rgb(0,0,0,.05);
+        /*输入框下方的外边距*/
+        .modal-content td{
+            margin-bottom: 20px;
         }
-        .container-content .container-content1 .headSculpture{
-            width: 106px;
-            transform:translateY(-30px);
-            margin-left: 85px;
-            display: inline-block;
+        .modal-content .collect-gender{
+            width: 10px;
         }
-        .container-content .container-content1 .content-nickname,
-        .container-content .container-content1 .content-age{
-            margin-bottom: 10px;
-            font-size: 18px;
+        .modal-content input:focus {
+            border-bottom: 1px solid #ccc;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.03);
         }
-        td .content-detail1,
-        td .content-detail2,
-        td .content-detail3{
-            margin-top: 23px;
+        .modal-content textarea:focus{
+            border-bottom: 1px solid #ccc;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.03);
         }
-        span{
-            margin-left: 10px;
+        .modal-content .collect-desc{
+            margin-left: 20px;
+            margin-bottom: 20px;
+            padding: 5px;
+            width: 386px;
+            height: 76px;
         }
-
-        .username,
-        .email,
-        .fan,
-        .follow{
-            margin-right: 38px;
+        /*手机号正则判断的提示*/
+        .modal-content .birthday-spanContain .tiBirthday{
+            color: #af0909;
+            position: absolute;
+            right:120px;
+            top:270px;
         }
-
-        .container-content .container-content2 .content-box{
-            margin-bottom: 10px;
-            height: 158px;
-            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+        .modal-content .phone-spanContain .ti{
+            color: #af0909;
+            position: absolute;
+            right:234px;
+            top:158px;
         }
-        .container-content .container-content2 .content-box .content-image{
-            display: inline-block;
-            height: 158px;
-            width: 300px;
-            object-fit: cover;
+        .save-button{
+            background-color: #4692cc;
+            border: none;
         }
-
-        select {
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: 135px;
-            margin: 10px 10px 10px 46px;
+        .save-button:hover{
+            background-color: #4083b6;
         }
-
-        select:focus {
-            outline: none;
-            border-color: #b3c0ce;
-        }
-
-        select option {
-            padding: 8px;
-            font-size: 16px;
-        }
-        tr td h3{
-            margin: 0 0 0 20px;
-            padding: 0;
-
-        }
-        tr td .content-span{
-            display: inline-block;
-            padding: 20px;
-        }
-        .nav{
-            background-color: #fcfcfc;
-            height:53px;
-            color: #4c4c4c;
-            border-top: 3px solid #89e1f1;
-            border-bottom:1px solid #edeef0;
-            line-height: 53px;
-        }
-        .nav a{
-            /*要转换为行内块元素*/
-            display:inline-block;
-            height:53px;
-            font-size:14px;
-            color: #4c4c4c;
-            text-decoration: none;
-            padding:0 130px;
-        }
-        .nav a:hover{
-            background-color: #eeeeee;
+    /*    修改成功的浮窗*/
+        .toast {
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            min-width: 200px;
+            background-color: #d6f6cc;
         }
     </style>
 </head>
 <body>
-  <header class="header-box">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="myToast">
+    <div class="toast-body"></div>
+</div>
+<!--导航栏-->
+<header class="header-box">
     <nav>
-      <ul>
-        <li class="left"><i class="fire icon"></i>博客园</li>
-        <li><a href="#"><i class="location arrow icon"></i>发布</a></li>
-        <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
-        <li><a href="#"><i class="bell icon"></i>消息</a></li>
-        <li><a href="#"><i class="home icon"></i>首页</a></li>
-        <li>
-          <div class="ui inline dropdown">
-            <div class="text">
-              <img class="ui avatar image" src="../image/账号.png">
-              未登录
-            </div>
-            <i class="dropdown icon"></i>
-          </div>
-        </li>
-        <li class="right">
-          <input type="text" id="acc" class="search" placeholder="查询" name="search">
-          <label for="search-button"><i class="search icon" style="color: white"></i></label>
-          <input type="button" id="search-button" value="搜索">
-        </li>
-      </ul>
+        <ul>
+            <li class="left"><i class="fire icon"></i>博客园</li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+            <li><a href="#"><i class="bell icon"></i>消息</a></li>
+            <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+            <li>
+                <div class="content-container">
+                    <div class="text image-container">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <span class="nickname">未登录</span>
+                    </div>
+                    <!--            下拉框-->
+                    <div class="content-dropdown">
+                        <div>
+                            <span class="Nickname">用户名</span>
+                            <span><a href="Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="#" class="Message">消息记录</a></span>
+                            <span class="exit">退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="right">
+                <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                <input type="button" id="search-button" value="搜索">
+            </li>
+        </ul>
     </nav>
-  </header>
 
+</header>
 
   <div class="container-content">
       <div class="container-content1">
-          <button class="edit-button">编辑资料</button>
+          <button class="forget edit-button" data-bs-toggle="modal" data-bs-target=".my-box">编辑资料</button>
+          <!--    弹框标签-->
+          <!--    bootstrap的modal弹框：添加modal类名（默认隐藏）-->
+          <div class="modal my-box" tabindex="-1">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <h3>个人信息</h3>
+                      <div class="box">
+                          <form class="submit">
+                              <table>
+                                  <tr>
+                                      <td>
+                                          <label><span>昵称:</span><input name=:"nickname" class="collect-nickname"></label>
+                                      </td>
+                                      <td rowspan="3">
+                                          <span>头像:</span>
+                                          <img src="../image/headSculpture.jpeg" alt="" class="collect-avatar">
+                                          <input id="upload" type="file" class="upload" placeholder="未选择">
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="phone-spanContain">
+                                           <label><span>电话:</span><input name="phone" class="collect-phone" ></label><br>
+                                          <span class="ti">&nbsp;</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td >
+                                          <span>性别:</span>
+                                          <div class="inline-gender">
+                                              <label>
+                                                  <input type="radio" name="gender" id="nan" class="collect-gender" value="0">男
+                                              </label>
+                                              <label>
+                                                  <input type="radio" name="gender" class="collect-gender" value="1">女
+                                              </label>
+                                          </div>
+
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td class="birthday-spanContain">
+                                          <label>
+                                              <span>生日:</span>
+                                              <input type="date" class="collect-birthday">
+                                          </label>
+                                          <span class="tiBirthday">&nbsp;</span>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2">
+                                          <label>
+                                              <span>个人简介:</span><br>
+                                              <textarea name="desc" class="collect-desc" ></textarea>
+                                          </label>
+                                      </td>
+                                  </tr>
+                              </table>
+                          </form>
+                  </div>
+                      <div class="modal-footer">
+                      <button type="button" id="exit-modify" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                      <button type="button" class="btn btn-primary save-button">保存</button>
+                  </div>
+              </div>
+
+          </div>
+      </div>
           <table>
               <tr>
-                  <td><img class="ui medium circular image headSculpture" src="../image/image.jpeg" alt=""></td>
+                  <td><img class="ui medium circular image headSculpture" src="../image/headSculpture.jpeg" alt=""></td>
                   <td>
                       <div class="content-detail1">
                           <span class="content-nickname">nickname</span>
                           <span class="content-age">5岁</span>
-                          <span class="content-age">女</span>
+                          <span class="content-gender">女</span>
                       </div>
                       <div class="content-detail2">
                           <span>账号:</span><span class="username">7894567899</span>
@@ -321,10 +355,19 @@
       </div>
   </div>
 
-
   <footer>
       <p>&copy; 2023 My Blog. All rights reserved.</p>
   </footer>
+<!--修改资料弹框-->
+<script src="../JavaScript/Modification.js"></script>
+<!--查找是否存在token令牌 /渲染资料卡片中的资料   -->
+<script src="../JavaScript/Detail.js"></script>
+<!--导航栏js-->
+<script src="../JavaScript/Navigation.js"></script>
+<script src="../lib/bootstrap.js"></script><!--弹窗-->
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+<!--导航栏下拉框-->
+    <script src="../JavaScript/Dropdown.js"></script>
   <script
           src="https://code.jquery.com/jquery-3.1.1.min.js"
           integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

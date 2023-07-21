@@ -1,0 +1,102 @@
+#headSculpture{
+    width: 34px;
+    height: 34px;
+}
+.content-container {
+    position: relative;
+    display: inline-block;
+}
+.content-dropdown {
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: calc(100%);
+    transform: translateX(-50%);
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    padding: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img{
+    transition: transform 0.3s ease;
+}
+
+.image-container:hover img{
+    transform: scale(1.4);
+}
+.dropdown-container:hover .content-dropdown {
+    display: block;
+}
+.content-dropdown div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.content-dropdown div span{
+    color: #60a9d0;
+    display: block;
+    margin-top: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+.content-dropdown .nickname{
+    margin-bottom: 10px;
+    border: none;
+    font-size: 15px;
+}
+.content-dropdown div span .Detail,
+.content-dropdown div span .Message{
+    color: #60a9d0;
+}
+.content-dropdown div span .Detail:hover,
+.content-dropdown div span .Message:hover{
+    color: #1b8bc0;
+}
+.content-dropdown div .exit{
+    margin-bottom: 20px;
+}
+/*新增的导航栏样式*/
+.content-view,
+.content-like{
+    margin-left: 10px;
+}
+i.icon{
+    margin: 0 0.25rem 0 18px;
+}
+.content-box{
+    margin-bottom: 10px;
+    height: 158px;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+}
+.content-image{
+    display: inline-block;
+    height: 158px;
+    width: 250px;
+    object-fit: cover;
+}
+tr .section span{
+    margin-left: 10px;
+}
+.content-dropdown div .exit{
+    cursor:pointer;
+}
+.content-dropdown div .exit:hover{
+    color: #60a9d0;
+}
+tr td h4{
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+tr td .content-span{
+    display: inline-block;
+    padding: 20px;
+}

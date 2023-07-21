@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="HTML/semantic.min.css">
+  <link rel="stylesheet" href="MainPageStyle.css">
+  <link rel="stylesheet" href="HTML/Dropdown.css">
+</head>
+<body>
+<header class="header-box">
+  <nav>
+      <ul>
+        <li class="left"><i class="fire icon"></i>博客园</li>
+        <li><a href="HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+        <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+        <li><a href="#"><i class="bell icon"></i>消息</a></li>
+        <li><a href="MainPage.html"><i class="home icon"></i>首页</a></li>
+        <li>
+          <div class="content-container">
+            <div class="text image-container">
+              <img class="ui avatar image" id="headSculpture" src="image/headSculpture.jpeg" alt="">
+              <span class="nickname">未登录</span>
+            </div>
+<!--            下拉框-->
+            <div class="content-dropdown">
+              <div>
+                <span class="Nickname">用户名</span>
+                <span><a href="HTML/Detail.html" class="Detail">个人中心</a></span>
+                <span><a href="#" class="Message">消息记录</a></span>
+                <span class="exit">退出登录</span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="right">
+          <input type="text" id="acc" class="search" placeholder="查询" name="search">
+          <label for="search-button"><i class="search icon" style="color: white"></i></label>
+          <input type="button" id="search-button" value="搜索">
+        </li>
+      </ul>
+  </nav>
+
+</header>
+
+<div class="banner">
+  <h2>Welcome to Blog Park</h2><br>
+  <div><p>A small step may lead to a thousand miles</p></div>
+</div>
+
+<div class="container">
+  <section class="left-section">
+    <h3>推荐博客</h3>
+<!--    装文章的盒子-->
+    <div class="articles"></div>
+<!--    文章-->
+<!--      <div class="content-box">-->
+<!--        <table>-->
+<!--          <tr>-->
+<!--            <td rowspan="2"><img src="image/cat.jpeg" class="content-image" alt=""></td>-->
+<!--            <td>-->
+<!--              <h4>博客</h4>-->
+<!--              <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td class="section">-->
+<!--              <span><i class="eye icon"></i>浏览量</span><span class="content-view">10</span>-->
+<!--              <span><i class="thumbs up icon"></i>点赞</span><span class="content-like">243</span>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--        </table>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    分页-->
+    <div class="pagination">
+      <a href="#" class="prev">上一页</a>
+      <a href="#" class="page">1</a>
+      <a href="#" class="page">2</a>
+      <a href="#" class="page">3</a>
+      <a href="#" class="next">下一页</a>
+    </div>
+  </section>
+<!--  旁边的盒子-->
+  <aside class="right-section">
+    <div class="box">
+<!--      <p>放轮播图片</p>-->
+      <h3>活动</h3>
+      <div id="slider-body">
+        <div class="slider">
+          <div class="slider-content">
+            <div class="slider-item" id="slider-item1">
+              <img src="image/image3.jpg" alt="Image 1">
+            </div>
+            <div class="slider-item">
+              <img src="image/image4.jpg" alt="Image 2">
+            </div>
+            <div class="slider-item">
+              <img src="image/image2.jpg" alt="Image 2">
+            </div>
+            <div class="slider-item">
+              <img src="image/image7.jpg" alt="Image 4">
+            </div>
+          </div>
+        </div>
+    </div>
+<!--      标签列表-->
+    <div class="box">
+      <h3><i class="tags icon"></i>标签</h3>
+      <ul>
+        <li><a href="#">标签1</a></li>
+        <li><a href="#">标签2</a></li>
+        <li><a href="#">标签3</a></li>
+        <li><a href="#">标签4</a></li>
+      </ul>
+    </div>
+<!--      作者列表-->
+    <div class="box">
+      <h3><i class="child icon"></i>作者推荐</h3>
+      <ul class="tags">
+        <li><a href="#">作者1</a></li>
+        <li><a href="#">作者2</a></li>
+        <li><a href="#">作者3</a></li>
+        <li><a href="#">作者4</a></li>
+        <li><a href="#">作者5</a></li>
+        <li><a href="#">作者6</a></li>
+      </ul>
+    </div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <p>&copy; 2023 My Blog. All rights reserved.</p>
+</footer>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--轮播图-->
+<script>
+  const slider = document.querySelector('.slider');
+  const sliderContent = document.querySelector('.slider-content');
+  const sliderItems = document.querySelectorAll('.slider-item');
+  let currentIndex = 0;
+  let interval;
+  function startSlider() {
+    interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % sliderItems.length;
+      updateSlider();
+    }, 3000);
+  }
+  function updateSlider() {
+    sliderContent.style.transform = `translateX(-${currentIndex * (100 / sliderItems.length)}%)`;
+  }
+  startSlider();
+</script>
+<!--导航栏下拉框-->
+<script src="JavaScript/Dropdown.js"></script>
+<!--主页面加载显示文章-->
+<script src="JavaScript/MainPage.js"></script>
+<!--渲染页面信息（登录之后存在localStorage）-->
+<script src="JavaScript/Navigation.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="lib/semantic.min.js"></script>
+<script src="lib/semantic.js"></script>
+
+</body>
+</html>

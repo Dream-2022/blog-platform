@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="semantic.min.css">
+    <link rel="stylesheet" href="Navigation.css">
+    <link rel="stylesheet" href="BlogPageStyle.css">
+    <link rel="stylesheet" href="Dropdown.css">
+</head>
+<body>
+<!--导航栏-->
+<header class="header-box">
+    <nav>
+        <ul>
+            <li class="left"><i class="fire icon"></i>博客园</li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+            <li><a href="#"><i class="bell icon"></i>消息</a></li>
+            <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+            <li>
+                <div class="content-container">
+                    <div class="text image-container">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <span class="nickname">未登录</span>
+                    </div>
+                    <!--            下拉框-->
+                    <div class="content-dropdown">
+                        <div>
+                            <span class="Nickname">用户名</span>
+                            <span><a href="HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="#" class="Message">消息记录</a></span>
+                            <span class="exit">退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="right">
+                <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                <input type="button" id="search-button" value="搜索">
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<!--内容-->
+<div class="container-content">
+    <div class="container-box1">
+        <div class="container-title1"><h3 class="content-title">博客标题</h3></div>
+        <div class="container-title2">
+            <span class="content-red">原创</span>
+            <span class="content-author">作者</span>
+            <span class="content-time">2023年7月17日09:08:17</span>
+            <span class="content-view"><i class="eye icon"></i>69</span>
+            <span class="content-give"><i class="thumbs up icon"></i>点赞</span>
+            <span>公开</span>
+        </div>
+        <div class="container-detail">
+            <span class="content-Column">分类专栏:</span>
+            <span class="content-column">C++</span>
+            <span class="content-column">算法</span>
+            <span class="content-Label">文章标签:</span>
+            <span class="content-label">学习</span>
+            <span class="content-label">算法</span>
+        </div>
+    </div>
+    <div class="container-box2">
+        <p class="content-content">内容</p>
+    </div>
+    <div class="detail">
+        <span><i class="thumbs up icon"></i>点赞</span><span>0</span>
+        <span><i class="star icon"></i> 收藏</span><span>0</span>
+    </div>
+</div>
+
+<!--尾部-->
+<footer>
+    <p>&copy; 2023 My Blog. All rights reserve d.</p>
+</footer>
+<!--导航栏下拉框-->
+<script>
+    const token=localStorage.getItem("token")
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../JavaScript/BlogPage.js"></script>
+<script src="../JavaScript/Dropdown.js"></script>
+<script src="../JavaScript/Navigation.js"></script>
+</body>
+</html>

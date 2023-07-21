@@ -12,11 +12,26 @@
     <select id="selectByUsernameAndPassword" resultType="bean.User" parameterType="map">
         SELECT * FROM user WHERE username=#{username} and password=#{password}
     </select>
+    <select id="selectByUsername" resultType="bean.User" parameterType="map">
+        SELECT * FROM user WHERE username=#{username}
+    </select>
     <insert id="insert">
         INSERT INTO user VALUES (#{id},#{username},#{password},#{email},#{nickname},#{gender},#{phone},#{birthday},#{picture},#{profile})
     </insert>
+    <insert id="insertUsernamePasswordEmail" parameterType="map">
+        INSERT INTO user VALUES (#{username},#{password},#{email})
+    </insert>
     <update id="update" parameterType="bean.User">
         UPDATE user SET username=#{username},password=#{password},email=#{email},nickname=#{nickname},gender=#{gender},phone=#{phone},birthday=#{birthday},picture=#{picture},profile=#{profile} WHERE id=#{id}
+    </update>
+    <update id="updateUser" parameterType="map">
+        UPDATE user SET nickname=#{nickname},gender=#{gender},phone=#{phone},birthday=#{birthday},profile=#{profile} WHERE username=#{username}
+    </update>
+    <update id="updatePassword" parameterType="bean.User">
+        UPDATE user SET password=#{password} WHERE email=#{email}
+    </update>
+    <update id="updateAvatar" parameterType="bean.User">
+        UPDATE user SET picture=#{picture} WHERE username=#{username}
     </update>
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE FROM user WHERE id=#{id}

@@ -1,91 +1,163 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: #80A1C5;
+
+
+ .container-content{
+ // 个人资料显示
+    margin:138px auto;
+ }
+.container-content1{
+    background-color: white;
+    margin: auto;
+    width: 74%;
+    height:150px;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.05);
 }
-body::before {
-    content: "";
-    background-image: url("../image/leaves.webp");
-    opacity: 0.3; /* 设置透明度 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.container-content1{
+    margin-bottom: 20px;
+    margin-top: 100px;
 }
-.header-box {
-    background-color: #a9b5c2;
-    color: #fff;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1;
+.container-content2{
+    background-color: #f6f6f6;
+    margin:0 auto;
+    width: 74%;
+    height:826px;
 }
-.left{
-    margin-right: 13px;
-    margin-top: 5px;
-    font-size: 17px;
-}
-.right{
-    float: right;
-    margin-right: 88px;
-}
-.search {
+.content-text {
     color: #3d6273;
-    width: 262px;
-    height: 26px;
-    border-radius: 12px;
+    width: 307px;
+    height: 34px;
+    border-radius: 20px;
     padding: 8px;
     font-size: 14px;
     border: none;
     outline: none;
+    margin-left: 79px;
 }
-#search-button {
-    color: white;
+.content-button ,
+.edit-button{
+    width: 67px;
+    height: 34px;
+    background-color: white;
+    color: #828993;
     font-family: Arial, sans-serif;
     font-size: 14px;
-    border: none;
-    border-radius: 5px;
+    border: 1px solid #dedede;
+    border-radius: 24px;
     cursor: pointer;
-    background-color: transparent;
+    margin-left: 10px;
 }
-.header-box nav ul li .sculpture{
-    width: 36px;
-    position: absolute;
-    top:8px;
-    right:27px;
+.content-edit{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 21px;
+    border: none;
+    background-color: #8bb1c5;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-left: 10px;
 }
-.header-box nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.edit-button{
+    float: right;
+    width: 80px;
+    margin-top: 10px;
+    margin-right: 20px;
+    color: #80A1C5;
 }
-.header-box nav ul li {
+.content-edit,
+.edit-button:hover,
+.content-button:hover{
+    box-shadow: 5px 5px 5px -1px rgb(0,0,0,.05);
+}
+.container-content .container-content1 .headSculpture{
+    width: 106px;
+    transform:translateY(-30px);
+    margin-left: 85px;
     display: inline-block;
-    margin-left: 24px;
+}
+.container-content .container-content1 .content-nickname,
+.container-content .container-content1 .content-gender,
+.container-content .container-content1 .content-age，{
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+td .content-detail1,
+td .content-detail2,
+td .content-detail3{
+    margin-top: 23px;
+}
+span{
+    margin-left: 10px;
 }
 
-.header-box nav ul .left {
-    float: left;
-    font-size: 17px;
+.username,
+.email,
+.fan,
+.follow{
+    margin-right: 38px;
 }
 
-.header-box nav ul li a {
-    color: #fff;
+.container-content .container-content2 .content-box{
+    margin-bottom: 10px;
+    height: 158px;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+}
+.container-content .container-content2 .content-box .content-image{
+    display: inline-block;
+    height: 158px;
+    width: 300px;
+    object-fit: cover;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 135px;
+    margin: 10px 10px 10px 35px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #b3c0ce;
+}
+
+select option {
+    padding: 8px;
+    font-size: 16px;
+}
+tr td h3{
+    margin: 0 0 0 20px;
+    padding: 0;
+
+}
+tr td .content-span{
+    display: inline-block;
+    padding: 20px;
+}
+.nav{
+    background-color: #fcfcfc;
+    height:53px;
+    color: #4c4c4c;
+    border-top: 3px solid #89e1f1;
+    border-bottom:1px solid #edeef0;
+    line-height: 53px;
+}
+.nav a{
+    /*要转换为行内块元素*/
+    display:inline-block;
+    height:53px;
+    font-size:14px;
+    color: #4c4c4c;
     text-decoration: none;
+    padding:0 116px;
 }
-
-.header-box nav ul li a:hover {
-    color: #e1e5ef;
-}
-footer{
-    color: white;
-    background-color: #a9b5c2;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.nav a:hover{
+    background-color: #eeeeee;
 }

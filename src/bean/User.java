@@ -1,4 +1,7 @@
 package bean;
+
+import java.sql.Timestamp;
+
 public class User {
     private int id;
     private String username;
@@ -7,12 +10,13 @@ public class User {
     private String nickname;
     private String gender;
     private String phone;
-    private String birthday;
+    private Timestamp birthday;
     private String picture;
     private String profile;
+    private String admin;
     public User(){}
 
-    public User(int id, String username, String password, String email, String nickname, String gender, String phone, String birthday, String picture, String profile) {
+    public User(int id, String username, String password, String email, String nickname, String gender, String phone, Timestamp birthday, String picture, String profile, String admin) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -23,6 +27,7 @@ public class User {
         this.birthday = birthday;
         this.picture = picture;
         this.profile = profile;
+        this.admin = admin;
     }
 
     @Override
@@ -35,10 +40,18 @@ public class User {
                 ", nickname='" + nickname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", phone='" + phone + '\'' +
-                ", birthday='" + birthday + '\'' +
+                ", birthday=" + birthday +
                 ", picture='" + picture + '\'' +
                 ", profile='" + profile + '\'' +
+                ", admin='" + admin + '\'' +
                 '}';
+    }
+
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
+    public String getAdmin() {
+        return admin;
     }
 
     public int getId() {
@@ -72,7 +85,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getNickname() {
         return nickname;
     }
@@ -97,11 +109,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getBirthday() {
+    public Timestamp getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Timestamp birthday) {
         this.birthday = birthday;
     }
 

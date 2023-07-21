@@ -5,7 +5,7 @@ body {
 }
 body::before {
     content: "";
-    background-image: url("../image/leaves.webp");
+    background-image: url("image/leaves.webp");
     opacity: 0.3; /* 设置透明度 */
     position: fixed;
     top: 0;
@@ -61,7 +61,7 @@ body::before {
 }
 .banner {
     padding-top: 30px;
-    background-image: url('../image/Main2.jpg');
+    background-image: url('image/Main2.jpg');
     background-size: cover;
     background-position: center;
     height: 300px;
@@ -88,7 +88,7 @@ body::before {
 
 .search {
     color: #3d6273;
-    width: 200px;
+    width: 382px;
     height: 24px;
     border-radius: 12px;
     padding: 5px;
@@ -208,4 +208,41 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#slider-body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+.slider {
+    width: 330px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: inline-flex;
+    border-radius: 10px 10px 10px 10px; /* 调整圆角半径大小 */
+}
+
+.slider-content {
+    display: flex;
+    width: fit-content;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+.content-id{
+    position :absolute;
+    top :153px;
+display :none;
+}
+.slider-item {
+    width: 1000px;
+    height: 388.88px;
+    flex-shrink: 0;
+}
+
+.slider-item img {
+    width: 350px;
+    max-height: 100%;
+    object-fit: cover;
+
 }

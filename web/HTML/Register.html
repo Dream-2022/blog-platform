@@ -1,58 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="stackpath.bootstrapcdn.com_bootstrap_4.5.2_css_bootstrap.min.css">
+    <script src="../JavaScript/code.jquery.com_jquery-3.6.0.min.js"></script>
+    <script src="../JavaScript/cdn.jsdelivr.net_npm_bootstrap@5.0.2_dist_js_bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="cdnjs.cloudflare.com_ajax_libs_font-awesome_5.15.3_css_all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
     <meta charset="UTF-8">
     <title>Register</title>
   <link rel="stylesheet" href="RegisterStyle.css">
+    <style>
+        .alert{
+            padding:0;
+            margin-left: 672px;
+            margin-top: 10px;
+            line-height: 40px;
+            height: 40px;
+            width: 264px;
+            font-size: 15px;
+            color: white;
+            text-align:center;
+        }
+    </style>
 </head>
 <body>
+<!--浮窗-->
+<div class="alert"></div>
 <div class="head">
+
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="myToast">
+        <div class="toast-body"></div>
+    </div>
+
   <h1 class="title">立即注册</h1>
-  <form class="acc">
+  <form class="acc" action="RegisterTest" method="POST">
 
     <div class="box boxAcc">
         <label for="abc">
             <img src="../image/邮箱.png" class="hao" alt="">
         </label>
-        <input type="text" class="text" id="abc" placeholder="请输入邮箱" name="password" required>
+        <input type="text" class="text email" id="abc" placeholder="请输入邮箱" name="email">
     </div>
 
     <div class="box boxPas">
       <label for="password">
           <img src="../image/时间.png" class="pas" alt="">
       </label>
-      <input type="password" id="password" placeholder="获取的验证码" name="password" required>
-      <span class="forget"><a href="#">获取验证码</a> </span>
+      <input type="text" id="password" class="code" placeholder="获取的验证码" name="code">
+      <button type="button" class="obtainCode">获取验证码 </button>
     </div>
 
     <div class="box boxPas">
         <label for="bcd">
             <img src="../image/密码.png" class="pas" alt="">
         </label>
-        <input type="password" id="bcd" placeholder="请输入密码" name="password" required>
+        <input type="password" id="bcd" placeholder="请输入密码" name="password">
     </div>
 
     <div class="box boxPas">
       <label for="cde">
-          <img src="../image/确认密码.png" class="pas" alt="">
+          <img src="../image/确认密码.png" class="pas confirm" alt="">
       </label>
-      <input type="password" placeholder="请确认密码" id="cde" name="password" required>
+      <input type="password" placeholder="请确认密码" id="cde" name="confirm">
     </div>
 
     <div class="redDiv">
       <span class="red">&nbsp;</span>
     </div>
 
-    <div>
-      <button type="button">注册</button>
+    <div class="Register-Box">
+      <button type="button" class="Register-button">注册</button>
     </div>
 
-    <div>
-      <button type="button" class="btn"><a href="Register.html">返回登录</a> </button>
+    <div class="Login-Box">
+      <button type="button" class="btn"><a href="../Login.html" class="Login-A" disabled="">返回登录</a> </button>
     </div>
   </form>
 </div>
-<script src="../JavaScript/registerJs.js">
-</script>
+<script>
+    var returnLoginBtn = document.querySelector('.btn');
+    var returnLoginA = document.querySelector('.btn .Login-A');
+    var loginUrl = returnLoginA.getAttribute('href');
+    returnLoginBtn.addEventListener('click', function() {
+        window.location.href = loginUrl;
+    });
+</script><!--点击盒子事件-->
+<!--密码加密-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script src="../lib/form-serialize.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+<script src="../JavaScript/Register.js"></script>
+
 </body>
 </html>

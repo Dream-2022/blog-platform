@@ -1,0 +1,34 @@
+.alert
+{
+    position:fixed;
+    width:400px;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+
+    z-index:99999;
+    height:50px;
+    transition:1s;
+    line-height:50px;
+    text-align:center;
+}
+.success
+{
+    background:#d5eddb;
+    border:1px solid #c3e7cb;
+    color:#145629;
+}
+.fail
+{
+    background:#f9d7db;
+    border:1px solid #f5c7cb;
+    color:#731c64;
+}
+.show
+{
+    opacity:1;
+}
+.disappear
+{
+    opacity:0;
+}

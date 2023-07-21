@@ -3,7 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.Mapper">
-    <select id="selectAlla" resultType="bean.Articles">
+    <select id="selectArticle" resultType="bean.Articles">
         select * from articles
     </select>
+    <select id="selectArticleById" resultType="bean.Articles">
+        select * from articles where id=#{id}
+    </select>
+    <insert id="insertArticle" parameterType="bean.Articles">
+        INSERT INTO articles VALUES (#{id},#{user_id},#{title},#{textarea},#{htmlText},#{plainText},#{original},#{avatar},#{state},#{view},#{give},#{collect},#{release_at},#{update_at})
+    </insert>
 </mapper>

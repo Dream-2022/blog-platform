@@ -1,0 +1,37 @@
+.dropdown
+{
+    position: relative;
+    display: inline-block;
+}
+.dropdown button
+{
+    width:100px;
+    height:30px;
+    outline:none;
+    border:1px solid #ccc;
+    background:#e7e7e1;
+    color:#000;
+    border-radius:10px;
+}
+.dropdown-content
+{
+    z-index:2;
+    display: none;
+    position: absolute;
+    min-width: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+.dropdown:hover .dropdown-content
+{
+    display: block;
+}
+
+.dropdown-content label
+{
+    display: block;
+    margin-bottom: 5px;
+}
