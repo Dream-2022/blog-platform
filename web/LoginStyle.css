@@ -29,7 +29,7 @@ body{
 .title{
     color: #5f6f7c;
     text-align: center;
-    margin: 55px;
+    margin: 50px;
 }
 .head {
     background-color: white;
@@ -60,6 +60,10 @@ input{
     font-family: "楷体";
     border-radius: 5px;
 }
+.content-container{
+    display: flex;
+    justify-content: flex-end;
+}
 #password{
     width: 324px;
 }
@@ -86,6 +90,18 @@ input{
     padding-top: 20px;
     text-align: right;
     color: #af0909;
+}
+.touristLoginBtn{
+    background-color: transparent;
+    color: #47575e;
+    border: none;
+    justify-content: center;
+    margin-top: 31px;
+    margin-left: 220px;
+}
+.touristLoginBtn a{
+    color: #47575e;
+    text-decoration: none;
 }
 .loginForm,
 .returnLoginBtn{

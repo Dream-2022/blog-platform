@@ -1,17 +1,18 @@
 package bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Likes {
     private int id;
     private int article_id;
     private int user_id;
-    private Timestamp create_at;
+    private Date create_at;
 
     public Likes() {
     }
 
-    public Likes(int id, int article_id, int user_id, Timestamp create_at) {
+    public Likes(int id, int article_id, int user_id, Date create_at) {
         this.id = id;
         this.article_id = article_id;
         this.user_id = user_id;
@@ -42,11 +43,11 @@ public class Likes {
         this.user_id = user_id;
     }
 
-    public Timestamp getCreate_at() {
+    public Date getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(Timestamp create_at) {
+    public void setCreate_at(Date create_at) {
         this.create_at = create_at;
     }
 

@@ -30,7 +30,7 @@ button.addEventListener('click', e => {
     password=CryptoJS.MD5(password).toString();
     const div=document.querySelector('.alert')
     axios({
-        url: '/Blog/LoginTest',
+        url: '/Blog/Fail/LoginTest',
         method: 'post',
         params: {username, password}
     }).then(result => {

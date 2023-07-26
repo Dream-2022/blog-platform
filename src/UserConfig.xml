@@ -25,6 +25,6 @@
         <mapper resource="LabelsMapper.xml"/>
         <mapper resource="LikesMapper.xml"/>
         <mapper resource="UserMapper.xml"/>
-
+        <mapper resource="Collect_articleMapper.xml"/>
     </mappers>
 </configuration>

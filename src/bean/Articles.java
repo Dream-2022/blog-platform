@@ -152,7 +152,7 @@ public class Articles {
     @Override
     public String toString() {
         return "Articles{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", title='" + title + '\'' +
                 ", textarea='" + textarea + '\'' +
@@ -164,7 +164,7 @@ public class Articles {
                 ", view='" + view + '\'' +
                 ", give='" + give + '\'' +
                 ", collect='" + collect + '\'' +
-                ", release_at=" + release_at +
+                ", release_at=" + release_at +'\'' +
                 ", update_at=" + update_at +
                 '}';
     }

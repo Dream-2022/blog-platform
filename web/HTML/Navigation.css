@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    color: #80A1C5;
+    color: #5e5e5e;
 }
 body::before {
     content: "";
@@ -38,6 +38,7 @@ body::before {
     color: #3d6273;
     width: 382px;
     height: 26px;
+    margin-left: 90px;
     border-radius: 12px;
     padding: 8px;
     font-size: 14px;
@@ -52,6 +53,9 @@ body::before {
     border-radius: 5px;
     cursor: pointer;
     background-color: transparent;
+}
+.content-container{
+    margin-left: 90px;
 }
 .header-box nav ul li .sculpture{
     width: 36px;

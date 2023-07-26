@@ -61,7 +61,7 @@ ObtainCode.addEventListener('click', e=> {
     },1000)
 
     axios({
-        url: '/Blog/EmailTest',
+        url: '/Blog/user/EmailTest',
         method: 'post',
         params: {email}
     }).then(result => {
@@ -111,7 +111,7 @@ RegisterButton.addEventListener('click', e => {
     password=CryptoJS.MD5(password).toString();
 
     axios({
-        url: '/Blog/RegisterTest',
+        url: '/Blog/Fail/RegisterTest',
         method: 'post',
         params: {email,code,password}
     }).then(result => {

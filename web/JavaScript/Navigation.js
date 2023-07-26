@@ -11,7 +11,9 @@ if (localStorage.getItem("nickname")) {
 var pictureElement = document.querySelector('#headSculpture');
 if (localStorage.getItem("picture")) {
     var picture = localStorage.getItem("picture");
-    pictureElement.src = picture;
+    pictureElement.src = "/upload/"+"headSculpture.jpeg";
+    document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture");
+
 }
 
 //如果未登录，则不会出现退出登录的按钮

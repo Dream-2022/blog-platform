@@ -3,27 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Editor</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-    <link rel="stylesheet" href="../HTML/semantic.min.css">
-    <link rel="stylesheet" href="semantic.min.css">
+    <!--  图标-->
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
     <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet">
     <link href="Navigation.css" rel="stylesheet">
     <link rel="stylesheet" href="Dropdown.css">
     <link rel="stylesheet" href="EditorPageStyle.css">
+<!--    <link rel="stylesheet" href="../lib/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="../lib/bootstrap.css">-->
     <style>
         /*下方编辑栏样式*/
         body{
             background-color: rgba(238, 238, 238, 0.76);
         }
-        .edit-box{
-            width: 55%;
-            margin: auto;
-        }
         .container{
-            margin-top: 100px;
+            margin-top: 56px;
         }
         #editor—wrapper {
-            border: 1px solid #ccc;
             z-index: 100; /* 按需定义 */
         }
         #toolbar-container {
@@ -49,14 +45,6 @@
             width: 193px;
             height: 170px;
         }
-        .blog .content-title{
-            height: 25px;
-            width: 224px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-        }
-        .blog .content-title:focus,
         .blog .content-textarea:focus{
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -66,16 +54,14 @@
         }
         .blog span {
             margin-right: 10px;
-            margin-top: 20px;
         }
 
         .content-label ,
         .content-class{
             display: inline-block;
             background-color: #eee;
-            padding: 5px 10px;
+            padding: 4px 0 4px 10px;
             border-radius: 3px;
-            margin-bottom: 5px;
         }
         .content-textarea {
             width: 100%;
@@ -99,7 +85,7 @@
         .footer .save-button,
         .footer .send-button{
             margin-left: 125px;
-            height: 43px;
+            height: 31px;
             width: 100px;
             background-color: #60a9d0;
             color: white;
@@ -119,25 +105,98 @@
             float: right;
             padding-right: 53px;
         }
+    /*    标签样式*/
+        /* 样式可以根据需要进行自定义 */
+        .container-label {
+            display: inline-block;
+        }
+        .input-box {
+            display: none;
+        }
+        .input-box input,
+        .input-box button {
+            display: inline;
+        }
+        #output{
+            display: inline;
+            margin-left: 10px;
+        }
+        .delete-label{
+            margin-left: 5px;
+            font-size: 12px;
+            border: none;
+            color: #ccc;
+        }
+        /*添加标签的输入框*/
+        #textInput{
+            border: none;
+            width: 87px;
+            background-color: #e8e8e8;
+            height: 23px;
+            border-radius: 8px;
+            outline: 1px solid #ccc;
+            margin-left: 10px;
+        }
+        /*添加标签的确认按钮*/
+        .confirm-label{
+            border: none;
+            border-radius: 8px;
+            background-color: transparent;
+        }
+        #toggleButton{
+            border:none;
+            margin-left: 10px;
+        }
+        /*!*弹窗*!*/
+        /*.toast {*/
+        /*    position: fixed;*/
+        /*    top: 50px;*/
+        /*    left: 50%;*/
+        /*    transform: translateX(-50%);*/
+        /*    color: orangered;*/
+        /*    min-width: 200px;*/
+
+        /*}*/
+        /*.alert{*/
+        /*    display: flex;*/
+        /*    padding:0;*/
+        /*    margin-left: 588px;*/
+        /*    margin-top: 10px;*/
+        /*    line-height: 40px;*/
+        /*    height: 40px;*/
+        /*    width: 264px;*/
+        /*    font-size: 15px;*/
+        /*    color: white;*/
+        /*    text-align:center;*/
+        /*}*/
     </style>
 </head>
 <body>
+<!--    &lt;!&ndash;浮窗&ndash;&gt;-->
+<!--    <div class="alert">111</div>-->
     <!--导航栏-->
     <header class="header-box">
         <nav>
             <ul>
                 <li class="left"><i class="fire icon"></i>博客园</li>
-                <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+
                 <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
                 <li><a href="#"><i class="bell icon"></i>消息</a></li>
                 <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+
+                <li>
+                    <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                    <input type="button" id="search-button" value="搜索">
+                </li>
                 <li>
                     <div class="content-container">
                         <div class="text image-container">
                             <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
                             <span class="nickname">未登录</span>
                         </div>
-                        <!--            下拉框-->
+                        <!--下拉框-->
                         <div class="content-dropdown">
                             <div>
                                 <span class="Nickname">用户名</span>
@@ -148,39 +207,44 @@
                         </div>
                     </div>
                 </li>
-                <li class="right">
-                    <input type="text" id="acc" class="search" placeholder="查询" name="search">
-                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
-                    <input type="button" id="search-button" value="搜索">
-                </li>
+                <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
             </ul>
+
+
         </nav>
 
     </header>
-    <div class="edit-box">
-        <div class="container">
-            <div id="editor—wrapper">
-                <div id="toolbar-container"><!-- 工具栏 --></div>
+<!--    编辑器-->
+    <div class="container">
+        <div id="editor—wrapper">
+            <div id="toolbar-container"><!-- 工具栏 --></div>
+            <div class="edit-box">
+                <div class="editor-title">
+                    <input class="content-title" placeholder="请输入文章标题..."><br>
+                </div>
                 <div id="editor-container"><!-- 编辑器 --></div>
             </div>
         </div>
     </div>
     <div class="blog">
-        <span>文章标题</span>
-        <input class="content-title" placeholder="请输入文章标题"><br>
-
         <span>文章标签</span>
         <div class="dropdown">
             <button>选择标签</button>
-                <div class="dropdown-content">
- <!-- 这里可以根据需要添加更多的标签选项 -->
+                <div class="dropdown-content" onclick="addContentLabelDropdown()">
+                    <!-- 这里可以根据需要添加更多的标签选项 -->
                 </div>
         </div>
+<!--        输入标签-->
+        <div class="container-label">
+            <button id="toggleButton" onclick="toggleInputBox()">添加新标签</button>
+            <span class="input-box" id="inputBox">
+            <input type="text" id="textInput" />
+                <button class="confirm-label" onclick="addContentLabel()">确定</button>
+             </span>
+            <span id="output"></span>
+        </div>
 
-        <span class="content-label">C++</span>
-        <span class="content-label">数据结构</span><br>
-
-        <span>添加封面</span><br>
+        <br><span>添加封面</span><br>
         <img src="../image/title.png" class="cover-image" alt=""><br>
 
         <span>文章摘要</span>
@@ -211,11 +275,15 @@
         <button type="button" class="save-button">保存</button>
         <button type="button" class="send-button">发布</button>
     </div>
+    <!--标签事件-->
+    <script src="../JavaScript/addLabel.js"></script>
     <script>const token=localStorage.getItem("token")</script>
     <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+    <!--发送请求时在响应头中加入token和longt-->
+    <script src="../JavaScript/Identity.js"></script>
+    <script src="../lib/bootstrap.bundle.min.js"></script>
     <script src="../JavaScript/EditorPage.js"></script>
-
     <!--导航栏-->
     <script src="../JavaScript/Navigation.js"></script>
     <!--下拉框-->

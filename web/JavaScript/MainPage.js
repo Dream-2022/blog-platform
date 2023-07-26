@@ -3,8 +3,12 @@ const token=localStorage.getItem("token")
 let articles;
 // 在页面加载时执行查询请求
 window.addEventListener('DOMContentLoaded', function() {
-    axios.get('/Blog/MainPageTest')
+    console.log("进入addEventListener的响应页面")
+    axios.get('/Blog/Articles/MainPageTest')
         .then(result => {
+            document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture")
+            var loadingBox = document.querySelector(".loading-container");
+            loadingBox.style.display = "none";
             console.log(result.data);
             articles=result.data;
             // 进行后续处理，根据实际需求操作
@@ -93,7 +97,7 @@ document.querySelector('.articles').addEventListener('click', function(event) {
         // 执行需要的操作，比如向后端发送请求，更新数据库等
         console.log("Content ID:", text);
         // 进入博客页面
-        axios.get('/Blog/MainPageTest')
+        axios.get('/Blog/Articles/MainPageTest')
             .then(result => {
                 console.log(result.data);
                 articles=result.data;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Mapper">
+    <select id="select" resultType="bean.Collect_article">
+        select * from collect_article
+    </select>
+    <insert id="insertCollectArticleById" parameterType="map">
+        INSERT INTO collect_article (article_id, label_id) VALUES (#{article_id},#{label_id})
+    </insert>
+</mapper>

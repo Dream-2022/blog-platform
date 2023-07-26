@@ -1,0 +1,60 @@
+.loading-container {
+    width: 100%; /* Adjust the container size as needed */
+    height: 500px; /* Adjust the container size as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading {
+    width: 50px; /* Adjust the size of the loading animation */
+    height: 50px; /* Adjust the size of the loading animation */
+    box-sizing: border-box;
+    border-top: 5px solid #7bc6cc; /* Adjust the border size and color as needed */
+    border-radius: 50%;
+    position: relative;
+    animation: pload 2s linear infinite;
+}
+
+.loading span {
+    width: 50px; /* Adjust the size of the inner span */
+    height: 50px; /* Adjust the size of the inner span */
+    position: absolute;
+    text-align: center;
+    line-height: 25px; /* Adjust the size of the inner span */
+    color: aliceblue;
+    animation: load 2s linear infinite;
+}
+
+@keyframes load {
+    0% {
+        transform: rotate(-360deg);
+    }
+}
+@keyframes pload {
+    0% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading::after,
+.loading::before {
+    content: "";
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    box-sizing: border-box;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: -5px; /* Adjust the top position as needed */
+}
+
+.loading::after {
+    border-top: 5px solid #be9795; /* Adjust the border size and color as needed */
+    transform: rotate(120deg);
+}
+
+.loading::before {
+    border-top: 5px solid #efdbbe; /* Adjust the border size and color as needed */
+    transform: rotate(240deg);
+}

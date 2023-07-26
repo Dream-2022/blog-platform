@@ -22,7 +22,7 @@
     height:826px;
 }
 .content-text {
-    color: #3d6273;
+    color: #565656;
     width: 307px;
     height: 34px;
     border-radius: 20px;
@@ -52,7 +52,7 @@
     width: 70px;
     height: 21px;
     border: none;
-    background-color: #8bb1c5;
+    background-color: #9aa1a6;
     color: #ffffff;
     font-family: Arial, sans-serif;
     font-size: 14px;
@@ -90,7 +90,7 @@ td .content-detail3{
     margin-top: 23px;
 }
 span{
-    margin-left: 10px;
+    margin-left: 24px;
 }
 
 .username,

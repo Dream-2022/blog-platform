@@ -13,6 +13,10 @@
     color:#000;
     border-radius:10px;
 }
+.edit-box{
+    width: 55%;
+    margin: 0 auto;
+}
 .dropdown-content
 {
     z-index:2;
@@ -24,6 +28,20 @@
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     padding: 5px;
+}
+
+.content-title{
+    margin-top: 50px;
+    padding: 35px 20px 21px 20px;
+    height: 45px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #414141;
+    font-size: 17px;
+}
+.content-title::placeholder {
+    color: #ccc; /* 设置 placeholder 文本颜色为灰色 (#999) */
 }
 .dropdown:hover .dropdown-content
 {

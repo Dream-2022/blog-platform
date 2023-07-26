@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>Main Page</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="HTML/semantic.min.css">
+  <!--  图标-->
+  <link rel="stylesheet" href="Semantic-UI-CSS/semantic.min.css">
+  <link rel="stylesheet" href="HTML/Navigation.css">
   <link rel="stylesheet" href="MainPageStyle.css">
   <link rel="stylesheet" href="HTML/Dropdown.css">
+<!--  加载动画-->
+  <link rel="stylesheet" href="CSS/Loading.css">
 </head>
 <body>
 <header class="header-box">
   <nav>
       <ul>
         <li class="left"><i class="fire icon"></i>博客园</li>
-        <li><a href="HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+
         <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
         <li><a href="#"><i class="bell icon"></i>消息</a></li>
         <li><a href="MainPage.html"><i class="home icon"></i>首页</a></li>
+
+
+        <li>
+          <input type="text" id="acc" class="search" placeholder="查询" name="search">
+          <label for="search-button"><i class="search icon" style="color: white"></i></label>
+          <input type="button" id="search-button" value="搜索">
+        </li>
         <li>
           <div class="content-container">
             <div class="text image-container">
               <img class="ui avatar image" id="headSculpture" src="image/headSculpture.jpeg" alt="">
               <span class="nickname">未登录</span>
             </div>
-<!--            下拉框-->
+            <!--下拉框-->
             <div class="content-dropdown">
               <div>
                 <span class="Nickname">用户名</span>
@@ -34,12 +44,10 @@
             </div>
           </div>
         </li>
-        <li class="right">
-          <input type="text" id="acc" class="search" placeholder="查询" name="search">
-          <label for="search-button"><i class="search icon" style="color: white"></i></label>
-          <input type="button" id="search-button" value="搜索">
-        </li>
+        <li><a href="HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
       </ul>
+
+
   </nav>
 
 </header>
@@ -52,8 +60,11 @@
 <div class="container">
   <section class="left-section">
     <h3>推荐博客</h3>
-<!--    装文章的盒子-->
-    <div class="articles"></div>
+
+      <div class="articles"></div>
+
+
+
 <!--    文章-->
 <!--      <div class="content-box">-->
 <!--        <table>-->
@@ -73,8 +84,10 @@
 <!--        </table>-->
 <!--      </div>-->
 <!--    </div>-->
-
-
+    <!--    装加载的盒子-->
+    <div class="loading-container">
+       <div class="loading"></div>
+    </div>
 <!--    分页-->
     <div class="pagination">
       <a href="#" class="prev">上一页</a>
@@ -156,6 +169,8 @@
   }
   startSlider();
 </script>
+<!--发送请求时在响应头中加入token和longt-->
+<script src="JavaScript/Identity.js"></script>
 <!--导航栏下拉框-->
 <script src="JavaScript/Dropdown.js"></script>
 <!--主页面加载显示文章-->
@@ -164,8 +179,8 @@
 <script src="JavaScript/Navigation.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="lib/semantic.min.js"></script>
-<script src="lib/semantic.js"></script>
+<!--<script src="lib/semantic.min.js"></script>-->
+<!--<script src="lib/semantic.js"></script>-->
 
 </body>
 </html>

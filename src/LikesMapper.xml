@@ -6,4 +6,13 @@
     <select id="selectLike" resultType="bean.Likes">
         select * from likes
     </select>
+    <select id="selectLikeByUserIdAndArticleId" resultType="bean.Likes" parameterType="map">
+        SELECT * FROM likes WHERE user_id=#{user_id} AND article_id=#{article_id}
+    </select>
+    <insert id="insertGive" parameterType="map">
+        INSERT INTO likes (user_id, article_id, create_at) VALUES (#{user_id},#{article_id},#{create_at})
+    </insert>
+    <delete id="deleteLike" parameterType="map">
+        DELETE FROM likes WHERE user_id=#{user_id} AND article_id=#{article_id}
+    </delete>
 </mapper>

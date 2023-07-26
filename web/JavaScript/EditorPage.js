@@ -7,7 +7,9 @@ if(!token){
 
 //加载页面的时候发送请求，读取标签和分类
 window.addEventListener('DOMContentLoaded', function() {
-    axios.get('/Blog/ObtainLabelTest')
+    document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture");
+
+    axios.get('/Blog/Labels/ObtainLabelTest')
         .then(result => {
             console.log(result.data);
             const labels = result.data;
@@ -31,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error(error);
         });
-    axios.get('/Blog/ObtainColumnTest')
+    axios.get('/Blog/Columns/ObtainColumnTest')
         .then(result => {
             console.log(result.data);
             const columns = result.data;
@@ -118,27 +120,32 @@ textarea.addEventListener('input', function() {
         textarea.value = text.slice(0, 100);
     }
 });
-//上传图片(图片添加点击事件)
-document.querySelector('.cover-image').addEventListener("click", function() {
 
-    var input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = function(e) {
-        var file = e.target.files[0];
-        var imageRegex = /\.(jpeg|jpg|png|gif)$/i;
-        if(imageRegex.test(file.name))
-        {
-            var imageUrl = URL.createObjectURL(file);
-            console.log("这是一个图片")
-            console.log(imageUrl)
-            document.querySelector('.cover-image').src=`${imageUrl}`;
-        }
-        // 在这里可以对选择的文件进行处理
-        console.log("选择的文件: ", file);
-    };
+// let file=""
+// //上传图片(图片添加点击事件)
+// window.onload = function() {
+//     // 设置头像点击事件
+//     document.querySelector('#headSculpture').onclick = function() {
+//         document.getElementById('upload').click();
+//     };
+//
+//     document.getElementById('upload').onchange = function(e) {
+//         file = e.target.files[0];
+//         if (file) {
+//             const reader = new FileReader();
+//             reader.readAsDataURL(file);
+//             reader.onloadend = function() {
+//                 document.querySelector('#headSculpture').src = reader.result;
+//                 console.log("1111"+reader.result)
+//             };
+//         }
+//     };
+// };
 
-    input.click();
-});
+//上传照片
+
+
+
 //保存文章(存草稿)
 const articleSaveButton = document.querySelector('.save-button');
 articleSaveButton.addEventListener('click', function() {
@@ -223,15 +230,13 @@ articleSaveButton.addEventListener('click', function() {
     });
 
 
-    //上传博客
+    //上传博客(草稿）
     const user_id=localStorage.getItem("id")
     const title=document.querySelector('.content-title').value
     const textarea=document.querySelector('.content-textarea').value
     //html
     //content
     //selectedValue
-    const avatar=document.querySelector('.cover-image').src
-
     //设置是否是草稿
     let state='草稿'
     let view=0;
@@ -239,18 +244,19 @@ articleSaveButton.addEventListener('click', function() {
     let collect=0;
     const release_at=new Date();
     const update_at=new Date();
-
+    let avatar;
     let htmlText=html
     let plainText=content
     //selectedLabels
     //selectedColumns
-    if(articleId==""){
-        console.log("空")
-        //插入字段
+
+    //插入字段
+    if(articleId===""){
+        console.log('空')
         console.log(articleId+":"+user_id+":"+title+":"+textarea+":"+html+":"+content+":"+original+":"+
             avatar+":"+state+":"+view+":"+give+":"+collect+":"+release_at+":"+update_at)
         axios({
-            url:'/Blog/InsertArticleTest',
+            url:'/Blog/Articles/InsertArticleTest',
             method: 'post',
             params:{
                 articleId,user_id,title,textarea,htmlText,plainText,original,
@@ -263,14 +269,188 @@ articleSaveButton.addEventListener('click', function() {
             //将文章id更新，不重复上传
             articleId=result.data.id;
         })
+        //读取标签的list
+        const contentLabels = output.querySelectorAll('.content-label');
+
+
+        let selectElement=[]
+        contentLabels.forEach((label) => {
+
+            var trimmedString = label.textContent.trim().substring(0, label.textContent.trim().length - 1);
+
+            selectElement.push(trimmedString)
+
+        });
+        console.log("selectElement:"+selectElement)
+
+
+        //新增对应文章的标签(labels表)
+        axios({
+            url:'/Blog/Labels/InsertLabel',
+            method: 'post',
+            data:{
+                articleId,selectElement
+            }
+        }).then(result=>{
+            console.log("结果："+result);
+            console.log(result.data);
+            //提示和跳转
+            //将文章id更新，不重复上传
+            articleId=result.data.id;
+        })
+
+        //新增对应标签文章信息（label_article表）
+        axios({
+            url:'/Blog/LabelArticle/insertLabelArticle',
+            method: 'post',
+            data:{
+                articleId,selectElement
+            }
+        }).then(result=>{
+            console.log("结果："+result);
+            console.log(result.data);
+            //提示和跳转
+            //将文章id更新，不重复上传
+            articleId=result.data.id;
+        })
     }
     else{
-        console.log("非空")
-        //更新字段
+        //此时已经保存了，只需要更新即可
+        console.log('非空')
         console.log(articleId+":"+user_id+":"+title+":"+textarea+":"+html+":"+content+":"+original+":"+
             avatar+":"+state+":"+view+":"+give+":"+collect+":"+release_at+":"+update_at)
         axios({
-            url:'/Blog/InsertArticleTest',
+            url:'/Blog/Articles/updateArticleTest',
+            method: 'post',
+            params:{
+                id:articleId,user_id,title,textarea,html,content,original,avatar,state
+            }
+        }).then(result=>{
+            console.log("结果："+result);
+            console.log(result.data);
+            //提示和跳转
+            //将文章id更新，不重复上传
+            articleId=result.data.id;
+        })
+    }
+
+
+    // //提示(保存成功)和跳转
+    // window.location.replace('../MainPage.html')
+    // console.log('11')
+});
+
+//发布文章（状态为未审核）
+const articleSendButton = document.querySelector('.send-button');
+articleSendButton.addEventListener('click', function() {
+    //标签
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="tag"]');
+    const selectedLabels = [];
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedLabels.push(checkbox.value);
+        }
+    });
+    // Do whatever you want with the selected labels
+    console.log("Selected Labels:", selectedLabels);
+    //分类
+    const checkboxColumn = document.querySelectorAll('input[type="checkbox"][name="column"]');
+    const selectedColumns = [];
+    checkboxColumn.forEach(checkbox => {
+        if (checkbox.checked) {
+            selectedColumns.push(checkbox.value);
+        }
+    });
+
+
+    //为空的情况
+    const redSpan=document.querySelector('.red')
+    //博客内容不能为空
+    if(count=='0'){
+        console.log("博客内容不能为空");
+        console.log('div.classList.add(\'fail\')')
+        redSpan.innerHTML='博客内容不能为空'
+        redSpan.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }else{
+        redSpan.innerHTML='&nbsp;'
+    }
+    //请选择标签或分类
+    console.log("Selected Column:", selectedColumns);
+    if (!Boolean(selectedLabels.length)||!Boolean(selectedColumns.length)) {
+        // selectedLabels 不为空，包含选中的标签
+        console.log("selectedLabels或selectedColumns是空的", selectedLabels);
+        console.log('div.classList.add(\'fail\')')
+        redSpan.innerHTML='请选择标签或分类'
+        redSpan.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }else{
+        redSpan.innerHTML='&nbsp;'
+    }
+    //标题输入为空
+    const myInput=document.querySelector('.content-title')
+    if (myInput.value.trim() === '') {
+        // 输入为空
+        console.log("标题输入为空");
+        console.log('div.classList.add(\'fail\')')
+        redSpan.innerHTML='请输入标题'
+        redSpan.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }else{
+        redSpan.innerHTML='&nbsp;'
+    }
+    //文本域内容为空
+    const myTextarea=document.querySelector('.content-textarea')
+    if (myTextarea.value.trim() === '') {
+        console.log("文本域内容为空");
+        console.log('div.classList.add(\'fail\')')
+        redSpan.innerHTML='请输入文章摘要'
+        redSpan.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }else{
+        redSpan.innerHTML='&nbsp;'
+    }
+
+
+    //获得单选框中的内容
+    const radioButtons = document.querySelectorAll('input[type="radio"][name="original"]');
+    // 遍历所有单选框，找到被选中的单选框
+    let original;
+    radioButtons.forEach(radio => {
+        if (radio.checked) {
+            original = radio.value;
+            console.log("单选框的内容："+original)
+        }
+    });
+
+
+    //上传博客(未审核）
+    const user_id=localStorage.getItem("id")
+    const title=document.querySelector('.content-title').value
+    const textarea=document.querySelector('.content-textarea').value
+    //html
+    //content
+    //selectedValue
+    //设置是否是草稿
+    let state='未审核'
+    let view=0;
+    let give=0;
+    let collect=0;
+    const release_at=new Date();
+    const update_at=new Date();
+    let avatar;
+    let htmlText=html
+    let plainText=content
+    //selectedLabels
+    //selectedColumns
+
+    //插入字段
+    if(articleId===""){
+        console.log('空')
+        console.log(articleId+":"+user_id+":"+title+":"+textarea+":"+html+":"+content+":"+original+":"+
+            avatar+":"+state+":"+view+":"+give+":"+collect+":"+release_at+":"+update_at)
+        axios({
+            url:'/Blog/Articles/InsertArticleTest',
             method: 'post',
             params:{
                 articleId,user_id,title,textarea,htmlText,plainText,original,
@@ -279,12 +459,39 @@ articleSaveButton.addEventListener('click', function() {
         }).then(result=>{
             console.log("结果："+result);
             console.log(result.data);
-
+            //提示和跳转
+            //将文章id更新，不重复上传
             articleId=result.data.id;
+            //提示(保存成功)和跳转
+            window.location.href = '../MainPage.html';
+            console.log('11')
         })
     }
-    //提示和跳转
-    window.location.replace('../MainPage.html')
-    console.log('11')
+    else{
+        //此时已经保存了，只需要更新即可
+        console.log('非空')
+        console.log(articleId+":"+user_id+":"+title+":"+textarea+":"+html+":"+content+":"+original+":"+
+            avatar+":"+state+":"+view+":"+give+":"+collect+":"+release_at+":"+update_at)
+        axios({
+            url:'/Blog/Articles/updateArticleTest',
+            method: 'post',
+            params:{
+                id:articleId,user_id,title,textarea,html,content,original,avatar,state
+            }
+        }).then(result=>{
+            console.log("结果："+result);
+            console.log(result.data);
+            //提示和跳转
+            //将文章id更新，不重复上传
+            articleId=result.data.id;
+            //提示(保存成功)和跳转
+            window.location.href = '../MainPage.html';
+            console.log('11')
+        })
+    }
+
+
+
 });
+
 

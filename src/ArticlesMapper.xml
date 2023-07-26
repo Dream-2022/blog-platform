@@ -6,6 +6,15 @@
     <select id="selectArticle" resultType="bean.Articles">
         select * from articles
     </select>
+    <update id="updateArticleGiveLike" parameterType="map">
+        UPDATE articles SET give=#{give} WHERE id=#{id}
+    </update>
+    <update id="updateArticleGiveView" parameterType="map">
+        UPDATE articles SET view=#{view} WHERE id=#{id}
+    </update>
+    <update id="updateArticleTest" parameterType="map">
+        UPDATE articles SET title=#{title},textarea=#{textarea},plainText=#{plainText},htmlText=#{htmlText},original=#{original},avatar=#{avatar},state=#{state} WHERE id=#{id}
+    </update>
     <select id="selectArticleById" resultType="bean.Articles">
         select * from articles where id=#{id}
     </select>

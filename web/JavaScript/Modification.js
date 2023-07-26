@@ -1,56 +1,48 @@
-//上传头像
-// document.querySelector('.upload').addEventListener('change',e=>{
-//     //获取头像文件
-//     console.log(e.target.files[0])
-//     const avatar=e.target.files[0]
-//     const username=creator
-//     //提交服务器并更新头像
-//     axios({
-//         url:'/Blog/ModificationAvatarTest',
-//         method:'PUT',
-//         params: {avatar,username}
-//     }).then(result=>{
-//         console.log(result)
-//         console.log(result.data)
-//         const imUrl=result.data.avatar
-//         document.querySelector('.collect-avatar').src=imUrl
-//         localStorage.setItem("picture",imUrl);
-//     })
-// })
 
-//上传图片(图片添加点击事件)
-document.querySelector('.collect-avatar').addEventListener("click", function() {
-    var input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = function(e) {
-        var file = e.target.files[0];
-        var imageRegex = /\.(jpeg|jpg|png|gif)$/i;
-        if(imageRegex.test(file.name))
-        {
-            var imageUrl = URL.createObjectURL(file);
-            console.log("这是一个图片")
-            console.log(imageUrl)
-            document.querySelector('.collect-avatar').src=`${imageUrl}`;
-        }
-        // 在这里可以对选择的文件进行处理
-        console.log("选择的文件: ", file);
-        //上传到数据库
-        axios({
-            url:'/Blog/ModificationAvatarTest',
-            method:'PUT',
-            params:{
-                username:creator,
-                avatar:imageUrl
-            }
-        }).then(result=> {
-            console.log(result)
-            const userObj = result.data
-            console.log(userObj)
-            localStorage.setItem("pricture",userObj.picture);
-        })
+// 设置头像点击事件
+window.onload = function() {
+    // 设置头像点击事件
+    document.getElementById('avatarImage').onclick = function() {
+        document.getElementById('upload').click();
     };
-    input.click();
-});
+
+    document.getElementById('upload').onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                document.getElementById('avatarImage').src = reader.result;
+                console.log("66666"+reader.result)
+
+                // 创建一个 FormData 对象
+                const formData = new FormData();
+                formData.append('username', creator);
+                formData.append('avatar', file);
+
+                //上传到数据库
+                axios({
+                    url:'/Blog/user/ModificationAvatarTest',
+                    method:'POST',
+                    data: formData
+                }).then(result=> {
+                    console.log(result)
+                    const userObj = result.data
+                    console.log(userObj)
+                    localStorage.setItem("pricture",userObj.picture);
+                    console.log("洒水："+userObj.picture)
+                    document.querySelector('.ui.avatar.image').src="/upload/"+userObj.picture;
+                    document.querySelector('.ui.medium.circular.image.headSculpture').src="/upload/"+userObj.picture;
+                    localStorage.setItem("picture",userObj.picture)
+                })
+            };
+        }
+    };
+};
+
+
+
+
 //手机号正则判断
 const phoneHeZi=document.querySelector('.collect-phone')
 phoneHeZi.addEventListener('change',isValidPhoneNumber)
@@ -98,7 +90,7 @@ document.querySelector('.save-button').addEventListener('click',()=>{
     const phone=document.querySelector('.collect-phone').value
 
     axios({
-        url:'/Blog/ModificationTest',
+        url:'/Blog/user/ModificationTest',
         method: 'put',
         params:{nickname,username,gender,birthday,profile,phone}
     }).then(result=>{
@@ -112,7 +104,7 @@ document.querySelector('.save-button').addEventListener('click',()=>{
         localStorage.setItem("profile",profile);
         localStorage.setItem("birthday",birthday);
         localStorage.setItem("phone",phone);
-        const button1=document.querySelector('#exit-modify')
-        button1.click;
+        update();
+
     })
 })

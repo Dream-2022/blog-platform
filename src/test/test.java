@@ -289,4 +289,22 @@ public class test {
         sqlSession.close();
         is.close();
     }
+    @Test
+    public void select() throws IOException {
+        //加载核心配置文件
+        InputStream is= Resources.getResourceAsStream("UserConfig.xml");
+        //获取SqlSession工厂对象
+        SqlSessionFactory sqlSessionFactory=new SqlSessionFactoryBuilder().build(is);
+        //通过SqlSession工厂对象获取SqlSession对象
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        //执行映射配置文件中的sql语句，并接收结果
+        List<Collect_article> lists=sqlSession.selectList("select");
+        //处理结果
+        for(Collect_article collect_article:lists){
+            System.out.println(collect_article);
+        }
+        //释放资源
+        sqlSession.close();
+        is.close();
+    }
 }

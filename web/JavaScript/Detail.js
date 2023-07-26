@@ -8,8 +8,11 @@ if(!token){
 const creator=localStorage.getItem("username")
 const editButtonModify=document.querySelector(".edit-button")
 editButtonModify.addEventListener("click",function (){
+    document.getElementById('avatarImage').src ='/upload/headSculpture.jpeg'
+    document.querySelector('.collect-avatar').src = '/upload/headSculpture.jpeg'
+
     axios({
-        url:'/Blog/DetailTest',
+        url:'/Blog/user/DetailTest',
         params:{
             username:creator
         }
@@ -21,8 +24,7 @@ editButtonModify.addEventListener("click",function (){
         Object.keys(userObj).forEach(key=>{
             if(key==='avatar'){
                 //赋予默认头像
-                console.log(userObj[key])
-                document.querySelector('.collect-avatar').src=userObj[key]
+                document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture")
             }
             else if(key==='gender'){
                 //赋予默认性别，获取性别单选框
@@ -38,6 +40,7 @@ editButtonModify.addEventListener("click",function (){
             else{
                 document.querySelector('.collect-nickname').value=userObj.nickname
                 document.querySelector('.collect-phone').value=userObj.phone
+                document.getElementById('avatarImage').src ="/upload/"+userObj.picture
                 console.log(userObj.birthday)
                 var collectBirthdayInput = document.querySelector(".collect-birthday");
                 // 将日期字符串转换为时间对象
@@ -55,8 +58,9 @@ editButtonModify.addEventListener("click",function (){
     })
 })
 
-
+//Detail上方的资料显示
 function update(){
+    console.log("资料修改")
     //页面上方的资料
     document.querySelector('.content-nickname').innerHTML=localStorage.getItem("nickname")
     // 给定的日期字符串
@@ -69,12 +73,18 @@ function update(){
     document.querySelector('.username').innerHTML=localStorage.getItem("username")
     document.querySelector('.email').innerHTML=localStorage.getItem("email")
     document.querySelector('.content-detail3').innerHTML=localStorage.getItem("profile")
+    document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture")
+    document.querySelector('.headSculpture').src="/upload/"+localStorage.getItem("picture")
     const fan=document.querySelector('.fans')
     const follow=document.querySelector('.follow')
     const picture=document.querySelector("picture")
 }
+const buttonSave=document.querySelector(".save-button")
 const buttonExit=document.querySelector(".exit")
 update();
+buttonSave.addEventListener('click',e=>{
+    update();
+})
 buttonExit.addEventListener('click',e=>{
     update();
 })

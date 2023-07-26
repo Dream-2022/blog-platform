@@ -1,7 +1,7 @@
 package tool;
 
 import bean.User;
-import controller.EmailTest;
+import controller.DistributeUser;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Map;
 public class RegisterAccount {
     public static String registerAccount(Map params, String password, String email, SqlSession sqlSession){
 
-        List<User> users= EmailTest.getUsers();
+        List<User> users= DistributeUser.getUsers();
 
         //生成一个唯一账号（符合所有条件）用雪花算法生成邀请码
         int Flag=0;

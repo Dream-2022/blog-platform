@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Blog Details Page</title>
+    <!--  图标-->
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
 <!--    浮窗-->
     <link rel="stylesheet" href="stackpath.bootstrapcdn.com_bootstrap_4.5.2_css_bootstrap.min.css">
     <script src="../JavaScript/code.jquery.com_jquery-3.6.0.min.js"></script>
@@ -12,7 +14,6 @@
 <!--    -->
     <link rel="stylesheet" href="../lib/bootstrap.min.css">
     <link rel="stylesheet" href="../lib/bootstrap.css">
-    <link rel="stylesheet" href="semantic.min.css">
     <link rel="stylesheet" href="Navigation.css">
     <link rel="stylesheet" href="Dropdown.css">
     <link rel="stylesheet" href="DetailStyle.css">
@@ -128,17 +129,24 @@
     <nav>
         <ul>
             <li class="left"><i class="fire icon"></i>博客园</li>
-            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+
             <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
             <li><a href="#"><i class="bell icon"></i>消息</a></li>
             <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+
+            <li>
+                <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                <input type="button" id="search-button" value="搜索">
+            </li>
             <li>
                 <div class="content-container">
                     <div class="text image-container">
-                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <img  class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
                         <span class="nickname">未登录</span>
                     </div>
-                    <!--            下拉框-->
+                    <!--下拉框-->
                     <div class="content-dropdown">
                         <div>
                             <span class="Nickname">用户名</span>
@@ -149,12 +157,10 @@
                     </div>
                 </div>
             </li>
-            <li class="right">
-                <input type="text" id="acc" class="search" placeholder="查询" name="search">
-                <label for="search-button"><i class="search icon" style="color: white"></i></label>
-                <input type="button" id="search-button" value="搜索">
-            </li>
+            <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
         </ul>
+
+
     </nav>
 
 </header>
@@ -177,8 +183,9 @@
                                       </td>
                                       <td rowspan="3">
                                           <span>头像:</span>
-                                          <img src="../image/headSculpture.jpeg" alt="" class="collect-avatar">
-                                          <input id="upload" type="file" class="upload" placeholder="未选择">
+                                          <img id="avatarImage" src="../image/headSculpture.jpeg" alt="" class="collect-avatar">
+                                          <input id="upload" type="file" class="upload" placeholder="未选择" style="display: none">
+
                                       </td>
                                   </tr>
                                   <tr>
@@ -358,6 +365,7 @@
   <footer>
       <p>&copy; 2023 My Blog. All rights reserved.</p>
   </footer>
+
 <!--修改资料弹框-->
 <script src="../JavaScript/Modification.js"></script>
 <!--查找是否存在token令牌 /渲染资料卡片中的资料   -->
@@ -366,6 +374,8 @@
 <script src="../JavaScript/Navigation.js"></script>
 <script src="../lib/bootstrap.js"></script><!--弹窗-->
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+<!--发送请求时在响应头中加入token和longt-->
+<script src="../JavaScript/Identity.js"></script>
 <!--导航栏下拉框-->
     <script src="../JavaScript/Dropdown.js"></script>
   <script

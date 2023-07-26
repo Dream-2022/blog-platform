@@ -62,7 +62,7 @@ ObtainCode.addEventListener('click', e=> {
         }
     },1000)
     axios({
-        url: '/Blog/EmailTest',
+        url: '/Blog/user/EmailTest',
         method: 'post',
         params: {email}
     }).then(result => {
@@ -105,7 +105,7 @@ saveButton.addEventListener('click', e => {
 
 
     axios({
-        url: '/Blog/PasswordTest',
+        url: '/Blog/Fail/PasswordTest',
         method: 'post',
         params: {email,code,password}
     }).then(result => {

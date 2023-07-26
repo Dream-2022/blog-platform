@@ -4,16 +4,16 @@ import java.sql.Timestamp;
 
 public class Collects {
     private int id;
-    private int article_id;
+    private String collectName;
     private int user_id;
     private Timestamp create_at;
 
     public Collects() {
     }
 
-    public Collects(int id, int article_id, int user_id, Timestamp create_at) {
+    public Collects(int id, String collectName, int user_id, Timestamp create_at) {
         this.id = id;
-        this.article_id = article_id;
+        this.collectName = collectName;
         this.user_id = user_id;
         this.create_at = create_at;
     }
@@ -26,12 +26,12 @@ public class Collects {
         this.id = id;
     }
 
-    public int getArticle_id() {
-        return article_id;
+    public String getCollectName() {
+        return collectName;
     }
 
-    public void setArticle_id(int article_id) {
-        this.article_id = article_id;
+    public void setCollectName(String collectName) {
+        this.collectName = collectName;
     }
 
     public int getUser_id() {
@@ -54,7 +54,7 @@ public class Collects {
     public String toString() {
         return "Collects{" +
                 "id=" + id +
-                ", article_id=" + article_id +
+                ", collectName='" + collectName + '\'' +
                 ", user_id=" + user_id +
                 ", create_at=" + create_at +
                 '}';
