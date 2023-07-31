@@ -6,7 +6,16 @@
     <select id="select" resultType="bean.Collect_article">
         select * from collect_article
     </select>
-    <insert id="insertCollectArticleById" parameterType="map">
-        INSERT INTO collect_article (article_id, label_id) VALUES (#{article_id},#{label_id})
+    <select id="selectCollectArticleByCollectIdAndArticleId" resultType="bean.Collect_article">
+        select * from collect_article WHERE article_id=#{article_id} AND collect_id=#{collect_id}
+    </select>
+    <select id="selectCollectsByArticleId" resultType="bean.Collect_article">
+        select * from collect_article WHERE article_id=#{article_id}
+    </select>
+    <insert id="insertCollectsByCollectIdAndArticleId" parameterType="bean.Collect_article">
+        INSERT INTO collect_article (article_id,collect_id) VALUES (#{article_id},#{collect_id})
     </insert>
+    <delete id="deleteCollectArticleByCollectIdAndArticleId" parameterType="map">
+        DELETE FROM collect_article WHERE collect_id=#{collect_id} AND article_id=#{article_id}
+    </delete>
 </mapper>

@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class LabelsTest {
+    //筛选出全部标签，传到前端
     public static void selectLabelName(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
         List<Labels> labels =sqlSession.selectList("selectLabel");
@@ -27,6 +28,7 @@ public class LabelsTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    //在插入标签之前删除之前文章对应的标签
     public static void insertLabel(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("进入insertLabel方法");
         //调用工具类
@@ -71,20 +73,5 @@ public class LabelsTest {
             }
 
         }
-        // 获取前端传递的字符串数组
-//        String selectElementArray = req.getParameter("selectElement");
-//
-//        System.out.println("selectElementArray:"+selectElementArray);
-        // 将字符串数组转换为List<String>类型
-//        List<String> selectElement = Arrays.asList(selectElementArray);
-//        System.out.println("selectElement:"+selectElement);
-
-//        System.out.println("selectElement:"+selectElement);
-        // 执行映射配置文件中的sql语句，并接收结果
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("articleId", articleId);
-//        params.put("selectElement", selectElement);
-
-//        int result = sqlSession.insert("insert", params);
     }
 }

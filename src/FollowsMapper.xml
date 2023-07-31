@@ -6,4 +6,7 @@
     <select id="selectFollow" resultType="bean.Follows">
         select * from follows
     </select>
+    <insert id="insertFollowsByBlogger_idAndFans_id" parameterType="map">
+        INSERT INTO follows (blogger_id, fans_id) VALUES (#{blogger_id},#{fans_id})
+    </insert>
 </mapper>

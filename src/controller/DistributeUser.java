@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -89,5 +90,12 @@ public class DistributeUser extends BaseServletUser {
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         UserTest.selectByUsername(req,resp);
+    }
+    public void selectUserById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectUserById.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        UserTest.selectUserById(req,resp);
     }
 }

@@ -9,11 +9,11 @@ if (localStorage.getItem("nickname")) {
 }
 // 检查是否存在 picture
 var pictureElement = document.querySelector('#headSculpture');
-if (localStorage.getItem("picture")) {
+if (localStorage.getItem("picture")!==null) {
     var picture = localStorage.getItem("picture");
     pictureElement.src = "/upload/"+"headSculpture.jpeg";
     document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture");
-
+    console.log("1121212")
 }
 
 //如果未登录，则不会出现退出登录的按钮
@@ -45,6 +45,34 @@ exitButton.addEventListener("click", function() {
     //退出登录来到主页面
     window.location.href ='../MainPage.html';
 });
+
+if(window.location.href==='http://localhost:8080/Blog/HTML/SearchPage.html'){
+    document.querySelector('.search').style.display = 'none';
+    var labelElement = document.querySelector('label[for="search-button"]');
+    var inputElement = document.getElementById('search-button');
+
+    // 隐藏 label 元素和 input 元素
+    labelElement.style.display = 'none';
+    inputElement.style.display = 'none';
+    var contentContainer = document.querySelector('.content-container');
+    contentContainer.style.marginLeft = '712px';
+}
+//点击搜索
+document.querySelector('#search-button').addEventListener('click', function() {
+    let content=document.querySelector('.search').value
+    if(content===''){
+        document.querySelector('.search').setAttribute('placeholder', '请输入要查找的内容');
+        return
+    }
+    localStorage.setItem("search",content)
+    console.log( window.location.href );
+    if(window.location.href==='http://localhost:8080/Blog/MainPage.html'){
+        window.location.href ='HTML/SearchPage.html';
+    }
+    else{
+        window.location.href ='SearchPage.html';
+    }
+})
 
 
 

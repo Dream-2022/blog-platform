@@ -5,6 +5,9 @@ public class Collect_article {
     private String article_id;
     private int collect_id;
 
+    public Collect_article() {
+    }
+
     public Collect_article(int id, String article_id, int collect_id) {
         this.id = id;
         this.article_id = article_id;

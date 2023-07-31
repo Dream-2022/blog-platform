@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @WebServlet("/Columns/*")
 
@@ -17,5 +18,12 @@ public class DistributeColumns extends BaseServletColumns{
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ColumnTest.selectColumnName(req,resp);
+    }
+    public void InsertColumn(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("InsertColumn.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ColumnTest.InsertColumn(req,resp);
     }
 }

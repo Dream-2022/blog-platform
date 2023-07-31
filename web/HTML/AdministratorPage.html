@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrator Page</title>
+    <!--  图标-->
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
+    <style>
+        body::before {
+            content: "";
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-image: url("../image/blue2.jpg"); /* 设置背景图片的路径 */
+            background-size: cover;
+            opacity: 0.6; /* 设置背景图片的透明度，值范围从 0 到 1，0 表示完全透明，1 表示完全不透明 */
+            z-index: -1; /* 将伪元素放在底层，避免覆盖内容 */
+        }
+        .content-Box{
+            margin:47px 200px 24px 200px;
+            background-color: #f8f8f8;
+            opacity: 0.9;
+            /*background-color: rgba(217, 214, 209, 0.5);*/
+            height: 150px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
+        }
+        .container-content{
+            margin: 0 200px 0 200px;
+            height: 555px;
+        }
+        .container-box1{
+            width: 20%;
+            background-color: #ffffff;
+            opacity: 0.7;
+            /*background-color: rgba(217, 214, 209, 0.5);*/
+            height: 100%;
+            border-radius: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) ;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
+        }
+        .container-box2{
+            background-color: #ffffff;
+            opacity: 0.7;
+            /*background-color: rgba(217, 214, 209, 0.5);*/
+            height: 100%;
+            width: 78%;
+            margin-left: 2%;
+            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
+            border-radius: 20px;
+        }
+        .container-content div{
+            float:left;
+        }
+        .text-content1,
+        .text-content2{
+            padding: 20px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .text-content1:hover,
+        .text-content2:hover{
+            background-color: #ccc;
+        }
+        .text-content1{
+            border-bottom: 1px solid #ccc;
+        }
+        .text-content1{
+            margin-top: 50px;
+        }
+        .content-Box .headSculpture{
+            width: 100px;
+            margin-left: 85px;
+            display: inline-block;
+            border-radius: 50px;
+            opacity: 1;
+            margin-top: 22px;
+        }
+        table tr td img{
+            width: 150px;
+        }
+        .published-box{
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .container-box2 div .published,
+        .container-box2 div .unpublished{
+            padding: 10px;
+            font-size: 20px;
+        }
+        .container-box2 div .published:hover,
+        .container-box2 div .unpublished:hover{
+            background-color: #ccc;
+            border-radius: 20px;
+        }
+        .container-box2 div .published{
+            border-right: 1px solid #ccc;
+            margin-left: 66px;
+            padding-left: 134px;
+            padding-right: 134px;
+        }
+        .container-box2 div .unpublished{
+            padding-left: 134px;
+            padding-right: 134px;
+        }
+        .section span{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-Box">
+        <img class="headSculpture" src="/upload/image.jpeg" alt="">
+    </div>
+    <div class="container-content">
+        <div class="container-box1">
+            <div class="text-content1">文章管理</div><br>
+            <div class="text-content2">用户管理</div>
+        </div>
+        <div class="container-box2">
+            <div class="published-box">
+                <span class="published">已发布</span>
+                <span class="unpublished">未发布</span>
+            </div>
+<!--            发布的文章放在这个盒子里-->
+          <div class="content-box">
+            <table>
+              <tr>
+                <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
+                <td>
+                  <h4>博客</h4>
+                  <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="section">
+                  <span><i class="eye icon"></i>浏览量</span><span class="content-view">10</span>
+                  <span><i class="thumbs up icon"></i>点赞</span><span class="content-like">243</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+    </div>
+</body>
+</html>

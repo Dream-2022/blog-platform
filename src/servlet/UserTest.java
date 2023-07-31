@@ -255,25 +255,6 @@ public class UserTest {
         //释放资源
         sqlSession.close();
     }
-    //修改个人头像
-/*    public static void updateAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String username= req.getParameter("username");
-        String picture= req.getParameter("avatar");
-        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
-        //执行映射配置文件中的sql语句，并接收结果
-        User user=new User();
-        user.setUsername(username);
-        user.setPicture(picture);
-        int result = sqlSession.update("update", user);
-        System.out.println("事务提交："+result);
-        //提交事务
-        sqlSession.commit();
-        //处理结果
-        System.out.println(result);
-        //释放资源
-        sqlSession.close();
-    }    //DetailTest获取个人信息，显示到个人资料页面*/
-
     public static void updateAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         final String AVATAR_BASE_PATH = "D:\\javaj\\upload";
         String username= req.getParameter("username");
@@ -342,7 +323,7 @@ public class UserTest {
         resp.getWriter().write(userJson);
 
     }
-
+    //通过username找用户信息
     public static void selectByUsername(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
         String username=req.getParameter("username");
@@ -350,6 +331,20 @@ public class UserTest {
         Map<String, Object> params = new HashMap<>();
         params.put("username",username);
         User user = sqlSession.selectOne("selectByUsername", params);
+        System.out.println(user);
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(user);
+        PrintWriter out=resp.getWriter();
+        out.print(dataJson);
+    }
+    //通过id找用户信息
+    public static void selectUserById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        String id=req.getParameter("id");
+        System.out.println("获取的id："+id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("id",id);
+        User user = sqlSession.selectOne("selectUserById", params);
         System.out.println(user);
         Gson gson=new Gson();
         String dataJson = gson.toJson(user);

@@ -104,7 +104,7 @@ document.querySelector('.articles').addEventListener('click', function(event) {
                 // 传key
                 localStorage.setItem("key", text);
                 window.location.href = "HTML/BlogPage.html";
-                })
+            })
             .catch(error => {
                 console.error(error);
             });

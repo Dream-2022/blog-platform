@@ -6,4 +6,13 @@
     <select id="selectLabel_article" resultType="bean.Label_article">
         select * from label_article
     </select>
+    <select id="selectLabelArticleByArticleId" parameterType="bean.Label_article" resultType="bean.Label_article">
+        select * from label_article WHERE article_id=#{article_id}
+    </select>
+    <insert id="insertLabelArticleById" parameterType="map">
+        INSERT INTO label_article (article_id, label_id) VALUES (#{article_id},#{label_id})
+    </insert>
+    <delete id="deleteLabelArticleByArticleId" parameterType="map">
+        DELETE FROM label_article WHERE article_id=#{article_id}
+    </delete>
 </mapper>

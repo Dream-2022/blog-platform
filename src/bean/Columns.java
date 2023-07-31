@@ -1,14 +1,15 @@
 package bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Columns {
     private int id;
     private int user_id;
     private String columnName;
-    private Timestamp create_at;
+    private Date create_at;
 
-    public Columns(int id, int user_id, String columnName, Timestamp create_at) {
+    public Columns(int id, int user_id, String columnName, Date create_at) {
         this.id = id;
         this.user_id = user_id;
         this.columnName = columnName;
@@ -42,11 +43,11 @@ public class Columns {
         this.columnName = columnName;
     }
 
-    public Timestamp getCreate_at() {
+    public Date getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(Timestamp create_at) {
+    public void setCreate_at(Date create_at) {
         this.create_at = create_at;
     }
 

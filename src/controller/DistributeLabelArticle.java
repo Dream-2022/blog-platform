@@ -1,6 +1,7 @@
 package controller;
 
-import servlet.Label_ArticleTest;
+import servlet.LabelArticleTest;
+import servlet.LikesTest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,14 @@ public class DistributeLabelArticle extends BaseServletLabelArticle{
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
-        Label_ArticleTest.insertLabelArticle(req,resp);
+        LabelArticleTest.insertLabelArticle(req,resp);
+    }
+    //通过article_id读取文章的label_id，然后从labels表中读取labelName
+    public void selectLabelArticleByArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectLabelArticleByArticleId.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        LabelArticleTest.selectLabelArticleByArticleId(req,resp);
     }
 }

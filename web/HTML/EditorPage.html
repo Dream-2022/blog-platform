@@ -106,8 +106,8 @@
             padding-right: 53px;
         }
     /*    标签样式*/
-        /* 样式可以根据需要进行自定义 */
-        .container-label {
+        .container-label ,
+        .container-column{
             display: inline-block;
         }
         .input-box {
@@ -117,18 +117,21 @@
         .input-box button {
             display: inline;
         }
-        #output{
+        #output,
+        #input{
             display: inline;
             margin-left: 10px;
         }
-        .delete-label{
+        .delete-label,
+        .delete-column{
             margin-left: 5px;
             font-size: 12px;
             border: none;
             color: #ccc;
         }
         /*添加标签的输入框*/
-        #textInput{
+        #textInput,
+        #text-input{
             border: none;
             width: 87px;
             background-color: #e8e8e8;
@@ -138,14 +141,20 @@
             margin-left: 10px;
         }
         /*添加标签的确认按钮*/
+        .confirm-column,
         .confirm-label{
             border: none;
             border-radius: 8px;
             background-color: transparent;
         }
-        #toggleButton{
+        #toggleButton,
+        #togleButton {
             border:none;
             margin-left: 10px;
+        }
+        .blog .class-name{
+            margin-top: 10px;
+            display: inline-block;
         }
         /*!*弹窗*!*/
         /*.toast {*/
@@ -174,46 +183,47 @@
 <body>
 <!--    &lt;!&ndash;浮窗&ndash;&gt;-->
 <!--    <div class="alert">111</div>-->
-    <!--导航栏-->
-    <header class="header-box">
-        <nav>
-            <ul>
-                <li class="left"><i class="fire icon"></i>博客园</li>
+<!--导航栏-->
+<header class="header-box">
+    <nav>
+        <ul>
+            <li class="left"><i class="fire icon"></i>博客园</li>
 
-                <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
-                <li><a href="#"><i class="bell icon"></i>消息</a></li>
-                <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+            <li><a href="#"><i class="bell icon"></i>消息</a></li>
+            <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
 
 
-                <li>
-                    <input type="text" id="acc" class="search" placeholder="查询" name="search">
-                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
-                    <input type="button" id="search-button" value="搜索">
-                </li>
-                <li>
-                    <div class="content-container">
-                        <div class="text image-container">
-                            <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
-                            <span class="nickname">未登录</span>
-                        </div>
-                        <!--下拉框-->
-                        <div class="content-dropdown">
-                            <div>
-                                <span class="Nickname">用户名</span>
-                                <span><a href="Detail.html" class="Detail">个人中心</a></span>
-                                <span><a href="#" class="Message">消息记录</a></span>
-                                <span class="exit">退出登录</span>
-                            </div>
+            <li>
+                <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                <input type="button" id="search-button" value="搜索">
+            </li>
+            <li>
+                <div class="content-container">
+                    <div class="text image-container">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <span class="nickname">未登录</span>
+                    </div>
+                    <!--下拉框-->
+                    <div class="content-dropdown">
+                        <div>
+                            <span class="Nickname">用户名</span>
+                            <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
+                            <span class="exit">退出登录</span>
                         </div>
                     </div>
-                </li>
-                <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
-            </ul>
+                </div>
+            </li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+        </ul>
 
 
-        </nav>
+    </nav>
 
-    </header>
+</header>
 <!--    编辑器-->
     <div class="container">
         <div id="editor—wrapper">
@@ -245,23 +255,30 @@
         </div>
 
         <br><span>添加封面</span><br>
-        <img src="../image/title.png" class="cover-image" alt=""><br>
+        <img id="avatarImage1" src="../image/title.png" class="cover-image" alt=""><br>
+        <input id="upload1" type="file" class="upload" placeholder="未选择" style="display: none">
 
         <span>文章摘要</span>
         <textarea placeholder="摘要，会在列表、推荐等场景外漏，帮助读者快速了解内容" rows="4" cols="50" class="content-textarea"></textarea><br>
 
         <span>分类专栏</span>
-
         <div class="dropdown">
             <button>选择分类</button>
-            <div class="dropdown-content dropdown-column">
- <!-- 这里可以根据需要添加更多的标签选项 -->
+            <div class="dropdown-content dropdown-column" onclick="addContentColumnDropdown()">
+                <!-- 这里可以根据需要添加更多的分类选项 -->
             </div>
         </div>
-        <span class="content-class">总结</span>
-        <span class="content-class">学习</span><br>
+<!--        输入分类-->
+        <div class="container-column">
+            <button id="togleButton" onclick="togleInputBox()">添加新分类</button>
+            <span class="input-box" id="input-box">
+            <input type="text" id="text-input" />
+                <button class="confirm-column" onclick="addContentColumn()">确定</button>
+             </span>
+            <span id="input"></span>
+        </div>
 
-        <span>文章类型</span>
+        <br><span class="class-name">文章类型</span>
         <input type="radio" name="original" value="original" checked="checked"><span>原创</span>
         <input type ="radio" name="original" value="transshipment"><span>转载</span>
         <input type ="radio" name="original" value="translation"><span>翻译</span><br>
@@ -277,6 +294,9 @@
     </div>
     <!--标签事件-->
     <script src="../JavaScript/addLabel.js"></script>
+    <!--分类事件-->
+    <script src="../JavaScript/addColumn.js"></script>
+
     <script>const token=localStorage.getItem("token")</script>
     <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
@@ -284,6 +304,7 @@
     <script src="../JavaScript/Identity.js"></script>
     <script src="../lib/bootstrap.bundle.min.js"></script>
     <script src="../JavaScript/EditorPage.js"></script>
+    <script src="../JavaScript/EditorBolg.js"></script>
     <!--导航栏-->
     <script src="../JavaScript/Navigation.js"></script>
     <!--下拉框-->

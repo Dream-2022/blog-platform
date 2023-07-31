@@ -130,12 +130,6 @@
 
 
 
-    // 在页面加载完成后调用设置按钮点击事件的函数
-    // window.onload = function() {
-    //     setupButtonClickEvent();
-    // };
-
-
     // 从下拉框中添加标签(根据页面中span盒子的个数是否大于5，来判断是否能继续添加盒子)
     function addContentLabelDropdown(){
         //标签

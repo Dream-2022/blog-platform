@@ -43,21 +43,30 @@ body{
     text-align: center;
     background-color: #F0AEA9;
 }
-.container-detail .content-Column{
+.container-detail1,
+.container-detail2{
+    display: inline-block;
+}
+.container-detail1 .content-Column,
+.container-detail2 .content-Column{
     margin-left: 61px;
 }
-.container-detail span{
+.container-detail1 span,
+.container-detail2 span{
     margin-left: 5px;
 }
-.container-detail .content-column,
-.container-detail .content-label{
+.container-detail1 .content-column,
+.container-detail1 .content-label,
+.container-detail2 .content-column,
+.container-detail2 .content-label{
     color: #8bafb2;
     display: inline-block;
     background-color: white;
     padding: 5px;
     border-radius: 5px;
 }
-.container-detail .content-Label{
+.container-detail1 .content-Label,
+.container-detail2 .content-Label{
     margin-left: 36px;
 }
 .container-title2{

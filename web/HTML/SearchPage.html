@@ -8,95 +8,7 @@
     <link rel="stylesheet" href="Navigation.css">
 <!--    下拉框样式-->
     <link rel="stylesheet" href="Dropdown.css">
-
-    <style>
-        .container-search{
-            background-color: white;
-            margin:  auto;
-        }
-        .container-content{
-            width: 60%;
-            margin: auto;
-            height: 800px;
-        }
-        .container-search {
-            border: 1px solid #ccc;
-            display: flex;
-             margin-top: 50px; /* 根据需要调整距离导航栏的间距 */
-         }
-        .content-search{
-            margin-top: 7px;
-            margin-bottom: 7px;
-            margin-left: 290px;
-            width: 60%;
-        }
-        .content-input {
-            position: sticky;
-            top: 0;
-            width: 77%;
-            height: 48px;
-            border: none;
-            padding: 8px;
-            background-color: #f3f3f3;
-            margin-right: 0;
-            outline: none;
-        }
-        .content-button{
-            width: 22%;
-            color: white;
-            background-color: #a8c3de;
-            position: sticky;
-            top: 0;
-            height: 48px;
-            border: none;
-            margin-left: 0; /* 去除左边距 */
-        }
-        .container-content .container-content2 .content-box{
-            margin-bottom: 10px;
-            height: 158px;
-            box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
-        }
-        td .content-image{
-            display: inline-block;
-            height: 158px;
-            width: 300px;
-            object-fit: cover;
-        }
-        .content-edit{
-             float: right;
-             margin-right: 10px;
-             margin-bottom: 10px;
-             width: 70px;
-             height: 21px;
-             border: none;
-             background-color: #8bb1c5;
-             color: #ffffff;
-             font-family: Arial, sans-serif;
-             font-size: 14px;
-             border-radius: 24px;
-             cursor: pointer;
-             margin-left: 10px;
-         }
-        tr td h3{
-            margin: 0 0 0 20px;
-            padding: 0;
-
-        }
-        tr td span{
-            margin-left: 10px;
-        }
-        tr td .content-view{
-            margin-left: 20px;
-        }
-        tr td .content-span{
-            display: inline-block;
-            padding: 20px;
-        }
-        footer{
-            margin-top: 138px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="SearchPageStyle.css">
 </head>
 <body>
   <div>
@@ -126,14 +38,15 @@
                           <div class="content-dropdown">
                               <div>
                                   <span class="Nickname">用户名</span>
-                                  <span><a href="Detail.html" class="Detail">个人中心</a></span>
-                                  <span><a href="#" class="Message">消息记录</a></span>
+                                  <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                                  <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                                  <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
                                   <span class="exit">退出登录</span>
                               </div>
                           </div>
                       </div>
                   </li>
-                  <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+                  <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
               </ul>
 
 
@@ -149,44 +62,26 @@
 
       </div>
       <div class="container-content">
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="content-view"><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span class="content-view"><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
+
+<!--          <div class="content-box">-->
+<!--              <table>-->
+<!--                  <tr>-->
+<!--                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>-->
+<!--                      <td>-->
+<!--                          <h3>博客</h3>-->
+<!--                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>-->
+<!--                      </td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                      <td>-->
+<!--                          <span class="content-view"><i class="eye icon"></i>浏览量</span><span>10</span>-->
+<!--                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>-->
+<!--                          <span><i class="star icon"></i> 收藏</span><span>12</span>-->
+<!--                          <button class="content-edit">编辑</button>-->
+<!--                      </td>-->
+<!--                  </tr>-->
+<!--              </table>-->
+<!--          </div>-->
       </div>
 
       <!--尾部-->
@@ -194,10 +89,13 @@
           <p>&copy; 2023 My Blog. All rights reserved.</p>
       </footer>
   </div>
+  <script>const token=localStorage.getItem("token")</script>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
   <!--发送请求时在响应头中加入token和longt-->
   <script src="../JavaScript/Identity.js"></script>
-  <script></script>
+  <script src="../JavaScript/SearchPage.js"></script>
+  <script src="../JavaScript/Navigation.js"></script>
+
   <!--导航栏下拉框-->
   <script src="../JavaScript/Dropdown.js"></script>
 </body>

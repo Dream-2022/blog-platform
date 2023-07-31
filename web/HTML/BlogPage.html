@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="Navigation.css">
     <link rel="stylesheet" href="BlogPageStyle.css">
     <link rel="stylesheet" href="Dropdown.css">
+
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
     <style>
         .outline-give,
         .outline-collect{
@@ -17,9 +19,127 @@
             display: inline-block;
             transition: background-color 0.3s, color 0.3s; /* Add smooth transition for the effect */
         }
+        .outline-give{
+            margin-left: 70px;
+        }
         .liked ,
         .collected{
             color: #fa8945; /* Text color on liked state */
+        }
+        /*收藏弹窗样式*/
+        .modal-body .modal-content-collect{
+            line-height: 35px;
+            width: 90%;
+            margin-left: 20px;
+            margin-bottom: 10px;
+            background-color: #efefef;
+            height: 35px;
+            border-radius: 5px;
+        }
+        .grey{
+            color: #ccc;
+            font-size: 12px;
+        }
+        .right{
+            display: flex;
+            justify-content: center; /* 水平居中 */
+        }
+        .confirm-button{
+            display: flex;
+            position: absolute;
+            right: 15px;
+            justify-content: center; /* 水平居中 */
+            border-radius: 15px;
+            border: 1px solid #ccc;
+
+            width: 48px;
+            height: 27px;
+            line-height: 27px;
+            cursor: pointer;
+        }
+        .modal-content{
+            border-radius: 0;
+        }
+        .modal-footer{
+            background-color: white;
+        }
+
+        .container-collect{
+            padding: 10px;
+        }
+        /*    标签样式*/
+        .modal-content-collect{
+            display: inline-block;
+        }
+        .input-box {
+            display: none;
+        }
+        .input-box input,
+        .input-box button {
+            display: inline;
+        }
+        #output{
+            display: inline;
+            margin-left: 10px;
+        }
+        .delete-label,
+        .delete-column{
+            margin-left: 5px;
+            font-size: 12px;
+            border: none;
+            color: #ccc;
+        }
+        /*添加标签的输入框*/
+        #textInput{
+            border: none;
+            width: 87px;
+            background-color: #e8e8e8;
+            height: 23px;
+            border-radius: 8px;
+            outline: 1px solid #ccc;
+            margin-left: 10px;
+        }
+        /*添加标签的确认按钮*/
+        .confirm-label{
+            border: none;
+            border-radius: 8px;
+            background-color: transparent;
+        }
+        #toggleButton {
+            border:none;
+            margin-left: 10px;
+        }
+        .blog {
+            margin-top: 10px;
+            display: inline-block;
+        }
+        /*提示栏*/
+        .prompt{
+            display: inline-block;
+            margin-left: 314px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            color: #b1deba;
+            font-size: 15px;
+        }
+        .my-box{
+            color: #4c4c4c;
+        }
+    /*    作者详细信息*/
+        .detail-author{
+            display: inline-block;
+        }
+        .detail-author-avatar{
+            width: 30px;
+            height: 30px;
+            margin-left: 15px;
+            border-radius: 15px;
+        }
+        .detail-author-nickname{
+            margin-left: 10px;
+        }
+        .detail-author-id{
+            display: none;
         }
     </style>
 </head>
@@ -43,21 +163,22 @@
             <li>
                 <div class="content-container">
                     <div class="text image-container">
-                        <img  class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
                         <span class="nickname">未登录</span>
                     </div>
                     <!--下拉框-->
                     <div class="content-dropdown">
                         <div>
                             <span class="Nickname">用户名</span>
-                            <span><a href="Detail.html" class="Detail">个人中心</a></span>
-                            <span><a href="#" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
                             <span class="exit">退出登录</span>
                         </div>
                     </div>
                 </div>
             </li>
-            <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
         </ul>
 
 
@@ -75,27 +196,88 @@
             <span class="content-time">2023年7月17日09:08:17</span>
             <span><i class="eye icon"></i><span class="content-view">69</span></span>
             <span><i class="heart icon"></i><span class="content-give">8</span></span>
-            <span>公开</span>
+            <span class="content-state">公开</span>
         </div>
-        <div class="container-detail">
+        <div class="container-detail1">
             <span class="content-Column">分类专栏:</span>
-            <span class="content-column">C++</span>
-            <span class="content-column">算法</span>
+        </div>
+        <div class="container-detail2">
             <span class="content-Label">文章标签:</span>
-            <span class="content-label">学习</span>
-            <span class="content-label">算法</span>
         </div>
     </div>
     <div class="container-box2">
         <p class="content-content">内容</p>
         <div class="outline-box">
+            <!--            作者头像，和名字-->
+            <div class="detail-author">
+                <img src="../image/headSculpture.jpeg" class="detail-author-avatar">
+                <span class="detail-author-nickname">作者</span>
+                <span class="detail-author-id">id</span>
+            </div>
             <div class="detail-give" onclick="toggleLike()">
                 <span class="outline-give"><i class="thumbs up outline icon"></i>点赞</span><span class="article-give">0</span>
             </div>
-            <div class="detail-collect" onclick="toggleCollect()">
-                <span class="outline-collect"><i class="star outline icon"></i>收藏</span><span class="article-collect">0</span>
-                <!--        thumbs up  heart-->
-            </div>
+<!--            onclick="toggleCollect()"-->
+            <div class="detail-collect" >
+
+                <span class="outline-collect" type="button" data-bs-toggle="modal" data-bs-target=".my-box"><i class="star outline icon"></i>收藏</span><span class="article-collect">0</span>
+
+                        <!--    弹框标签-->
+                        <!--    bootstrap的modal弹框：添加modal类名（默认隐藏）-->
+                        <div class="modal my-box" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">添加收藏夹</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="modal-content-collect">
+                                            <div class="addCollect" id="toggleButton" onclick="toggleInputBox()"><i class="plus circle icon"></i>新建收藏夹</div>
+                                                <span class="input-box" id="inputBox">
+                                                    <input type="text" id="textInput" />
+                                                    <button class="confirm-label" onclick="addContentCollect()">确定</button>
+                                                 </span>
+                                                <span id="output"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="content-collectList">
+                                            <!--这里放收藏夹盒子-->
+
+<!--                                            <div class="container-collect">-->
+<!--                                                <table>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>-->
+<!--                                                            <span class="collect-name">收藏夹1</span>-->
+<!--                                                        </td>-->
+<!--                                                        <td rowspan="2" class="right">-->
+<!--                                                            <span class="confirm-button" >收藏</span>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                    <tr>-->
+<!--                                                        <td>-->
+<!--                                                            <span class="collect-number grey">5</span><span class="grey">条收藏内容</span>-->
+<!--                                                        </td>-->
+
+<!--                                                    </tr>-->
+<!--                                                </table>-->
+<!--                                            </div>-->
+
+                                        </div>
+                                        <span class="prompt">&nbsp</span>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" id="exit-login-email" data-bs-dismiss="modal">关闭</button>
+<!--                                        <button type="button" class="btn btn-primary save-button">保存</button>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
         </div>
     </div>
 
@@ -114,6 +296,7 @@
 
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../lib/bootstrap.js"></script><!--弹窗-->
 <script src="../JavaScript/Identity.js"></script>
 <script src="../JavaScript/BlogPage.js"></script>
 <script src="../JavaScript/Dropdown.js"></script>

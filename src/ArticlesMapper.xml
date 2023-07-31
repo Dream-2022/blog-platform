@@ -6,6 +6,20 @@
     <select id="selectArticle" resultType="bean.Articles">
         select * from articles
     </select>
+    <select id="selectArticlesUserIdByArticleId" resultType="bean.Articles">
+        select * from articles WHERE id=#{id}
+    </select>
+    <select id="likeSelectArticles" resultType="bean.Articles" parameterType="map">
+        SELECT *,
+        (LENGTH(title) - LENGTH(REPLACE(title, #{content}, ''))) AS title_match_count,
+        (LENGTH(plainText) - LENGTH(REPLACE(plainText, #{content}, ''))) AS plainText_match_count
+        FROM articles
+        WHERE (title LIKE CONCAT('%', #{content}, '%') OR plainText LIKE CONCAT('%', #{content}, '%')) AND state='发布'
+        ORDER BY (title_match_count + plainText_match_count) DESC;
+    </select>
+    <select id="selectArticlesByUser_idDetail" resultType="bean.Articles">
+        select * from articles WHERE user_id=#{user_id}
+    </select>
     <update id="updateArticleGiveLike" parameterType="map">
         UPDATE articles SET give=#{give} WHERE id=#{id}
     </update>
@@ -13,7 +27,7 @@
         UPDATE articles SET view=#{view} WHERE id=#{id}
     </update>
     <update id="updateArticleTest" parameterType="map">
-        UPDATE articles SET title=#{title},textarea=#{textarea},plainText=#{plainText},htmlText=#{htmlText},original=#{original},avatar=#{avatar},state=#{state} WHERE id=#{id}
+        UPDATE articles SET update_at=#{update_at},title=#{title},textarea=#{textarea},plainText=#{plainText},htmlText=#{htmlText},original=#{original},avatar=#{avatar},state=#{state} WHERE id=#{id}
     </update>
     <select id="selectArticleById" resultType="bean.Articles">
         select * from articles where id=#{id}

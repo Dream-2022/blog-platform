@@ -1,6 +1,6 @@
 
-// 设置头像点击事件
-window.onload = function() {
+    // 设置头像点击事件
+    window.onload = function() {
     // 设置头像点击事件
     document.getElementById('avatarImage').onclick = function() {
         document.getElementById('upload').click();
@@ -13,7 +13,7 @@ window.onload = function() {
             reader.readAsDataURL(file);
             reader.onloadend = function() {
                 document.getElementById('avatarImage').src = reader.result;
-                console.log("66666"+reader.result)
+                console.log(reader.result)
 
                 // 创建一个 FormData 对象
                 const formData = new FormData();
@@ -57,6 +57,9 @@ function isValidPhoneNumber() {
     phoneTi.innerHTML='手机号格式不正确'
     return false
 }
+
+
+
 //生日日期的判断
 const birthdayHeZi=document.querySelector('.collect-birthday')
 birthdayHeZi.addEventListener('change',isValidBirthday)
@@ -74,6 +77,9 @@ function isValidBirthday(){
         birthdayTi.innerHTML='&nbsp;'
     }
 }
+
+
+
 //保存修改-》点击
 document.querySelector('.save-button').addEventListener('click',()=>{
     const gRadioList=document.querySelectorAll('.collect-gender')

@@ -9,6 +9,9 @@
     <select id="selectById" resultType="bean.User" parameterType="java.lang.Integer">
         SELECT * FROM user WHERE id=#{id}
     </select>
+    <select id="selectUserById" resultType="bean.User" parameterType="map">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
     <select id="selectByUsernameAndPassword" resultType="bean.User" parameterType="map">
         SELECT * FROM user WHERE username=#{username} and password=#{password}
     </select>

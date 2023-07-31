@@ -4,15 +4,23 @@ import java.util.Arrays;
 
 public class LabelList {
     private String[] selectElement;
-    private int articleId ;
+    private String  articleId ;
 
 
-    public LabelList(String[] selectLabel, int articleId) {
-        this.selectElement = selectLabel;
+    public LabelList(String[] selectElement, String articleId) {
+        this.selectElement = selectElement;
         this.articleId = articleId;
     }
 
     public LabelList() {
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String[] getSelectLabel() {
@@ -23,12 +31,8 @@ public class LabelList {
         this.selectElement = selectLabel;
     }
 
-    public int getArticleId() {
-        return articleId;
-    }
-
-    public void setArticleId(int articleId) {
-        this.articleId = articleId;
+    public String[] getSelectElement() {
+        return selectElement;
     }
 
     @Override

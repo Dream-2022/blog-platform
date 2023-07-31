@@ -7,12 +7,12 @@ import java.sql.Timestamp;
 public class Column_article {
     private int id;
     private int column_id;
-    private int article_id;
+    private String  article_id;
 
     public Column_article() {
     }
 
-    public Column_article(int id, int column_id, int article_id) {
+    public Column_article(int id, int column_id, String article_id) {
         this.id = id;
         this.column_id = column_id;
         this.article_id = article_id;
@@ -34,11 +34,11 @@ public class Column_article {
         this.column_id = column_id;
     }
 
-    public int getArticle_id() {
+    public String getArticle_id() {
         return article_id;
     }
 
-    public void setArticle_id(int article_id) {
+    public void setArticle_id(String article_id) {
         this.article_id = article_id;
     }
 

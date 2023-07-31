@@ -5,7 +5,7 @@
     margin:138px auto;
  }
 .container-content1{
-    background-color: white;
+    background-color: #f8f8f8;
     margin: auto;
     width: 74%;
     height:150px;
@@ -19,8 +19,10 @@
     background-color: #f6f6f6;
     margin:0 auto;
     width: 74%;
-    height:826px;
 }
+ .container-content2{
+     margin-bottom: 400px;
+ }
 .content-text {
     color: #565656;
     width: 307px;
@@ -33,7 +35,8 @@
     margin-left: 79px;
 }
 .content-button ,
-.edit-button{
+.edit-button,
+.follow-button{
     width: 67px;
     height: 34px;
     background-color: white;
@@ -45,7 +48,10 @@
     cursor: pointer;
     margin-left: 10px;
 }
-.content-edit{
+.container-content1 .follow-button{
+
+}
+.blog-box .content-edit{
     float: right;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -58,17 +64,25 @@
     font-size: 14px;
     border-radius: 24px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 297px;
 }
-.edit-button{
+.content-id{
+    display: none;
+}
+.edit-button,
+.follow-button{
     float: right;
     width: 80px;
     margin-top: 10px;
     margin-right: 20px;
     color: #80A1C5;
 }
+.follow-button i.icon{
+    margin-left: 0;
+}
 .content-edit,
 .edit-button:hover,
+.follow-button:hover,
 .content-button:hover{
     box-shadow: 5px 5px 5px -1px rgb(0,0,0,.05);
 }
@@ -145,19 +159,33 @@ tr td .content-span{
     background-color: #fcfcfc;
     height:53px;
     color: #4c4c4c;
-    border-top: 3px solid #89e1f1;
+
     border-bottom:1px solid #edeef0;
     line-height: 53px;
 }
-.nav a{
+.nav .ordinary{
+    border-top: 3px solid #89e1f1;
     /*要转换为行内块元素*/
     display:inline-block;
     height:53px;
     font-size:14px;
     color: #4c4c4c;
     text-decoration: none;
-    padding:0 116px;
+    padding:0 59px;
 }
-.nav a:hover{
+.nav .active{
+    display:inline-block;
+    height:53px;
+    font-size:14px;
+    color: #4c4c4c;
+    text-decoration: none;
+    padding:0 74px;
+    border-top: 3px solid #ffc29c;
+    background-color: #f1f1f1;
+}
+.nav span{
+    margin-left: 0;
+}
+.nav span:hover{
     background-color: #eeeeee;
 }

@@ -9,7 +9,7 @@
 .content-dropdown {
     border-radius: 10px;
     position: absolute;
-    left: 50%;
+    left: 25%;
     top: calc(100%);
     transform: translateX(-50%);
     display: none;
@@ -42,11 +42,30 @@
     height: 100%;
 }
 .content-dropdown div span{
-    color: #60a9d0;
+    color: #ccc;
     display: block;
     margin-top: 5px;
     padding: 5px;
     border-bottom: 1px solid #ccc;
+}
+.content-dropdown .exit{
+    color: #60a9d0;
+    border: none;
+}
+ .content-dropdown div .Detail:hover,
+ .content-dropdown div .Message:hover,
+ .content-dropdown div .Content:hover,
+ .content-dropdown div .exit:hover {
+     border: 1px solid #f3f2f2;
+     background-color: #f3f2f2;
+     border-radius: 10px;
+}
+.content-dropdown .Nickname{
+    color: #3e4c64;
+    cursor: pointer;
+    border: none;
+    font-size: 17px;
+    margin-bottom: 20px;
 }
 .content-dropdown .nickname{
     margin-bottom: 10px;
@@ -54,12 +73,22 @@
     font-size: 15px;
 }
 .content-dropdown div span .Detail,
-.content-dropdown div span .Message{
+.content-dropdown div span .Message,
+.content-dropdown div span .Message,
+.content-dropdown div span .exit{
     color: #60a9d0;
 }
 .content-dropdown div span .Detail:hover,
-.content-dropdown div span .Message:hover{
+.content-dropdown div span .Content:hover,
+.content-dropdown div span .Message:hover,
+.content-dropdown div span .exit:hover{
     color: #1b8bc0;
+}
+.content-dropdown div .exit:hover{
+    color: #1b8bc0;
+}
+.header-box .content-dropdown div .Content{
+    color: #60a9d0;
 }
 .content-dropdown div .exit{
     margin-bottom: 20px;

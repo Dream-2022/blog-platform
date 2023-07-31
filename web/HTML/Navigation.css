@@ -45,6 +45,7 @@ body::before {
     border: none;
     outline: none;
 }
+
 #search-button {
     color: white;
     font-family: Arial, sans-serif;

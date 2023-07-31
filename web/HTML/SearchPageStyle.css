@@ -1,0 +1,99 @@
+.container-search{
+    background-color: white;
+    margin:  auto;
+}
+.container-content{
+    width: 60%;
+    margin: auto;
+}
+.container-content{
+    margin-bottom: 600px;
+}
+.container-search {
+    border: 1px solid #ccc;
+    display: flex;
+    margin-top: 50px; /* 根据需要调整距离导航栏的间距 */
+}
+.content-search{
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-left: 290px;
+    width: 60%;
+}
+.content-input {
+    position: sticky;
+    top: 0;
+    width: 77%;
+    height: 48px;
+    border: none;
+    padding: 8px;
+    background-color: #f3f3f3;
+    margin-right: 0;
+    outline: none;
+}
+.content-button{
+    width: 22%;
+    color: white;
+    background-color: #a8c3de;
+    position: sticky;
+    top: 0;
+    height: 48px;
+    border: none;
+    margin-left: 0; /* 去除左边距 */
+}
+.container-content .container-content2 .content-box{
+    margin-bottom: 10px;
+    height: 158px;
+    box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+}
+.content-id{
+    display: none;
+}
+td .content-image{
+    display: inline-block;
+    height: 158px;
+    width: 300px;
+    object-fit: cover;
+}
+.content-edit{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 21px;
+    border: none;
+    background-color: #8bb1c5;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+tr td h3{
+    margin: 0 0 0 20px;
+    padding: 0;
+
+}
+tr td span{
+    margin-left: 10px;
+}
+tr td .content-view{
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+tr td .content-span{
+    display: inline-block;
+    padding: 20px;
+}
+.black{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 20px;
+}
+footer{
+    margin-top: 138px;
+}

@@ -143,21 +143,22 @@
             <li>
                 <div class="content-container">
                     <div class="text image-container">
-                        <img  class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
                         <span class="nickname">未登录</span>
                     </div>
                     <!--下拉框-->
                     <div class="content-dropdown">
                         <div>
                             <span class="Nickname">用户名</span>
-                            <span><a href="Detail.html" class="Detail">个人中心</a></span>
-                            <span><a href="#" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
                             <span class="exit">退出登录</span>
                         </div>
                     </div>
                 </div>
             </li>
-            <li><a href="EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
         </ul>
 
 
@@ -167,6 +168,7 @@
 
   <div class="container-content">
       <div class="container-content1">
+          <button class="follow-button"><i class="plus icon"></i>关注</button>
           <button class="forget edit-button" data-bs-toggle="modal" data-bs-target=".my-box">编辑资料</button>
           <!--    弹框标签-->
           <!--    bootstrap的modal弹框：添加modal类名（默认隐藏）-->
@@ -260,10 +262,13 @@
       <div class="container-content2">
 
           <div class="nav">
-              <a href="#">全部</a>
-              <a href="#">草稿箱</a>
-              <a href="#">审核</a>
-              <a href="#">收藏</a>
+              <span  class="nav-all ordinary">全部</span>
+              <span  class="nav-DraftBin ordinary">草稿箱</span>
+              <span  class="nav-Audit ordinary">审核</span>
+              <span  class="nav-collection ordinary">收藏</span>
+              <span  class="nav-column ordinary">专栏</span>
+              <span  class="nav-follow ordinary">关注</span>
+              <span  class="nav-fan ordinary">粉丝</span>
           </div>
           <select>
               <option>年</option>
@@ -283,89 +288,39 @@
           <input type="text" class="content-text" placeholder="查找的内容">
           <button class="content-button">搜索</button>
 
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
+          <div class="blog-box">
+<!--              这里加文章盒子-->
+
+<!--              <div class="content-box">-->
+<!--                  <table>-->
+<!--                      <tr>-->
+<!--                          <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>-->
+<!--                          <td>-->
+<!--                              <h3>博客</h3>-->
+<!--                              <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>-->
+<!--                          </td>-->
+<!--                      </tr>-->
+<!--                      <tr>-->
+<!--                          <td>-->
+<!--                              <span><i class="eye icon"></i>浏览量</span><span>10</span>-->
+<!--                              <span><i class="thumbs up icon"></i>点赞</span><span>243</span>-->
+<!--                              <span><i class="star icon"></i> 收藏</span><span>12</span>-->
+<!--                              <button class="content-edit">编辑</button>-->
+<!--                          </td>-->
+<!--                      </tr>-->
+<!--                  </table>-->
+<!--              </div>-->
           </div>
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
-          <div class="content-box">
-              <table>
-                  <tr>
-                      <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                      <td>
-                          <h3>博客</h3>
-                          <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>
-                          <span><i class="eye icon"></i>浏览量</span><span>10</span>
-                          <span><i class="thumbs up icon"></i>点赞</span><span>243</span>
-                          <span><i class="star icon"></i> 收藏</span><span>12</span>
-                          <button class="content-edit">编辑</button>
-                      </td>
-                  </tr>
-              </table>
-          </div>
+
       </div>
   </div>
 
   <footer>
       <p>&copy; 2023 My Blog. All rights reserved.</p>
   </footer>
-
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
+<!--发送请求时在响应头中加入token和longt-->
+<script src="../JavaScript/Identity.js"></script>
 <!--修改资料弹框-->
 <script src="../JavaScript/Modification.js"></script>
 <!--查找是否存在token令牌 /渲染资料卡片中的资料   -->
@@ -373,9 +328,8 @@
 <!--导航栏js-->
 <script src="../JavaScript/Navigation.js"></script>
 <script src="../lib/bootstrap.js"></script><!--弹窗-->
-<script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.min.js"></script>
-<!--发送请求时在响应头中加入token和longt-->
-<script src="../JavaScript/Identity.js"></script>
+
+
 <!--导航栏下拉框-->
     <script src="../JavaScript/Dropdown.js"></script>
   <script

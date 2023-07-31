@@ -9,6 +9,9 @@
     <select id="selectLabelByLabelName" resultType="bean.Labels" parameterType="map">
         select * FROM labels WHERE labelName=#{labelName}
     </select>
+    <select id="selectLabelsByArticleId" resultType="bean.Labels" parameterType="map">
+        SELECT * FROM labels WHERE id=#{id}
+    </select>
     <insert id="insertLabel" parameterType="map">
         INSERT INTO labels (labelName) VALUES (#{labelName})
     </insert>

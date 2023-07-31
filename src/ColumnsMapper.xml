@@ -3,7 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.Mapper">
-    <select id="selectColumn" resultType="bean.Columns">
-        select * from columns
+    <select id="selectColumn" resultType="bean.Columns" parameterType="map">
+        select * from columns WHERE user_id=#{user_id}
     </select>
+    <select id="selectColumnByColumnName" resultType="bean.Columns" parameterType="map">
+        select * FROM columns WHERE columnName=#{columnName}
+    </select>
+    <select id="selectColumnsByArticleId" resultType="bean.Columns" parameterType="map">
+        SELECT * FROM columns WHERE id=#{id}
+    </select>
+    <insert id="insertColumn" parameterType="bean.Columns">
+        INSERT INTO columns (columnName,user_id,create_at) VALUES (#{columnName},#{user_id},#{create_at})
+    </insert>
 </mapper>

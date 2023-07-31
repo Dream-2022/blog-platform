@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Page</title>
+    <!--  图标-->
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
+    <link rel="stylesheet" href="../HTML/Navigation.css">
+    <link rel="stylesheet" href="../HTML/Dropdown.css">
+    <style>
+        body{
+            background-color: #ccc;
+            color: #2c2a2a;
+        }
+        .box{
+            background-color: white;
+            width: 68%;
+            margin:100px auto;
+        }
+        .classification{
+            padding: 8px;
+        }
+        .classification span{
+            padding: 8px;
+        }
+        .classification span:hover{
+            border-bottom: 2px solid #60a9d0;
+        }
+        .title{
+            margin-left: 20px;
+            padding-top: 1px;
+        }
+        .message-box-fan .fan,
+        .give-content,
+        .message-box-comment .message-content{
+            color: #ccc;
+            font-size: 13px;
+        }
+        .message-content{
+            color: #211f1f;
+        }
+        .headSculpture{
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            padding: 15px;
+        }
+        .message-box-fan,
+        .message-box-give,
+        .message-box-comment{
+            border-bottom: 1px solid #ccc;
+        }
+        .message-box-fan span,
+        .message-box-give span,
+        .message-box-comment span{
+            margin-left: 10px;
+        }
+        .message-box-comment .comment-content{
+            font-size: 18px;
+        }
+        .message-box-comment .blog-name{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<!--导航栏-->
+<header class="header-box">
+    <nav>
+        <ul>
+            <li class="left"><i class="fire icon"></i>博客园</li>
+
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+            <li><a href="#"><i class="bell icon"></i>消息</a></li>
+            <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+
+            <li>
+                <input type="text" id="acc" class="search" placeholder="查询" name="search">
+                <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                <input type="button" id="search-button" value="搜索">
+            </li>
+            <li>
+                <div class="content-container">
+                    <div class="text image-container">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <span class="nickname">未登录</span>
+                    </div>
+                    <!--下拉框-->
+                    <div class="content-dropdown">
+                        <div>
+                            <span class="Nickname">用户名</span>
+                            <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
+                            <span class="exit">退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+        </ul>
+
+
+    </nav>
+
+</header>
+    <div class="box">
+        <div class="title">
+            <h4>消息中心</h4>
+        </div>
+        <div class="classification">
+            <span class="content-comment">评论</span>
+            <span class="content-collect">点赞</span>
+            <span class="content-message">收藏</span>
+            <span class="content-fan">粉丝</span>
+        </div>
+        <div class="message-content">
+            <div class="message-box-fan">
+                <table>
+                    <tr>
+                        <td rowspan="2"><img src="../image/headSculpture.jpeg" alt="" class="headSculpture"></td>
+                        <td>
+                            <span class="nickname">用户</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="fan">关注了你</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="message-box-give">
+                <table>
+                    <tr>
+                        <td rowspan="2"><img src="../image/headSculpture.jpeg" alt="" class="headSculpture"></td>
+                        <td>
+                            <span class="nickname">用户</span>
+                            <span class="give-content">点赞了你</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="blog-name">23/2/3日总结</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="message-box-comment">
+                <table>
+                    <tr>
+                        <td rowspan="3"><img src="../image/headSculpture.jpeg" alt="" class="headSculpture"></td>
+                        <td>
+                            <span class="nickname">用户</span>
+                            <span class="message-content">评论了你</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="comment-content">你好</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="blog-name">23/2/3日总结</span>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+<!--发送请求时在响应头中加入token和longt-->
+<script src="../JavaScript/Identity.js"></script>
+<!--导航栏下拉框-->
+<script src="../JavaScript/Dropdown.js"></script>
+<!--渲染页面信息（登录之后存在localStorage）-->
+<script src="../JavaScript/Navigation.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
