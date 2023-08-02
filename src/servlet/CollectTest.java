@@ -62,6 +62,36 @@ public class CollectTest {
         //传过去
         return collect;
     }
+    //将收藏夹中的内容放到默认收藏夹中，然后删除这个收藏夹
+    public static Collects selectAndDeleteCollectsByUser_idAndCollect_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String user_id=req.getParameter("user_id");
+        String collect_id=req.getParameter("collect_id");
+        System.out.println("user_id:"+user_id+"collect_id:"+collect_id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectName","默认收藏夹");
+        params.put("user_id",user_id);
+        Collects collect =sqlSession.selectOne("selectCollectsByCollectNameAndUserId",params);
+        System.out.println("Collects:"+collect);
+
+        //更改
+        int collect_id2=collect.getId();
+        String collect_id1=req.getParameter("collect_id");
+        //将collect_article表中的collect_id1改为collect_id2
+        Map<String, Object> params2 = new HashMap<>();
+        params2.put("collect_id1",collect_id1);
+        params2.put("collect_id2",collect_id2);
+        int result=sqlSession.update("updateCollectArticleByCollect_id",params2);
+        System.out.println("更新收藏夹："+result);
+
+        //删除collect_id对应的收藏夹
+        SqlSession sqlSession1= ObtainSqlSession.obtainSqlSession();
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("id",collect_id);
+        int result2=sqlSession1.delete("DeleteCollectsByCollect_id",params1);
+        System.out.println("删除收藏夹："+result2);
+        return collect;
+    }
     public static void insertCollectsCollectName(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
         String user_id=req.getParameter("user_id");
@@ -78,5 +108,18 @@ public class CollectTest {
         //序列化传过去
         PrintWriter out=resp.getWriter();
         out.print(result);
+    }
+    //更新收藏夹名字
+    public static void updateCollectsByCollectNameAndCollect_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String collectName=req.getParameter("collectName");
+        int collect_id= Integer.parseInt(req.getParameter("collect_id"));
+        System.out.println("collectNameAndCollect_id:"+collectName+":"+collect_id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("collectName",collectName);
+        params.put("id",collect_id);
+        int result=sqlSession.update("updateCollectsByCollectNameAndCollect_id",params);
+        System.out.println("更新收藏夹名字"+result);
+        resp.getWriter().print(result);
     }
 }

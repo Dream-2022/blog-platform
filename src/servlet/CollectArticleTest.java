@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Articles;
 import bean.Collect_article;
 import bean.Collects;
 import bean.Columns;
@@ -11,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CollectArticleTest {
     //点击收藏之后，插入collect_article表
@@ -91,6 +89,35 @@ public class CollectArticleTest {
         Gson gson=new Gson();
         String dataJson = gson.toJson(params1);
         System.out.println("序列化前："+params1);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //通过collect_id找article_id，然后再articles表中查找文章
+    public static void selectCollectArticleByCollectId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectCollectArticleByCollectId");
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String id=req.getParameter("id");
+        System.out.println("收藏夹id:"+id);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("collect_id",id);
+        List<Collect_article> collectArticleList =sqlSession.selectList("selectCollectArticleByCollectId",params);
+        System.out.println("collectArticleList:"+collectArticleList);
+
+        List<Articles> articlesList = new ArrayList<>();
+        for (Collect_article collect_article : collectArticleList) {
+            String article_id=collect_article.getArticle_id();
+            //通过article_id找到文章对象
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("id",article_id);
+            Articles article =sqlSession.selectOne("selectArticlesUserIdByArticleId",params1);
+            articlesList.add(article);
+        }
+        System.out.println("序列化前："+articlesList);
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articlesList);
+
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }

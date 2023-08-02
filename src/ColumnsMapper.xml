@@ -15,4 +15,8 @@
     <insert id="insertColumn" parameterType="bean.Columns">
         INSERT INTO columns (columnName,user_id,create_at) VALUES (#{columnName},#{user_id},#{create_at})
     </insert>
+<!--    deleteColumnsByColumn_id-->
+    <delete id="deleteColumnsByColumn_id" parameterType="map">
+        DELETE FROM columns WHERE id=#{column_id}
+    </delete>
 </mapper>

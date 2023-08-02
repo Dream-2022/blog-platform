@@ -9,10 +9,19 @@
     <select id="selectColumnArticleByArticleId" parameterType="bean.Column_article" resultType="bean.Column_article">
         select * from column_article WHERE article_id=#{article_id}
     </select>
+    <select id="selectColumnArticleByColumnId" resultType="bean.Column_article">
+        select * from column_article WHERE column_id=#{column_id}
+    </select>
     <insert id="insertColumnArticleById" parameterType="map">
         INSERT INTO column_article (article_id, column_id) VALUES (#{article_id},#{column_id})
     </insert>
+    <update id="updateColumnArticleByColumn_idAndArticle_id" parameterType="bean.User">
+        UPDATE column_article SET column_id=#{column_id2} WHERE article_id=#{article_id}
+    </update>
     <delete id="deleteColumnArticleByArticleId" parameterType="map">
         DELETE FROM column_article WHERE article_id=#{article_id}
+    </delete>
+    <delete id="deleteColumnArticleByColumn_idAndArticle_id" parameterType="map">
+        DELETE FROM column_article WHERE article_id=#{article_id} AND column_id=#{column_id1}
     </delete>
 </mapper>

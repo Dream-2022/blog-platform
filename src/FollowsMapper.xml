@@ -6,7 +6,19 @@
     <select id="selectFollow" resultType="bean.Follows">
         select * from follows
     </select>
+    <select id="selectFollowsByBlogger_idAndFans_id" resultType="bean.Follows">
+        select * from follows WHERE blogger_id=#{blogger_id} AND fans_id=#{fans_id}
+    </select>
+    <select id="selectFollowsByFans_id" resultType="bean.Follows" parameterType="map">
+        select * from follows WHERE fans_id=#{fans_id}
+    </select>
+    <select id="selectFollowsByBlogger_id" resultType="bean.Follows" parameterType="map">
+        select * from follows WHERE blogger_id=#{blogger_id}
+    </select>
     <insert id="insertFollowsByBlogger_idAndFans_id" parameterType="map">
         INSERT INTO follows (blogger_id, fans_id) VALUES (#{blogger_id},#{fans_id})
     </insert>
+    <delete id="deleteFollowsByBlogger_idAndFans_id" parameterType="map">
+        DELETE FROM follows WHERE blogger_id=#{blogger_id} AND fans_id=#{fans_id}
+    </delete>
 </mapper>

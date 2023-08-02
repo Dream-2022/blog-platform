@@ -48,8 +48,9 @@
     cursor: pointer;
     margin-left: 10px;
 }
-.container-content1 .follow-button{
-
+.container-content1 .followed{
+    background-color: #80A1C5;
+    color: white;
 }
 .blog-box .content-edit{
     float: right;
@@ -113,19 +114,163 @@ span{
 .follow{
     margin-right: 38px;
 }
-
+/*文章盒子*/
 .container-content .container-content2 .content-box{
     margin-bottom: 10px;
     height: 158px;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
 }
-.container-content .container-content2 .content-box .content-image{
+.title-div{
+    margin-top: 10px;
+}
+ .container-content .container-content2 .content-column,
+ .container-content .container-content2 .content-collect{
+     margin-bottom: 10px;
+     height: 77px;
+     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
+ }
+ .container-content .container-content2 .column-wen,
+ .container-content .container-content2 .collect-wen{
+     font-size: 12px;
+ }
+ .container-content .container-content2 .column-time,
+ .container-content .container-content2 .collect-time{
+     margin-left: 0;
+ }
+ .container-content .container-content2 .content-collect .collect-wen,
+ .container-content .container-content2 .content-collect .collect-name,
+ .container-content .container-content2 .content-collect .collect-time,
+ .container-content .container-content2 .content-collect .collect-update,
+ .container-content .container-content2 .content-collect .collect-delete,
+ .container-content .container-content2 .content-collect .collect-zhan{
+     margin-top: 10px;
+     display: inline-block;
+     cursor: pointer;
+ }
+ .container-content .container-content2 .content-column .column-wen,
+ .container-content .container-content2 .content-column .column-name,
+ .container-content .container-content2 .content-column .column-time,
+ .container-content .container-content2 .content-column .column-update,
+ .container-content .container-content2 .content-column .column-delete,
+ .container-content .container-content2 .content-column .column-zhan{
+     margin-top: 10px;
+     display: inline-block;
+     cursor: pointer;
+ }
+ .container-content .container-content2 .content-column .column-id,
+ .container-content .container-content2 .content-collect .collect-id{
+     display: none;
+ }
+ #textInput-column,
+ #textInput{
+     margin-left: 15px;
+     border-radius: 10px;
+     padding:3px;
+     border: 0.4px solid #ccc;
+     font-family: Arial,sans-serif;
+     display: none;
+ }
+ #textInput::placeholder,
+ #textInput-column::placeholder{
+     font-family: Helvetica,sans-serif;
+     font-size: 12px;
+ }
+ .modal-body-content{
+     margin-top: 20px;
+     margin-bottom: 20px;
+     color: #29363b;
+ }
+ #textInput:focus,
+ #textInput-column:focus{
+     outline: 1px solid #ccc;
+ }
+ .confirm,
+ .confirm-column{
+     border: none;
+     border-radius: 10px;
+     display: none;
+ }
+ .container-content .container-content2 .content-column .column-name,
+ .container-content .container-content2 .content-collect .collect-name{
+     font-size: 16px;
+ }
+ .container-content .container-content2 .content-column .column-update,
+ .container-content .container-content2 .content-collect .collect-update{
+     margin-left: 200px;
+ }
+ .container-content .container-content2 .content-box .content-image{
     display: inline-block;
     height: 158px;
     width: 300px;
     object-fit: cover;
 }
+.fan-avatar,
+.blogger-avatar{
+    margin-left: 28px;
+    margin-top: 4px;
+    width: 60px;
+    border-radius: 30px;
+    height: 60px;
+}
+.content-fan tr td .fan-id,
+.content-blogger tr td .blogger-id{
+    display: none;
+}
+ .content-fan ,
+ .content-blogger {
+     margin-bottom: 10px; /* 可选：为了增加表格之间的间距 */
+ }
 
+ .content-fan table ,
+ .content-blogger table {
+     width: 100%; /* 表格占满容器宽度 */
+ }
+
+ .content-fan .fan-follow ,
+ .content-blogger .blogger-follow {
+     float: left;
+     margin-top: 30px;
+     border: 1px solid #ccc;
+     border-radius: 13px;
+     display: inline-block;
+     height: 26px;
+     width: 58px;
+     line-height: 26px;
+     justify-content: center;
+     cursor: pointer;
+ }
+ .content-fan .fan-follow i.icon,
+ .content-blogger .blogger-follow i.icon{
+     margin-left: 3px;
+ }
+ .content-fan td ,
+ .content-blogger td {
+     text-align: left; /* 其余内容向左对齐靠拢 */
+ }
+ .content-fan td ,
+ .content-blogger td {
+     vertical-align: top; /* 图片和内容向上对齐 */
+ }
+
+ .content-fan img, .fan-name,
+ .content-blogger img, .blogger-name{
+     display: inline-block;
+     vertical-align: top;
+     margin-top: 14px;
+ }
+.content-fan tr .center,
+.content-blogger tr .center{
+    width: 400px;
+}
+ .content-fan  td:first-child ,
+ .content-blogger  td:first-child {
+     width: 79px; /* 设置图片单元格的固定宽度 */
+ }
+ .cccBackground{
+     background-color: #ccc;
+     color: white;
+     padding-left: 9px;
+ }
 select {
     padding: 8px;
     font-size: 16px;

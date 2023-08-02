@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ColumnArticleTest {
+    //插入专栏文章关系
     public static void insertColumnArticle(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("进入insertColumnArticle方法");
 
@@ -75,6 +76,37 @@ public class ColumnArticleTest {
             sqlSession.close();
         }
     }
+    //通过专栏id找到所有的article_id，逐个从articles表中找到文章
+    public static void selectColumnArticleByColumnId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectColumnArticleByColumnId");
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String id=req.getParameter("id");
+        System.out.println("专栏id:"+id);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("column_id",id);
+        List<Column_article>  columnArticles=sqlSession.selectList("selectColumnArticleByColumnId",params);
+        System.out.println("columnArticleList:"+columnArticles);
+
+        List<Articles> articlesList = new ArrayList<>();
+        for (Column_article columnArticle : columnArticles) {
+            String article_id=columnArticle.getArticle_id();
+            //通过article_id找到文章对象
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("id",article_id);
+            Articles article =sqlSession.selectOne("selectArticlesUserIdByArticleIdAndState",params1);
+            if(article!=null){
+                articlesList.add(article);
+            }
+        }
+        System.out.println("序列化前："+articlesList);
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articlesList);
+
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
     //通过articleId找到label_id,然后从labels表中找labelName
     public static  void selectColumnArticleByArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("selectColumnArticleByArticleId");
@@ -105,5 +137,49 @@ public class ColumnArticleTest {
         System.out.println("序列化前："+columns);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
+    }
+    //找到属于这个分类的文章id,根据这个文章id，从column_article表中找这篇文章是否还属于其他分类
+    public static void selectAndDeleteColumnArticleByUser_idAndCollect_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String column_id1=req.getParameter("column_id1");
+        String column_id2=req.getParameter("column_id2");
+        System.out.println("column_id1:"+column_id1+"column_id2:"+column_id2);
+        Map<String, Object> params = new HashMap<>();
+        params.put("column_id",column_id1);
+        List<Column_article> column_articles =sqlSession.selectList("selectColumnArticleByColumnId",params);
+        System.out.println("column_articles:"+column_articles);
+
+        //遍历找到的所有文章id，找这篇文章是否还属于其他分类
+        for (Column_article columnArticle : column_articles) {
+            String  article_id=columnArticle.getArticle_id();
+            Map<String, Object> params3 = new HashMap<>();
+            params3.put("article_id",article_id);
+            List<Articles>articlesList=sqlSession.selectList("selectColumnArticleByArticleId",params3);
+            System.out.println("articlesList:"+articlesList);
+                //说明只有一个分类（特判）
+                if(articlesList.size()==1){
+                    //要将这篇文章article_id所在的地方改为column_id2
+                    Map<String, Object> params1 = new HashMap<>();
+                    params1.put("article_id",article_id);
+                    params1.put("column_id2",column_id2);
+                    int result=sqlSession.update("updateColumnArticleByColumn_idAndArticle_id",params1);
+                    System.out.println("更新专栏column_id1改为column_id2："+result);
+                    break;
+                }
+                //否则的话就将记录删除（article_id和column_id1）
+                else{
+                    Map<String, Object> params2 = new HashMap<>();
+                    params2.put("column_id1",column_id1);
+                    params2.put("article_id",article_id);
+                    int result1=sqlSession.delete("deleteColumnArticleByColumn_idAndArticle_id",params2);
+                    System.out.println("删除对应专栏文章关系："+result1);
+                    break;
+                }
+
+        }
+        //接下来在columns表中删除对应的collect_id1
+        SqlSession sqlSession1= ObtainSqlSession.obtainSqlSession();
+        int result=sqlSession1.delete("deleteColumnsByColumn_id",params);
+        System.out.println("删除专栏："+result);
     }
 }

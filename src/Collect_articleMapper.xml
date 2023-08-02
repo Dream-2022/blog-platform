@@ -12,9 +12,15 @@
     <select id="selectCollectsByArticleId" resultType="bean.Collect_article">
         select * from collect_article WHERE article_id=#{article_id}
     </select>
+    <select id="selectCollectArticleByCollectId" resultType="bean.Collect_article">
+        select * from collect_article WHERE collect_id=#{collect_id}
+    </select>
     <insert id="insertCollectsByCollectIdAndArticleId" parameterType="bean.Collect_article">
         INSERT INTO collect_article (article_id,collect_id) VALUES (#{article_id},#{collect_id})
     </insert>
+    <update id="updateCollectArticleByCollect_id" parameterType="bean.Collect_article">
+        UPDATE collect_article SET collect_id=#{collect_id2} WHERE collect_id=#{collect_id1}
+    </update>
     <delete id="deleteCollectArticleByCollectIdAndArticleId" parameterType="map">
         DELETE FROM collect_article WHERE collect_id=#{collect_id} AND article_id=#{article_id}
     </delete>

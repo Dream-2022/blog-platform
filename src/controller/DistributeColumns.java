@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 @WebServlet("/Columns/*")
 
 public class DistributeColumns extends BaseServletColumns{
+    //根据User_id查询全部专栏
     public void ObtainColumnTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("ObtainColumnTest.java");
         req.setCharacterEncoding("UTF-8");
@@ -26,4 +27,5 @@ public class DistributeColumns extends BaseServletColumns{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ColumnTest.InsertColumn(req,resp);
     }
+
 }

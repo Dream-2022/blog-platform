@@ -9,6 +9,9 @@
     <select id="selectArticlesUserIdByArticleId" resultType="bean.Articles">
         select * from articles WHERE id=#{id}
     </select>
+    <select id="selectArticlesUserIdByArticleIdAndState" resultType="bean.Articles">
+        select * from articles WHERE id=#{id} AND state='发布'
+    </select>
     <select id="likeSelectArticles" resultType="bean.Articles" parameterType="map">
         SELECT *,
         (LENGTH(title) - LENGTH(REPLACE(title, #{content}, ''))) AS title_match_count,

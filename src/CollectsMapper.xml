@@ -12,11 +12,16 @@
     <select id="selectCollectsByUserIdAndCollectName" resultType="bean.Collects">
         select * from collects WHERE user_id=#{user_id} AND collectName=#{collectName}
     </select>
-<!--    有问题：通过collectName和user_id找-->
     <select id="selectCollectsByCollectNameAndUserId" resultType="bean.Collects">
         select * from collects WHERE collectName=#{collectName} AND user_id=#{user_id}
     </select>
     <insert id="insertCollectCollectName" parameterType="bean.Collects">
         INSERT INTO collects (user_id,collectName,create_at) VALUES (#{user_id},#{collectName},#{create_at})
     </insert>
+    <delete id="DeleteCollectsByCollect_id" parameterType="map">
+        DELETE FROM collects WHERE id=#{id}
+    </delete>
+    <update id="updateCollectsByCollectNameAndCollect_id" parameterType="bean.User">
+        UPDATE collects SET collectName=#{collectName} WHERE id=#{id}
+    </update>
 </mapper>

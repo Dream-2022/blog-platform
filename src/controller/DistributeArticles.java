@@ -33,7 +33,6 @@ public class DistributeArticles extends BaseServletArticles{
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
-
         List<Articles> articles=lists;
         Gson gson=new Gson();
         PrintWriter out=resp.getWriter();
@@ -41,6 +40,7 @@ public class DistributeArticles extends BaseServletArticles{
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    //通过文章id查找文章
     public void selectArticlesByArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("selectArticlesByArticleId.java");
         req.setCharacterEncoding("UTF-8");
@@ -48,6 +48,7 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.selectArticlesByArticleId(req,resp);
     }
+    //搜索
     public void likeSelectArticles(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("likeSelectArticles.java");
         req.setCharacterEncoding("UTF-8");
