@@ -18,6 +18,14 @@
     <select id="selectByUsername" resultType="bean.User" parameterType="map">
         SELECT * FROM user WHERE username=#{username}
     </select>
+    <select id="likeSelectUsers" resultType="bean.User" parameterType="map">
+        SELECT *,
+        (LENGTH(nickname) - LENGTH(REPLACE(nickname, #{content}, ''))) AS nickname_match_count,
+        (LENGTH(username) - LENGTH(REPLACE(username, #{content}, ''))) AS username_match_count
+        FROM user
+        WHERE (nickname LIKE CONCAT('%', #{content}, '%') OR username LIKE CONCAT('%', #{content}, '%'))
+        ORDER BY (username_match_count + nickname_match_count) DESC;
+    </select>
     <insert id="insert">
         INSERT INTO user VALUES (#{id},#{username},#{password},#{email},#{nickname},#{gender},#{phone},#{birthday},#{picture},#{profile})
     </insert>

@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class JwtTest {
     public static String KEY="!Q@#E$RF%WE#!";
-    public static int time=10*24*3600;
-    public static int longTime=20*24*3600;
+    public static long time=10*3600*1000;
+    public static long longTime=2*24*3600*1000;
     public static Map<String,Object> getToken(String username, String isAdmin){
         Map<String,Object>tokenmap=new HashMap<>();
         JwtBuilder jwtBuilder= Jwts.builder();

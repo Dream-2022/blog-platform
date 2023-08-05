@@ -22,13 +22,23 @@ public class DistributeLikes extends BaseServletLikes{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         LikesTest.giveLike(req,resp);
     }
+    //查询该user_id是否给该文章点了赞
     public void selectLikeByUserIdAndArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("selectIsLike.java");
+        System.out.println("selectLikeByUserIdAndArticleId.java");
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         LikesTest.selectLikeByUserIdAndArticleId(req,resp);
     }
+    //查询该user_id所有点赞记录
+    public void selectLikesByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectLikesByUser_id.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        LikesTest.selectLikesByUser_id(req,resp);
+    }
+    //删除点赞
     public void deleteLike(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("deleteLike.java");
         req.setCharacterEncoding("UTF-8");

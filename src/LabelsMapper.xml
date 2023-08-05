@@ -12,6 +12,16 @@
     <select id="selectLabelsByArticleId" resultType="bean.Labels" parameterType="map">
         SELECT * FROM labels WHERE id=#{id}
     </select>
+    <select id="selectLabelsByLabelId" resultType="bean.Labels" parameterType="map">
+        SELECT * FROM labels WHERE id=#{label_id}
+    </select>
+    <select id="likeSelectLabel" resultType="bean.Labels" parameterType="map">
+        SELECT *,
+        (LENGTH(labelName) - LENGTH(REPLACE(labelName, #{content}, ''))) AS labelName_match_count
+        FROM labels
+        WHERE labelName LIKE CONCAT('%', #{content}, '%')
+        ORDER BY labelName_match_count DESC;
+    </select>
     <insert id="insertLabel" parameterType="map">
         INSERT INTO labels (labelName) VALUES (#{labelName})
     </insert>

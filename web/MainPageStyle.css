@@ -107,12 +107,32 @@ p{
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
 }
-
+.articles-box{
+    height: 732px;
+}
 .articles {
     display: grid;
     grid-gap: 20px;
-}
 
+    align-items: start;
+}
+/*分页元素*/
+.pagination-link{
+    background-color: #cccccc;
+    border-radius: 10px;
+    width: 20px;
+}
+.pageUp, .pageDown{
+    cursor: pointer;
+}
+.pageUp:hover, .pageDown:hover{
+    background-color: #f5f4f4;
+    color: #424242;
+    border-radius: 5px;
+}
+.pagination .active{
+    background-color: #ececec;
+}
 .article {
     background-color: #f9f9f9;
     border-radius: 5px;
@@ -166,6 +186,14 @@ p{
     display: inline-block;
     margin-right: 10px;
 }
+.labelList li{
+    margin-top: 8px;
+    margin-left: 15px;
+    font-size: 16px;
+}
+.lis{
+    cursor: pointer;
+}
 .box h3 {
     margin-top: 0;
 }
@@ -178,19 +206,19 @@ p{
 .box ul li {
     margin-bottom: 10px;
 }
-.tags li {
-    display: block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-.tags a {
+.labelList{
+    margin-left: 20px;
     display: inline-block;
-    padding: 5px 10px;
-    background-color: #f9f9f9;
-    color: #333;
-    border-radius: 5px;
-    text-decoration: none;
 }
+.userList li {
+    display: block;
+    margin-left: 11px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 footer{
     color: white;
     background-color: #475360;

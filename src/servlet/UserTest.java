@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Articles;
 import bean.User;
 import com.google.gson.Gson;
 import controller.DistributeUser;
@@ -80,6 +81,22 @@ public class UserTest {
             System.out.println("登录失败");
         }
         String dataJson = gson.toJson(data);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //搜索（content）
+    public static void likeSelectUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String content=req.getParameter("content");
+        System.out.println("content:"+content);
+        Map<String, Object> params = new HashMap<>();
+        params.put("content",content);
+        List<User> users =sqlSession.selectList("likeSelectUsers",params);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(users);
+        System.out.println(users);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }

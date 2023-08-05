@@ -27,6 +27,37 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         lists=ArticlesTest.selectByArticles(req,resp);
     }
+    //筛选user_id文章中的下拉框
+    public void selectArticlesForYearAndLabelAndColumn(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticlesForYearAndLabelAndColumn.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesForYearAndLabelAndColumn(req,resp);
+    }
+    public void selectArticlesForYearAndLabelAndColumnAndState(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticlesForYearAndLabelAndColumnAndState.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesForYearAndLabelAndColumnAndState(req,resp);
+    }
+    //通过user_id找用户发布原创文章的数量
+    public void selectArticleByUser_id(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticleByUser_id.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticleByUser_id(req,resp);
+    }
+    //渲染主页的用户（根据用户的原创个数）
+    public void selectArticlesByCount(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticlesByCount.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesByCount(req,resp);
+    }
     //查看文章
     public void BlogTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // String articleId=req.getParameter("articleId");

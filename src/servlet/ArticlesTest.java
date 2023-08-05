@@ -1,9 +1,6 @@
 package servlet;
 
-import bean.Articles;
-import bean.Columns;
-import bean.Likes;
-import bean.User;
+import bean.*;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.SqlSession;
 import tool.ObtainSqlSession;
@@ -20,10 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ArticlesTest {
     //查找全部文章（修改为根据id找文章）
@@ -64,6 +59,207 @@ public class ArticlesTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    public static int getYearFromDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
+    }
+    //搜索下拉框中选择的内容
+    public static void selectArticlesForYearAndLabelAndColumn(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String user_id=req.getParameter("user_id");
+        String state=req.getParameter("state");
+        String selectedYear=req.getParameter("selectedYear");
+        String selectedLabelId=req.getParameter("selectedLabelId");
+        String selectedColumnId=req.getParameter("selectedColumnId");
+        String selectedSearch=req.getParameter("selectedSearch");
+        System.out.println("user_id:"+user_id+"state:"+state+"selectedYear:"+selectedYear+"selectedLabelId:"+selectedLabelId+"selectedColumnId:"+selectedColumnId+"selectedSearch:"+selectedSearch);
+
+        //找到这个人（user_id）满足state的全部文章，然后通过年，标签，专栏的筛选
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id",user_id);
+        params.put("selectedSearch",selectedSearch);
+        List<Articles> articles =sqlSession.selectList("selectArticlesArticleIdByUserId",params);
+        System.out.println(articles);
+
+        List<Articles>articlesList=articles;
+        System.out.println(articlesList);
+        //接下来通过年，标签和专栏筛选
+        Iterator<Articles> iterator = articles.iterator();
+        while (iterator.hasNext()) {
+            Articles article = iterator.next();
+            System.out.println(article.getRelease_at());
+            String year = String.valueOf(getYearFromDate(article.getRelease_at()));
+            System.out.println("年份：" + year);
+            if (!selectedYear.equals("年") && !year.equals(selectedYear)) {
+                System.out.println("年不满足,移除");
+                iterator.remove();
+            }
+        }
+        if(!selectedLabelId.equals("标签")){
+            Iterator<Articles> iterator1 = articles.iterator();
+            while (iterator1.hasNext()) {
+                Articles article = iterator1.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("article_id",article_id);
+
+                List<Label_article> label_articles=sqlSession.selectList("selectLabelArticleByArticleId",params1);
+                int flag=0;
+                for (Label_article labelArticle : label_articles) {
+                    String labelId= String.valueOf(labelArticle.getLabel_id());
+                    System.out.println(labelId);
+                    if(labelId.equals(selectedLabelId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator1.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
+        if(!selectedColumnId.equals("分类")){
+            Iterator<Articles> iterator2 = articles.iterator();
+            while (iterator2.hasNext()) {
+                Articles article = iterator2.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params2 = new HashMap<>();
+                params2.put("article_id",article_id);
+
+                List<Column_article> columnArticles=sqlSession.selectList("selectColumnArticleByArticleId",params2);
+                int flag=0;
+                for (Column_article labelArticle : columnArticles) {
+                    String columnId= String.valueOf(labelArticle.getColumn_id());
+                    System.out.println(columnId);
+                    if(columnId.equals(selectedColumnId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator2.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
+
+
+        System.out.println(articles);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    public static void selectArticlesForYearAndLabelAndColumnAndState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String user_id=req.getParameter("user_id");
+        String state=req.getParameter("state");
+        String selectedYear=req.getParameter("selectedYear");
+        String selectedLabelId=req.getParameter("selectedLabelId");
+        String selectedColumnId=req.getParameter("selectedColumnId");
+        String selectedSearch=req.getParameter("selectedSearch");
+        System.out.println("user_id:"+user_id+"state:"+state+"selectedYear:"+selectedYear+"selectedLabelId:"+selectedLabelId+"selectedColumnId:"+selectedColumnId+"selectedSearch:"+selectedSearch);
+
+        //找到这个人（user_id）满足state的全部文章，然后通过年，标签，专栏的筛选
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id",user_id);
+        params.put("state",state);
+        params.put("selectedSearch",selectedSearch);
+        List<Articles> articles =sqlSession.selectList("selectArticlesArticleIdByUserIdAndState",params);
+        System.out.println(articles);
+
+        List<Articles>articlesList=articles;
+        System.out.println(articlesList);
+        //接下来通过年，标签和专栏筛选
+        Iterator<Articles> iterator = articles.iterator();
+        while (iterator.hasNext()) {
+            Articles article = iterator.next();
+            System.out.println(article.getRelease_at());
+            String year = String.valueOf(getYearFromDate(article.getRelease_at()));
+            System.out.println("年份：" + year);
+            if (!selectedYear.equals("年") && !year.equals(selectedYear)) {
+                System.out.println("年不满足,移除");
+                iterator.remove();
+            }
+        }
+//        //筛选标题
+//        Iterator<Articles> iterator3 = articles.iterator();
+//        while (iterator3.hasNext()) {
+//            Articles article = iterator3.next();
+//            System.out.println(article.getTitle());
+//            System.out.println("标题：" + article.getTitle());
+//            if (!selectedSearch.equals("") && !article.getTitle().equals(selectedSearch)) {
+//                System.out.println("标题不满足,移除");
+//                iterator3.remove();
+//            }
+//        }
+        System.out.println("article:"+articles);
+        if(!selectedLabelId.equals("标签")){
+            Iterator<Articles> iterator1 = articles.iterator();
+            while (iterator1.hasNext()) {
+                Articles article = iterator1.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("article_id",article_id);
+
+                List<Label_article> label_articles=sqlSession.selectList("selectLabelArticleByArticleId",params1);
+                int flag=0;
+                for (Label_article labelArticle : label_articles) {
+                    String labelId= String.valueOf(labelArticle.getLabel_id());
+                    System.out.println(labelId);
+                    if(labelId.equals(selectedLabelId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator1.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
+        if(!selectedColumnId.equals("分类")){
+            Iterator<Articles> iterator2 = articles.iterator();
+            while (iterator2.hasNext()) {
+                Articles article = iterator2.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params2 = new HashMap<>();
+                params2.put("article_id",article_id);
+
+                List<Column_article> columnArticles=sqlSession.selectList("selectColumnArticleByArticleId",params2);
+                int flag=0;
+                for (Column_article labelArticle : columnArticles) {
+                    String columnId= String.valueOf(labelArticle.getColumn_id());
+                    System.out.println(columnId);
+                    if(columnId.equals(selectedColumnId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator2.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
+
+
+        System.out.println(articles);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
     //通过文章id获取文章的详细信息
     public static void selectArticlesByArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
@@ -89,6 +285,44 @@ public class ArticlesTest {
         PrintWriter out=resp.getWriter();
         Gson gson=new Gson();
         String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //通过user_id找用户发布原创文章的数量
+    public static void selectArticleByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String user_id=req.getParameter("user_id");
+        System.out.println("user_id:"+user_id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id",user_id);
+        List<Articles> articles =sqlSession.selectList("selectArticlesUserIdByUserIdAndState",params);
+
+        int count=articles.size();
+        PrintWriter out=resp.getWriter();
+        System.out.println("："+count);
+        out.print(count);
+    }
+    //渲染主页的用户（根据用户的原创个数）
+    public static  void selectArticlesByCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectArticlesByCount");
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        List<Integer> userIdList =sqlSession.selectList("selectArticlesByCount");
+        System.out.println("userIdList:"+userIdList);
+
+        List<User> users=new ArrayList<>();
+        for (Integer integer : userIdList) {
+            //根据user_id找user
+            Map<String, Object> params = new HashMap<>();
+            int user_id=integer;
+            params.put("id",user_id);
+            User user=sqlSession.selectOne("selectById",params);
+            users.add(user);
+        }
+        //序列化传过去
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(users);
+        System.out.println("序列化前："+users);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }

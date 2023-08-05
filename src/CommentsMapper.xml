@@ -6,4 +6,22 @@
     <select id="selectComment" resultType="bean.Comments">
         select * from comments
     </select>
+    <select id="selectCommentsByArticle_id" resultType="bean.Comments">
+        select * from comments WHERE article_id=#{article_id}
+    </select>
+    <select id="selectCommentsByArticle_idAndUpLevel" resultType="bean.Comments">
+        select * from comments WHERE article_id=#{article_id} And up_level=-1  ORDER BY create_at
+    </select>
+    <select id="selectCommentsByUp_level" resultType="bean.Comments">
+        select * from comments WHERE up_level=#{up_level}  ORDER BY create_at
+    </select>
+    <select id="selectCommentsForCountByArticle_id" resultType="bean.Comments">
+        select * from comments WHERE article_id=#{article_id}
+    </select>
+    <select id="selectCommentsByAll" parameterType="map" resultType="bean.Comments">
+        select * from comments WHERE article_id=#{article_id} AND receiver_id=#{receiver_id} AND user_id=#{user_id} AND content=#{content} AND num=#{num} AND up_level=#{up_level}
+    </select>
+    <insert id="insertComments">
+        INSERT INTO comments (article_id,receiver_id,user_id,content,num,up_level,create_at) VALUES (#{article_id},#{receiver_id},#{user_id},#{content},#{num},#{up_level},#{create_at})
+    </insert>
 </mapper>

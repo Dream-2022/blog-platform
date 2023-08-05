@@ -67,6 +67,23 @@
     cursor: pointer;
     margin-left: 297px;
 }
+  .cancelGive{
+      float: right;
+      margin-right: 14px;
+      width: 103px;
+      height: 24px;
+      background-color: #a6a8ab;
+      color: white;
+      font-size: 12px;
+      border-radius: 24px;
+      cursor: pointer;
+      margin-left: 297px;
+      border: none;
+ }
+ .blog-box .Give{
+     background-color: white;
+     color: #234f60;
+ }
 .content-id{
     display: none;
 }
@@ -89,6 +106,7 @@
 }
 .container-content .container-content1 .headSculpture{
     width: 106px;
+    height: 106px;
     transform:translateY(-30px);
     margin-left: 85px;
     display: inline-block;
@@ -120,6 +138,9 @@ span{
     height: 158px;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
 }
+ .container-content .container-content2 .collect-article .content-box{
+     height: 168px;
+ }
 .title-div{
     margin-top: 10px;
 }
@@ -316,7 +337,7 @@ tr td .content-span{
     font-size:14px;
     color: #4c4c4c;
     text-decoration: none;
-    padding:0 59px;
+    padding:0 52px;
 }
 .nav .active{
     display:inline-block;
@@ -324,7 +345,7 @@ tr td .content-span{
     font-size:14px;
     color: #4c4c4c;
     text-decoration: none;
-    padding:0 74px;
+    padding:0 53px;
     border-top: 3px solid #ffc29c;
     background-color: #f1f1f1;
 }

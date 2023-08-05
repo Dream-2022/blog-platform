@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Articles;
 import bean.Likes;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.SqlSession;
@@ -10,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LikesTest {
     public static void giveLike(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -56,6 +55,33 @@ public class LikesTest {
         }
         Gson gson=new Gson();
         String dataJson = gson.toJson(result);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //查询该用户的全部点赞记录
+    public static void selectLikesByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String user_id=req.getParameter("user_id");
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id",user_id);
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        System.out.println(user_id);
+
+        PrintWriter out=resp.getWriter();
+        List<Likes> likes = sqlSession.selectList("selectLikesByUser_id", params);
+
+
+        List< Articles> articlesList=new ArrayList<>();
+        for (Likes like : likes) {
+            int article_id=like.getArticle_id();
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("id",article_id);
+            //根据article_id查找文章
+            Articles article=sqlSession.selectOne("selectArticlesUserIdByArticleId",params1);
+            articlesList.add(article);
+        }
+
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articlesList);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }

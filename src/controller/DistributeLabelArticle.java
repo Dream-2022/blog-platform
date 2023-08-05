@@ -25,4 +25,20 @@ public class DistributeLabelArticle extends BaseServletLabelArticle{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         LabelArticleTest.selectLabelArticleByArticleId(req,resp);
     }
+    //找到标签数最多的，传四个
+    public void selectLabelArticleByCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectLabelArticleByCount.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        LabelArticleTest.selectLabelArticleByCount(req,resp);
+    }
+    //搜索标签
+    public void likeSelectLabelArticle(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("likeSelectLabelArticle.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        LabelArticleTest.likeSelectLabelArticle(req,resp);
+    }
 }

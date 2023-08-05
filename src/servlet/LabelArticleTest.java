@@ -1,9 +1,6 @@
 package servlet;
 
-import bean.Columns;
-import bean.LabelList;
-import bean.Label_article;
-import bean.Labels;
+import bean.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.SqlSession;
@@ -104,6 +101,71 @@ public class LabelArticleTest {
         Gson gson=new Gson();
         String dataJson = gson.toJson(labels);
         System.out.println("序列化前："+labels);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //找到标签数最多的，传四个
+    public static  void selectLabelArticleByCount(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("进入selectLabelArticleByCount");
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        List<Integer> labelIdList =sqlSession.selectList("selectLabelArticleByCount");
+        System.out.println("label_articlesList:"+labelIdList);
+
+        List<Labels> labels=new ArrayList<>();
+        for (Integer integer : labelIdList) {
+            //根据label_id找label
+            Map<String, Object> params = new HashMap<>();
+            int label_id=integer;
+            params.put("label_id",label_id);
+            Labels label=sqlSession.selectOne("selectLabelsByLabelId",params);
+            labels.add(label);
+        }
+        //序列化传过去
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(labels);
+        System.out.println("序列化前："+labels);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //搜索标签
+    public static void likeSelectLabelArticle(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String content=req.getParameter("content");
+        System.out.println("content:"+content);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("content",content);
+        List<Labels> labels =sqlSession.selectList("likeSelectLabel",params);
+        System.out.println(labels);
+
+        List<Articles> articles=new ArrayList<>();
+        Map<String,Object> article=new HashMap<>();
+        for (Labels label : labels) {
+            int label_id = label.getId();
+            System.out.println("label_id:"+label_id);
+            //在label_article表中找对应的article_id
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("label_id", label_id);
+            List<Label_article> label_articles = sqlSession.selectList("selectLabelArticleByLabelId", params1);
+            System.out.println("Label_articles:"+label_articles);
+            for (Label_article labelArticle : label_articles) {
+                String article_id=labelArticle.getArticle_id();
+                System.out.println("article_id:"+article_id);
+                if(!article.containsKey(article_id)){
+                    article.put(article_id,1);
+                    Map<String, Object> params2 = new HashMap<>();
+                    params2.put("id",article_id);
+                    //找到文章，加入List集合中
+                    Articles articles1=sqlSession.selectOne("selectArticlesUserIdByArticleId",params2);
+                    articles.add(articles1);
+                }
+            }
+        }
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println(articles);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }

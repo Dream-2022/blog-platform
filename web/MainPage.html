@@ -10,6 +10,21 @@
   <link rel="stylesheet" href="HTML/Dropdown.css">
 <!--  加载动画-->
   <link rel="stylesheet" href="CSS/Loading.css">
+  <style>
+    .vertical-line {
+      border-left: 1px solid black;
+      height: 100px; /* 设置竖线的高度 */
+      width: 0; /* 确保竖线只占据宽度为0的空间 */
+    }
+    .blue{
+      display: none;
+    }
+    .manger{
+      margin-bottom: 10px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 <header class="header-box">
@@ -18,7 +33,7 @@
         <li class="left"><i class="fire icon"></i>博客园</li>
 
         <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
-        <li><a href="#"><i class="bell icon"></i>消息</a></li>
+        <li><a href="HTML/MessagePage.html"><i class="bell icon"></i>消息</a></li>
         <li><a href="MainPage.html"><i class="home icon"></i>首页</a></li>
 
 
@@ -61,8 +76,10 @@
 <div class="container">
   <section class="left-section">
     <h3>推荐博客</h3>
-
+    <div class="articles-box">
       <div class="articles"></div>
+    </div>
+    <div class="pagination"></div>
 
 
 
@@ -90,13 +107,13 @@
        <div class="loading"></div>
     </div>
 <!--    分页-->
-    <div class="pagination">
+<!--    <div class="pagination">
       <a href="#" class="prev">上一页</a>
       <a href="#" class="page">1</a>
       <a href="#" class="page">2</a>
       <a href="#" class="page">3</a>
       <a href="#" class="next">下一页</a>
-    </div>
+    </div>-->
   </section>
 <!--  旁边的盒子-->
   <aside class="right-section">
@@ -124,31 +141,31 @@
 <!--      标签列表-->
     <div class="box">
       <h3><i class="tags icon"></i>标签</h3>
-      <ul>
-        <li><a href="#">标签1</a></li>
-        <li><a href="#">标签2</a></li>
-        <li><a href="#">标签3</a></li>
-        <li><a href="#">标签4</a></li>
+      <ul class="labelList">
+<!--        插入标签-->
       </ul>
     </div>
 <!--      作者列表-->
     <div class="box">
       <h3><i class="child icon"></i>作者推荐</h3>
-      <ul class="tags">
-        <li><a href="#">作者1</a></li>
-        <li><a href="#">作者2</a></li>
-        <li><a href="#">作者3</a></li>
-        <li><a href="#">作者4</a></li>
-        <li><a href="#">作者5</a></li>
-        <li><a href="#">作者6</a></li>
+      <ul class="userList">
       </ul>
     </div>
     </div>
   </aside>
 </div>
 
-<footer>
-  <p>&copy; 2023 My Blog. All rights reserved.</p>
+<footer class="blue">
+  <p class="manger">
+    &copy; 2023 My Blog. All rights reserved.
+    <em>|</em>
+     管理员入口
+  </p>
+</footer>
+<footer class="orange">
+  <p>
+    &copy; 2023 My Blog. All rights reserved.
+  </p>
 </footer>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

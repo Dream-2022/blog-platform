@@ -98,4 +98,12 @@ public class DistributeUser extends BaseServletUser {
         resp.setHeader("content-type","text/html;charset=UTF-8");
         UserTest.selectUserById(req,resp);
     }
+    //搜索用户
+    public void likeSelectUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("likeSelectUsers.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        UserTest.likeSelectUsers(req,resp);
+    }
 }

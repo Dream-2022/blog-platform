@@ -55,6 +55,7 @@ public class FollowsTest {
     }
     //根据blogger_id查找fans_id
     public static void selectFollowsByBlogger_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("进入selectFollowsByBlogger_id");
         String blogger_id= req.getParameter("user_id");
         System.out.println(blogger_id);
         Map<String, Object> params = new HashMap<>();

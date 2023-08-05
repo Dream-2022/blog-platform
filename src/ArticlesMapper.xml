@@ -12,6 +12,22 @@
     <select id="selectArticlesUserIdByArticleIdAndState" resultType="bean.Articles">
         select * from articles WHERE id=#{id} AND state='发布'
     </select>
+    <select id="selectArticlesUserIdByUserIdAndState" resultType="bean.Articles">
+        select * from articles WHERE user_id=#{user_id} AND state='发布'
+    </select>
+    <select id="selectArticlesArticleIdByUserIdAndState" resultType="bean.Articles">
+        select * from articles WHERE user_id=#{user_id} AND state=#{state}  AND title LIKE CONCAT('%', #{selectedSearch}
+    </select>
+    <select id="selectArticlesArticleIdByUserId" resultType="bean.Articles">
+        select * from articles WHERE user_id=#{user_id} AND title LIKE CONCAT('%', #{selectedSearch}, '%')
+    </select>
+    <select id="selectArticlesByCount" resultType="int">
+        SELECT user_id, COUNT(*) AS user_id_count
+        FROM articles
+        GROUP BY user_id
+        ORDER BY user_id_count DESC
+        LIMIT 6
+    </select>
     <select id="likeSelectArticles" resultType="bean.Articles" parameterType="map">
         SELECT *,
         (LENGTH(title) - LENGTH(REPLACE(title, #{content}, ''))) AS title_match_count,

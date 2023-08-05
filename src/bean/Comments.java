@@ -1,6 +1,7 @@
 package bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 public class Comments {
     private int id;
@@ -8,18 +9,38 @@ public class Comments {
     private int user_id;
     private String content;
     private int up_level;
-    private Timestamp create_at;
+    private int num;
+    private int receiver_id;
+    private Date create_at;
 
     public Comments() {
     }
 
-    public Comments(int id, int article_id, int user_id, String content, int up_level, Timestamp create_at) {
+    public Comments(int id, int article_id, int user_id, String content, int up_level, int num, int receiver_id, Date create_at) {
         this.id = id;
         this.article_id = article_id;
         this.user_id = user_id;
         this.content = content;
         this.up_level = up_level;
+        this.num = num;
+        this.receiver_id = receiver_id;
         this.create_at = create_at;
+    }
+
+    public int getReceiver_id() {
+        return receiver_id;
+    }
+
+    public void setReceiver_id(int receiver_id) {
+        this.receiver_id = receiver_id;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public int getId() {
@@ -62,11 +83,11 @@ public class Comments {
         this.up_level = up_level;
     }
 
-    public Timestamp getCreate_at() {
+    public Date getCreate_at() {
         return create_at;
     }
 
-    public void setCreate_at(Timestamp create_at) {
+    public void setCreate_at(Date create_at) {
         this.create_at = create_at;
     }
 
@@ -78,6 +99,8 @@ public class Comments {
                 ", user_id=" + user_id +
                 ", content='" + content + '\'' +
                 ", up_level=" + up_level +
+                ", num=" + num +
+                ", receiver_id=" + receiver_id +
                 ", create_at=" + create_at +
                 '}';
     }

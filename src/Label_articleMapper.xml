@@ -9,6 +9,16 @@
     <select id="selectLabelArticleByArticleId" parameterType="bean.Label_article" resultType="bean.Label_article">
         select * from label_article WHERE article_id=#{article_id}
     </select>
+    <select id="selectLabelArticleByLabelId" parameterType="bean.Label_article" resultType="bean.Label_article">
+        select * from label_article WHERE label_id=#{label_id}
+    </select>
+    <select id="selectLabelArticleByCount" resultType="int">
+        SELECT label_id, COUNT(*) AS label_id_count
+        FROM label_article
+        GROUP BY label_id
+        ORDER BY label_id_count DESC
+        LIMIT 4
+    </select>
     <insert id="insertLabelArticleById" parameterType="map">
         INSERT INTO label_article (article_id, label_id) VALUES (#{article_id},#{label_id})
     </insert>
