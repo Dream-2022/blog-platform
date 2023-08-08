@@ -1,0 +1,153 @@
+.content-text {
+    color: #3b3b3b;
+    width: 220px;
+    height: 34px;
+    /*border-radius: 20px;*/
+    padding: 8px;
+    font-size: 14px;
+    border: 0.5px solid #ccc;
+    outline: none;
+    margin-top: 1px;
+    margin-left: 1px;
+}
+.content-button{
+    width: 58px;
+    height: 34px;
+    background-color: transparent;
+    color: #4b4c4f;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border: 1px solid transparent;
+    /*border-radius: 24px;*/
+    cursor: pointer;
+    outline: none;
+    margin-left: 10px;
+}
+select {
+    padding: 8px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    /*border-radius: 20px;*/
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 102px;
+    margin: 10px 10px 10px 35px;
+    height: 33px;
+}
+.search-box{
+    margin-top:10px;
+    /*border-radius: 10px;*/
+    background-color: #cccccc;
+    margin-left: 75px;
+}
+.select-year{
+    margin-left: 89px;
+}
+
+/*列表盒子*/
+.table {
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+.articles-box{
+    padding-bottom: 35px;
+}
+.Table span,
+.table span{
+
+    align-content: center;
+    display: inline-block;
+    padding:  6px 0;
+    margin: auto;
+    background-color: transparent;
+    border: 1.5px solid white;
+}
+.Table .table-tou,
+.table .table-tou{
+    margin-left: 40px;
+    width: 120px;
+}
+.Table .table-id,
+.table .table-id{
+    display: none;
+}
+.Table .hui,
+.table .hui{
+    background-color: #ccc;
+    margin-top: 30px;
+    text-align: center;
+    vertical-align: center;
+}
+.Table .table-user,
+.table .table-user{
+    width: 100px;
+}
+.Table .table-textarea,
+.table .table-textarea{
+    width: 324px;
+}
+.Table .table-release_at,
+.table .table-release_at{
+    width: 79px;
+}
+.Table .table-shen,
+.table .table-shen{
+    width: 100px;
+}
+.table .access{
+    cursor: pointer;
+    padding: 2px 3px;
+    background-color: #b0e0a7;
+}
+.table .accessFail {
+    cursor: pointer;
+    padding: 2px 7px;
+    background-color: #d29f9f;
+}
+.table .delete{
+    margin-left: 27px;
+    background-color: #d29f9f;
+    padding:4px 10px;
+}
+.container-box2{
+    padding-bottom: 30px;
+}
+.noSearch{
+    display: none;
+
+}
+.noSearch2{
+    font-size: 18px;
+    justify-items: center;
+    margin-top: 33px;
+    margin-left: 313px;
+}
+.container-box2 .published-box .active{
+    background-color: #efefef;
+    font-size: 17px;
+    border-radius: 10px;
+}
+.Active{
+    text-decoration: underline;
+}
+.table  .unAccessUser{
+    background-color: #d29f9f;
+    padding: 5px 10px;
+    margin-left: 19px;
+    cursor: pointer;
+}
+/*返回*/
+.exit{
+    margin-top: 100px;
+    margin-left: 61px;
+    cursor: pointer;
+}
+.table{
+    cursor: pointer;
+}
+.hide-content{
+    margin-top: 10px;
+}

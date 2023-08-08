@@ -7,61 +7,7 @@
     <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
     <link rel="stylesheet" href="../HTML/Navigation.css">
     <link rel="stylesheet" href="../HTML/Dropdown.css">
-    <style>
-        body{
-            background-color: #ccc;
-            color: #2c2a2a;
-        }
-        .box{
-            background-color: white;
-            width: 68%;
-            margin:100px auto;
-        }
-        .classification{
-            padding: 8px;
-        }
-        .classification span{
-            padding: 8px;
-        }
-        .classification span:hover{
-            border-bottom: 2px solid #60a9d0;
-        }
-        .title{
-            margin-left: 20px;
-            padding-top: 20px;
-        }
-        .message-box-fan .fan,
-        .give-content,
-        .message-box-comment .message-content{
-            color: #ccc;
-            font-size: 13px;
-        }
-        .message-content{
-            color: #211f1f;
-        }
-        .headSculpture{
-            width: 80px;
-            height: 80px;
-            border-radius: 40px;
-            padding: 15px;
-        }
-        .message-box-fan,
-        .message-box-give,
-        .message-box-comment{
-            border-bottom: 1px solid #ccc;
-        }
-        .message-box-fan span,
-        .message-box-give span,
-        .message-box-comment span{
-            margin-left: 10px;
-        }
-        .message-box-comment .comment-content{
-            font-size: 18px;
-        }
-        .message-box-comment .blog-name{
-            font-size: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="../HTML/MessagePage.css">
 </head>
 <body>
 <!--导航栏-->
@@ -110,10 +56,11 @@
             <h4>消息中心</h4>
         </div>
         <div class="classification">
-            <span class="content-comment">评论</span>
-            <span class="content-collect">点赞</span>
-            <span class="content-message">收藏</span>
+            <span class="content-comment active">评论</span>
+            <span class="content-give">点赞</span>
+            <span class="content-collect">收藏</span>
             <span class="content-fan">粉丝</span>
+            <span class="content-blog">博客</span>
         </div>
         <div class="message-content">
             <div class="message-box-fan">
@@ -123,6 +70,7 @@
                         <td>
                             <span class="nickname">用户</span>
                         </td>
+                        <td rowspan="2" class="timestampRight">23.2.3 12:2:17</td>
                     </tr>
                     <tr>
                         <td>
@@ -139,6 +87,7 @@
                             <span class="nickname">用户</span>
                             <span class="give-content">点赞了你</span>
                         </td>
+                        <td rowspan="2" class="timestampRight">23.2.3 12:2:17</td>
                     </tr>
                     <tr>
                         <td>
@@ -155,6 +104,8 @@
                             <span class="nickname">用户</span>
                             <span class="message-content">评论了你</span>
                         </td>
+                        <td rowspan="2" class="timestampRight">23.2.3 12:2:17</td>
+
                     </tr>
                     <tr>
                         <td>
@@ -169,14 +120,42 @@
                     </tr>
                 </table>
             </div>
+            <div class="message-box-blog">
+                <table>
+                    <tr>
+                        <td rowspan="3"><img src="../image/headSculpture.jpeg" alt="" class="headSculpture"></td>
+                        <td>
+                            <span class="blog-content1">你</span>
+                            <span class="blog-content2">发布</span>
+                            <span class="blog-content3">的博客</span>
+                        </td>
+                        <td rowspan="2" class="timestampRight">23.2.3 12:2:17</td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="blog-name">title</span>
+                            <span class="blog-result">审核未通过</span>
+                        </td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td>-->
+<!--                            <span class="blog-result">审核未通过</span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                </table>
+            </div>
         </div>
     </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--发送请求时在响应头中加入token和longt-->
 <script src="../JavaScript/Identity.js"></script>
+<script>const token=localStorage.getItem('token')</script>
 <!--导航栏下拉框-->
 <script src="../JavaScript/Dropdown.js"></script>
 <!--渲染页面信息（登录之后存在localStorage）-->
 <script src="../JavaScript/Navigation.js"></script>
+<script src="../JavaScript/MessagePage.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>

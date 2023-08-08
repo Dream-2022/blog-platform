@@ -83,6 +83,14 @@ public class DistributeUser extends BaseServletUser {
         System.out.println(req.getParts());
         UserTest.updateAvatar(req,resp);//方法
     }
+    //查找所有用户
+    public void selectUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("selectUser.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        UserTest.selectUser(req,resp);
+    }
     //显示个人信息
     public void DetailTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("进入DetailTest.java");
@@ -91,6 +99,7 @@ public class DistributeUser extends BaseServletUser {
         resp.setHeader("content-type","text/html;charset=UTF-8");
         UserTest.selectByUsername(req,resp);
     }
+    //通过user_id找到user
     public void selectUserById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("selectUserById.java");
         req.setCharacterEncoding("UTF-8");
@@ -105,5 +114,13 @@ public class DistributeUser extends BaseServletUser {
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         UserTest.likeSelectUsers(req,resp);
+    }
+    //根据用户id删除用户
+    public void deleteUserByUser_id(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("deleteUserByUser_id.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        UserTest.deleteUserByUser_id(req,resp);
     }
 }

@@ -21,6 +21,9 @@
     <select id="selectCommentsByAll" parameterType="map" resultType="bean.Comments">
         select * from comments WHERE article_id=#{article_id} AND receiver_id=#{receiver_id} AND user_id=#{user_id} AND content=#{content} AND num=#{num} AND up_level=#{up_level}
     </select>
+    <select id="selectCommentsByUserIdMessage" parameterType="map" resultType="bean.Comments">
+        select * from comments WHERE (article_id like CONCAT(#{user_id},'%') OR receiver_id=#{user_id}) order by create_at DESC
+    </select>
     <insert id="insertComments">
         INSERT INTO comments (article_id,receiver_id,user_id,content,num,up_level,create_at) VALUES (#{article_id},#{receiver_id},#{user_id},#{content},#{num},#{up_level},#{create_at})
     </insert>

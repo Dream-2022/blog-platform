@@ -6,6 +6,9 @@
     <select id="selectCollect" resultType="bean.Collects">
         select * from collects
     </select>
+    <select id="selectCollectByCollect_id" resultType="bean.Collects" parameterType="map">
+        select * from collects WHERE id=#{collect_id}
+    </select>
     <select id="selectCollectsByUserId" resultType="bean.Collects">
         select * from collects WHERE user_id=#{user_id}
     </select>

@@ -1,0 +1,96 @@
+body{
+    background-color: #ccc;
+    color: #2c2a2a;
+}
+.box{
+    background-color: white;
+    width: 68%;
+    margin:100px auto;
+}
+.classification{
+    padding: 8px;
+}
+.classification span{
+    padding: 8px;
+    cursor: pointer;
+}
+.classification span:hover{
+    border-bottom: 2px solid #60a9d0;
+}
+.title{
+    margin-left: 20px;
+    padding-top: 20px;
+}
+.message-box-fan .fan,
+.give-content,
+.message-box-comment .message-content{
+    color: #ccc;
+    font-size: 13px;
+}
+.message-content{
+    color: #211f1f;
+}
+.headSculpture{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    padding: 15px;
+}
+.message-box-fan,
+.message-box-give,
+.message-box-blog,
+.message-box-collect,
+.message-box-comment{
+    border-bottom: 1px solid #ccc;
+}
+.message-box-fan span,
+.message-box-give span,
+.message-box-collect span,
+.message-box-comment span{
+    margin-left: 10px;
+}
+.message-box-comment .comment-content{
+    font-size: 18px;
+}
+.message-box-give .blog-name{
+    font-size: 16px;
+}
+
+.active{
+    border-bottom: 2px solid #eacd9f;
+}
+/*博客*/
+.blog-content1,
+.blog-content2,
+.blog-content3{
+    font-size: 13px;
+    color: #ccc;
+
+}
+.message-box-blog .blog-name{
+    font-size: 16px;
+}
+.blog-result {
+    padding-left: 10px;
+    font-size: 13px;
+}
+.message-box-blog,
+.message-box-give,
+.message-box-comment,
+.message-box-fan,
+.message-box-collect{
+    position: relative;
+}
+.timestampRight{
+    position: absolute;
+    right: 24px; /* Adjust this value to set the distance from the right side */
+    top:38px;
+    color: #707070;
+}
+.blog-id,
+.give-id,
+.give-user_id,
+.comment-id,
+.fan-user_id{
+    display: none;
+}

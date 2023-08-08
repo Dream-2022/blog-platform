@@ -6,9 +6,8 @@
  }
 .container-content1{
     background-color: #f8f8f8;
-    margin: auto;
+    margin:10px auto;
     width: 74%;
-    height:150px;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.05);
 }
 .container-content1{
@@ -107,7 +106,7 @@
 .container-content .container-content1 .headSculpture{
     width: 106px;
     height: 106px;
-    transform:translateY(-30px);
+    transform:translateY(-40px);
     margin-left: 85px;
     display: inline-block;
 }
@@ -121,6 +120,7 @@ td .content-detail1,
 td .content-detail2,
 td .content-detail3{
     margin-top: 23px;
+    width: 736px;
 }
 span{
     margin-left: 24px;

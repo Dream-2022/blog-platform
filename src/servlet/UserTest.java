@@ -84,6 +84,18 @@ public class UserTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    //查找所有用户
+    public static void selectUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        List<User> users =sqlSession.selectList("selectAll");
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(users);
+        System.out.println(users);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
     //搜索（content）
     public static void likeSelectUsers(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
@@ -367,5 +379,21 @@ public class UserTest {
         String dataJson = gson.toJson(user);
         PrintWriter out=resp.getWriter();
         out.print(dataJson);
+    }
+    //根据用户id删除用户
+    public static void deleteUserByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String user_id=req.getParameter("user_id");
+        Map<String, Object> params = new HashMap<>();
+        params.put("id",user_id);
+        System.out.println(user_id);
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+
+        int result=sqlSession.delete("deleteUserByUser_id",params);
+        //提交事务
+        sqlSession.commit();
+        //处理结果
+        System.out.println("删除用户："+result);
+        //释放资源
+        sqlSession.close();
     }
 }

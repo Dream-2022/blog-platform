@@ -708,6 +708,7 @@ parentElement1.addEventListener('click', event=> {
 })
 
 
+
 //点击收藏按钮(显示收藏夹)
 document.querySelector('.nav-collection').addEventListener('click',function (){
     console.log('点击收藏')
@@ -1674,7 +1675,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             user_id
         }
-    }).then(result => {
+    })
+        .then(result => {
         document.querySelector('#headSculpture').src="/upload/"+localStorage.getItem("picture")
         console.log("selectArticlesByUser_idDetail:result.data"+result.data);
         console.log(result)
@@ -1766,7 +1768,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             user_id
         }
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         let countFollow=result.data.length
         document.querySelector('.fan').innerHTML=countFollow

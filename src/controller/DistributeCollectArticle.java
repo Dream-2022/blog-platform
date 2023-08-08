@@ -26,6 +26,14 @@ public class DistributeCollectArticle extends BaseServletCollectArticle {
         resp.setHeader("content-type", "text/html;charset=UTF-8");
         CollectArticleTest.selectCollectArticleByCollectId(req, resp);
     }
+    //首页获取收藏最多
+    public void MainPageCollectArticleCountTest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("MainPageCollectArticleCountTest.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type", "text/html;charset=UTF-8");
+        CollectArticleTest.MainPageCollectArticleCountTest(req, resp);
+    }
     public void deleteCollectArticleByCollectIdAndArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("deleteCollectArticleByCollectIdAndArticleId.java");
         req.setCharacterEncoding("UTF-8");

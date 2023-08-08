@@ -12,6 +12,15 @@
     <select id="selectLikesByUser_id" resultType="bean.Likes" parameterType="map">
         SELECT * FROM likes WHERE user_id=#{user_id}
     </select>
+    <select id="selectLikesByArticle_id" resultType="bean.Likes" parameterType="map">
+        SELECT * FROM likes WHERE article_id=#{article_id}
+    </select>
+    <select id="MainPageGiveCountTest" resultType="String">
+        SELECT article_id, COUNT(article_id) AS article_count
+        FROM likes
+        GROUP BY article_id
+        ORDER BY article_count DESC;
+    </select>
     <insert id="insertGive" parameterType="map">
         INSERT INTO likes (user_id, article_id, create_at) VALUES (#{user_id},#{article_id},#{create_at})
     </insert>

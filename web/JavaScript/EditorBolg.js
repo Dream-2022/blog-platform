@@ -26,6 +26,15 @@ articleSaveButton.addEventListener('click', function() {
             selectedColumns.push(checkbox.value);
         }
     });
+    const pageColumn=document.querySelectorAll('.content-column')
+    pageColumn.forEach(item=>{
+        console.log(item.innerHTML)
+        var trimmedString = item.textContent.trim().substring(0, item.textContent.trim().length - 1);
+        console.log('trimmedString:'+trimmedString)
+        selectedColumns.push(trimmedString)
+
+    })
+
 
 
     //为空的情况
@@ -435,6 +444,14 @@ articleSendButton.addEventListener('click', function() {
             selectedColumns.push(checkbox.value);
         }
     });
+    const pageColumn=document.querySelectorAll('.content-column')
+    pageColumn.forEach(item=>{
+        console.log(item.innerHTML)
+        var trimmedString = item.textContent.trim().substring(0, item.textContent.trim().length - 1);
+        console.log('trimmedString:'+trimmedString)
+        selectedColumns.push(trimmedString)
+
+    })
 
 
     //为空的情况

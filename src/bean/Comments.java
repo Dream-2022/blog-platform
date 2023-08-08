@@ -5,22 +5,29 @@ import java.util.Date;
 
 public class Comments {
     private int id;
-    private int article_id;
+    private String article_id;
     private int user_id;
     private String content;
+    private String nickname;
+    private String picture;
+    private String articleTitle;
     private int up_level;
     private int num;
     private int receiver_id;
     private Date create_at;
 
+
     public Comments() {
     }
 
-    public Comments(int id, int article_id, int user_id, String content, int up_level, int num, int receiver_id, Date create_at) {
+    public Comments(int id, String article_id, int user_id, String content, String nickname, String picture, String articleTitle, int up_level, int num, int receiver_id, Date create_at) {
         this.id = id;
         this.article_id = article_id;
         this.user_id = user_id;
         this.content = content;
+        this.nickname = nickname;
+        this.picture = picture;
+        this.articleTitle = articleTitle;
         this.up_level = up_level;
         this.num = num;
         this.receiver_id = receiver_id;
@@ -51,12 +58,36 @@ public class Comments {
         this.id = id;
     }
 
-    public int getArticle_id() {
+    public String getArticle_id() {
         return article_id;
     }
 
-    public void setArticle_id(int article_id) {
+    public void setArticle_id(String article_id) {
         this.article_id = article_id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
     }
 
     public int getUser_id() {
@@ -94,13 +125,16 @@ public class Comments {
     @Override
     public String toString() {
         return "Comments{" +
-                "id=" + id +
-                ", article_id=" + article_id +
+                "id=" + id + '\'' +
+                ", article_id='" + article_id + '\'' +
                 ", user_id=" + user_id +
                 ", content='" + content + '\'' +
-                ", up_level=" + up_level +
-                ", num=" + num +
-                ", receiver_id=" + receiver_id +
+                ", nickname='" + nickname + '\'' +
+                ", picture='" + picture + '\'' +
+                ", articleTitle='" + articleTitle + '\'' +
+                ", up_level=" + up_level + '\'' +
+                ", num=" + num + '\'' +
+                ", receiver_id=" + receiver_id + '\'' +
                 ", create_at=" + create_at +
                 '}';
     }

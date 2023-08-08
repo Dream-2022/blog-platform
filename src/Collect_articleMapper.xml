@@ -15,6 +15,12 @@
     <select id="selectCollectArticleByCollectId" resultType="bean.Collect_article">
         select * from collect_article WHERE collect_id=#{collect_id}
     </select>
+    <select id="MainPageCollectArticleCountTest" resultType="bean.Collect_article">
+        SELECT article_id, COUNT(article_id) AS article_count
+        FROM collect_article
+        GROUP BY article_id
+        ORDER BY article_count DESC;
+    </select>
     <insert id="insertCollectsByCollectIdAndArticleId" parameterType="bean.Collect_article">
         INSERT INTO collect_article (article_id,collect_id) VALUES (#{article_id},#{collect_id})
     </insert>

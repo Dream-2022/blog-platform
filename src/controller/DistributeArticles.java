@@ -27,6 +27,30 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         lists=ArticlesTest.selectByArticles(req,resp);
     }
+    //发布的全部文章
+    public void selectArticleByState(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticleByState.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticleByState(req,resp);
+    }
+    //管理员页面的未审核的全部文章
+    public void selectArticleByStateUnpublished(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticleByStateUnpublished.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticleByStateUnpublished(req,resp);
+    }
+    //管理员页面的发布的全部文章
+    public void selectArticleByStatePublished(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticleByStatePublished.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticleByStatePublished(req,resp);
+    }
     //筛选user_id文章中的下拉框
     public void selectArticlesForYearAndLabelAndColumn(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         System.out.println("selectArticlesForYearAndLabelAndColumn.java");
@@ -34,6 +58,22 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.selectArticlesForYearAndLabelAndColumn(req,resp);
+    }
+    //管理员页面筛选未审核的文章
+    public void selectArticlesForYearAndLabel(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticlesForYearAndLabel.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesForYearAndLabel(req,resp);
+    }
+    //管理员页面筛选审核文章
+    public void selectArticlesForYearAndLabelAndState(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        System.out.println("selectArticlesForYearAndLabelAndState.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesForYearAndLabelAndState(req,resp);
     }
     public void selectArticlesForYearAndLabelAndColumnAndState(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
         System.out.println("selectArticlesForYearAndLabelAndColumnAndState.java");
@@ -79,6 +119,7 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.selectArticlesByArticleId(req,resp);
     }
+
     //搜索
     public void likeSelectArticles(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("likeSelectArticles.java");
@@ -95,6 +136,15 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.updateArticleTest(req,resp);
     }
+    //修改文章状态，从未审核到为通过
+    public void updateArticleByArticle_idForState(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("updateArticleByArticle_idForState.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.updateArticleByArticle_idForState(req,resp);
+    }
+
     //插入文章内容(保存文章）
     public void InsertArticleTest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("进入insertArticleTest.java");
@@ -148,5 +198,13 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setContentType("application/json");
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.selectArticlesByUser_idDetail(req,resp);
+    }
+    //找到user_id的文章中‘未通过’和‘删除’的文章
+    public void selectArticlesByUser_idForAdmin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("HttpServletRequest req, HttpServletResponse resp.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.selectArticlesByUser_idForAdmin(req,resp);
     }
 }

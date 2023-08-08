@@ -39,6 +39,58 @@ public class ArticlesTest {
         sqlSession.close();
         return lists;
     }
+    //全部的发布文章
+    public static void selectArticleByState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        //执行映射配置文件中的sql语句，并接收结果
+        List<Articles> lists=sqlSession.selectList("selectArticleByState");
+        //处理结果
+        for(Articles articles:lists){
+            System.out.println(articles);
+        }
+        Gson gson=new Gson();
+        String articleJson=gson.toJson(lists);
+        System.out.println("序列化："+articleJson);
+        PrintWriter out=resp.getWriter();
+        out.print(articleJson);
+        //释放资源
+        sqlSession.close();
+    }
+    //管路员页面的未审核的全部文章
+    public static void selectArticleByStateUnpublished(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        //执行映射配置文件中的sql语句，并接收结果
+        List<Articles> lists=sqlSession.selectList("selectArticleByStateUnpublished");
+        //处理结果
+        for(Articles articles:lists){
+            System.out.println(articles);
+        }
+        Gson gson=new Gson();
+        String articleJson=gson.toJson(lists);
+        System.out.println("序列化："+articleJson);
+        PrintWriter out=resp.getWriter();
+        out.print(articleJson);
+        //释放资源
+        sqlSession.close();
+    }
+    //管路员页面的审核的全部文章
+    public static void selectArticleByStatePublished(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        //执行映射配置文件中的sql语句，并接收结果
+        List<Articles> lists=sqlSession.selectList("selectArticleByState");
+        //处理结果
+        for(Articles articles:lists){
+            System.out.println(articles);
+        }
+        Gson gson=new Gson();
+        String articleJson=gson.toJson(lists);
+        System.out.println("序列化："+articleJson);
+        PrintWriter out=resp.getWriter();
+        out.print(articleJson);
+        //释放资源
+        sqlSession.close();
+    }
+
     //查找文章作者（在articles表通过文章id（id）查找user_id,然后再user表通过用户id（id）查找nickname
     public static void selectArticlesUserIdByArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
@@ -147,6 +199,130 @@ public class ArticlesTest {
             }
         }
 
+
+        System.out.println(articles);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //管理员页面筛选下拉框中的内容
+    public static void selectArticlesForYearAndLabel(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String state=req.getParameter("state");
+        String selectedYear=req.getParameter("selectedYear");
+        String selectedLabelId=req.getParameter("selectedLabelId");
+        String selectedSearch=req.getParameter("selectedSearch");
+        System.out.println("state:"+state+"selectedYear:"+selectedYear+"selectedLabelId:"+selectedLabelId+"selectedSearch:"+selectedSearch);
+
+        //找到满足state的全部文章，然后通过年，标签筛选
+        Map<String, Object> params = new HashMap<>();
+        params.put("selectedSearch",selectedSearch);
+        params.put("state","未审核");
+        List<Articles> articles =sqlSession.selectList("selectArticlesArticleIdAndUnPublish",params);
+        System.out.println(articles);
+
+        //接下来通过年，标签和专栏筛选
+        Iterator<Articles> iterator = articles.iterator();
+        while (iterator.hasNext()) {
+            Articles article = iterator.next();
+            System.out.println(article.getRelease_at());
+            String year = String.valueOf(getYearFromDate(article.getRelease_at()));
+            System.out.println("年份：" + year);
+            if (!selectedYear.equals("年") && !year.equals(selectedYear)) {
+                System.out.println("年不满足,移除");
+                iterator.remove();
+            }
+        }
+        if(!selectedLabelId.equals("标签")){
+            Iterator<Articles> iterator1 = articles.iterator();
+            while (iterator1.hasNext()) {
+                Articles article = iterator1.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("article_id",article_id);
+
+                List<Label_article> label_articles=sqlSession.selectList("selectLabelArticleByArticleId",params1);
+                int flag=0;
+                for (Label_article labelArticle : label_articles) {
+                    String labelId= String.valueOf(labelArticle.getLabel_id());
+                    System.out.println(labelId);
+                    if(labelId.equals(selectedLabelId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator1.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
+
+        System.out.println(articles);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //管理员页面筛选下拉框中的内容
+    public static void selectArticlesForYearAndLabelAndState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String state=req.getParameter("state");
+        String selectedYear=req.getParameter("selectedYear");
+        String selectedLabelId=req.getParameter("selectedLabelId");
+        String selectedSearch=req.getParameter("selectedSearch");
+        System.out.println("state:"+state+"selectedYear:"+selectedYear+"selectedLabelId:"+selectedLabelId+"selectedSearch:"+selectedSearch);
+
+        //找到满足state的全部文章，然后通过年，标签筛选
+        Map<String, Object> params = new HashMap<>();
+        params.put("selectedSearch",selectedSearch);
+        params.put("state","发布");
+        List<Articles> articles =sqlSession.selectList("selectArticlesArticleIdAndUnPublish",params);
+        System.out.println(articles);
+
+        //接下来通过年，标签和专栏筛选
+        Iterator<Articles> iterator = articles.iterator();
+        while (iterator.hasNext()) {
+            Articles article = iterator.next();
+            System.out.println(article.getRelease_at());
+            String year = String.valueOf(getYearFromDate(article.getRelease_at()));
+            System.out.println("年份：" + year);
+            if (!selectedYear.equals("年") && !year.equals(selectedYear)) {
+                System.out.println("年不满足,移除");
+                iterator.remove();
+            }
+        }
+        if(!selectedLabelId.equals("标签")){
+            Iterator<Articles> iterator1 = articles.iterator();
+            while (iterator1.hasNext()) {
+                Articles article = iterator1.next();
+
+                //查找文章的全部标签，与selectLabel比较
+                String article_id=article.getId();
+                System.out.println(article_id);
+                Map<String, Object> params1 = new HashMap<>();
+                params1.put("article_id",article_id);
+
+                List<Label_article> label_articles=sqlSession.selectList("selectLabelArticleByArticleId",params1);
+                int flag=0;
+                for (Label_article labelArticle : label_articles) {
+                    String labelId= String.valueOf(labelArticle.getLabel_id());
+                    System.out.println(labelId);
+                    if(labelId.equals(selectedLabelId)){
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    iterator1.remove();
+                } // 使用迭代器的remove方法移除元素
+            }
+        }
 
         System.out.println(articles);
 
@@ -326,6 +502,21 @@ public class ArticlesTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    //找到user_id的文章中‘未通过’和‘删除’的文章
+    public static void selectArticlesByUser_idForAdmin(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+        String user_id=req.getParameter("user_id");
+        System.out.println("user_id:"+user_id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("user_id",user_id);
+        List<Articles> articles =sqlSession.selectList("selectArticlesByUser_idForAdmin",params);
+
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
     //搜索（content）
     public static void likeSelectArticles(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
@@ -436,6 +627,25 @@ public class ArticlesTest {
         params.put("id",id);
         params.put("give", give);
         int result = sqlSession.update("updateArticleGiveLike", params);
+        System.out.println("事务提交："+result);
+        //提交事务
+        sqlSession.commit();
+        //处理结果
+        System.out.println(result);
+        //释放资源
+        sqlSession.close();
+    }
+    //将文章状态state从未审核改为发布
+    public static void updateArticleByArticle_idForState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String article_id=req.getParameter("article_id");
+        String state=req.getParameter("state");
+        System.out.println(article_id);
+        System.out.println(state);
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        Map<String, Object> params = new HashMap<>();
+        params.put("article_id",article_id);
+        params.put("state", state);
+        int result = sqlSession.update("updateArticleByArticle_idForState", params);
         System.out.println("事务提交："+result);
         //提交事务
         sqlSession.commit();

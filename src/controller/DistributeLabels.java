@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Labels;
+import servlet.LabelArticleTest;
 import servlet.LabelsTest;
 
 import javax.servlet.ServletException;

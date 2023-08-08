@@ -103,12 +103,12 @@ i.icon{
 }
 .content-box{
     margin-bottom: 10px;
-    height: 158px;
+    height: 170px;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
 }
 .content-image{
     display: inline-block;
-    height: 158px;
+    height: 167px;
     width: 250px;
     object-fit: cover;
 }

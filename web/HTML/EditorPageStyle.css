@@ -40,6 +40,7 @@
     color: #414141;
     font-size: 17px;
 }
+
 .content-title::placeholder {
     color: #ccc; /* 设置 placeholder 文本颜色为灰色 (#999) */
 }

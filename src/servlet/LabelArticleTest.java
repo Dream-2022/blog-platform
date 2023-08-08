@@ -128,6 +128,8 @@ public class LabelArticleTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+
+
     //搜索标签
     public static void likeSelectLabelArticle(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();

@@ -121,6 +121,31 @@ public class CollectArticleTest {
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
+    //首页获取收藏最多
+    public static void MainPageCollectArticleCountTest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("MainPageCollectArticleCountTest");
+        SqlSession sqlSession= ObtainSqlSession.obtainSqlSession();
+
+        List<Collect_article> collectArticleList =sqlSession.selectList("MainPageCollectArticleCountTest");
+        System.out.println("collectArticleList:"+collectArticleList);
+
+        List<Articles> articlesList = new ArrayList<>();
+        for (Collect_article collect_article : collectArticleList) {
+            String article_id=collect_article.getArticle_id();
+            //通过article_id找到文章对象
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("id",article_id);
+            Articles article =sqlSession.selectOne("selectArticlesUserIdByArticleId",params1);
+            articlesList.add(article);
+        }
+        System.out.println("序列化前："+articlesList);
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articlesList);
+
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
     //通过article_id和collect_id删除收藏记录
     public static void deleteCollectArticleByCollectIdAndArticleId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String collect_id=req.getParameter("collect_id");

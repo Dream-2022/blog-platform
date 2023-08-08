@@ -42,6 +42,14 @@ public class DistributeCollects extends BaseServletCollects{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         Collects collect=CollectTest.selectAndDeleteCollectsByUser_idAndCollect_id(req,resp);
     }
+    //根据user_id的所有文章，找到所有的收藏记录
+    public void selectCollectsArticlesByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectAndDeleteCollectsByUser_idAndCollect_id.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        CollectTest.selectCollectsArticlesByUser_id(req,resp);
+    }
     //插入收藏夹
     public void insertCollectsCollectName(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("insertCollectsCollectName.java");

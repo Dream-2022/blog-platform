@@ -5,6 +5,7 @@
     <title>Administrator Page</title>
     <!--  图标-->
     <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
+    <link rel="stylesheet" href="AdministratorPage.css">
     <style>
         body::before {
             content: "";
@@ -28,7 +29,7 @@
             box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
         }
         .container-content{
-            margin: 0 200px 0 200px;
+            margin: 103px 200px 0 200px;
             height: 555px;
         }
         .container-box1{
@@ -36,7 +37,7 @@
             background-color: #ffffff;
             opacity: 0.7;
             /*background-color: rgba(217, 214, 209, 0.5);*/
-            height: 100%;
+            height: 481px;
             border-radius: 20px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) ;
             box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
@@ -45,7 +46,6 @@
             background-color: #ffffff;
             opacity: 0.7;
             /*background-color: rgba(217, 214, 209, 0.5);*/
-            height: 100%;
             width: 78%;
             margin-left: 2%;
             box-shadow: 10px 10px 10px -4px rgb(0,0,0,.3);
@@ -72,40 +72,39 @@
         .text-content1{
             margin-top: 50px;
         }
-        .content-Box .headSculpture{
+         .headSculpture{
             width: 100px;
-            margin-left: 85px;
+            margin-left: 58px;
             display: inline-block;
             border-radius: 50px;
             opacity: 1;
-            margin-top: 22px;
+            margin-top: 42px;
         }
         table tr td img{
             width: 150px;
         }
         .published-box{
-            margin-top: 20px;
+            margin-top: 10px;
             margin-bottom: 10px;
         }
         .container-box2 div .published,
         .container-box2 div .unpublished{
             padding: 10px;
-            font-size: 20px;
+            font-size: 17px;
         }
-        .container-box2 div .published:hover,
-        .container-box2 div .unpublished:hover{
-            background-color: #ccc;
-            border-radius: 20px;
-        }
-        .container-box2 div .published{
-            border-right: 1px solid #ccc;
-            margin-left: 66px;
-            padding-left: 134px;
-            padding-right: 134px;
+         div .published:hover,
+         div .unpublished:hover{
+            background-color: #f5f5f5;
+            border-radius: 0 10px 0 0;
         }
         .container-box2 div .unpublished{
-            padding-left: 134px;
-            padding-right: 134px;
+            border-right: 1px solid #ccc;
+            padding-left: 179px;
+            padding-right: 178px;
+        }
+        .container-box2 div .published{
+            padding-left: 178px;
+            padding-right: 178px;
         }
         .section span{
             margin-left: 5px;
@@ -126,60 +125,111 @@
             display: block;
             margin-right: 10px;
         }
-
+        /*浮窗*/
+        .alert{
+            padding:0;
+            margin-left: 588px;
+            margin-top: 10px;
+            line-height: 40px;
+            height: 40px;
+            width: 264px;
+            font-size: 15px;
+            color: white;
+            text-align:center;
+            background-color: #aad5a1;
+            border-radius: 10px;
+        }
+        .alertFail{
+            padding:0;
+            margin-left: 588px;
+            margin-top: 10px;
+            line-height: 40px;
+            height: 40px;
+            width: 264px;
+            font-size: 15px;
+            color: white;
+            text-align:center;
+            background-color: #e0a890;
+            border-radius: 10px;
+        }
+        .display{
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="content-Box">
-        <img class="headSculpture" src="/upload/image.jpeg" alt="">
-    </div>
+    <!--浮窗-->
+    <div class="alert display">审核通过</div>
+    <div class="alertFail display">审核未通过</div>
+
+
     <div class="container-content">
         <div class="container-box1">
-            <div class="text-content1">文章管理</div><br>
+<!--            <div class="content-Box">-->
+                <img class="headSculpture" src="/upload/image.jpeg" alt="">
+<!--            </div>-->
+            <div class="text-content1 Active">文章管理</div><br>
             <div class="text-content2">用户管理</div>
+            <div class="exit"><i class="arrow alternate circle left icon"></i>返回主页</div>
         </div>
         <div class="container-box2">
             <div class="published-box">
+                <span class="unpublished active">未发布</span>
                 <span class="published">已发布</span>
-                <span class="unpublished">未发布</span>
             </div>
+
+            <div class="hide-content">
+                <div class="search-box">
+                    <input type="text" class="content-text" placeholder="查找的内容">
+                    <button class="content-button" onclick="handleSelect()">搜索</button>
+                </div>
+
+                <select class="select-year" onchange="handleSelect()">
+                    <option value="年">年</option>
+                </select>
+                <select class="select-label" onchange="handleSelect()">
+                    <option value="标签">标签</option>
+                </select>
+            </div>
+
 <!--            发布的文章放在这个盒子里-->
-          <div class="content-box">
-            <table>
-              <tr>
-                <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                <td>
-                  <h4>博客</h4>
-                  <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="section">
-                  <span><i class="eye icon"></i>浏览量</span><span class="content-view">10</span>
-                  <span><i class="thumbs up icon"></i>点赞</span><span class="content-like">243</span>
-                </td>
-              </tr>
-            </table>
+            <div class="Table">
+            <span class="table-tou hui">文章标题</span>
+            <span class="table-user hui">作者id</span>
+            <span class="table-textarea hui">概要</span>
+            <span class="table-release_at hui">发布日期</span>
+            <span class="table-shen hui">审核</span>
+        </div>
+          <div class="articles-box">
+
+<!--              <div class="table">-->
+<!--                  <span class="table-tou">计算机科学与技术</span>-->
+<!--                  <span class="table-user">1243523462</span>-->
+<!--                  <span class="table-textarea">计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言计算机语言是一门高级语言</span>-->
+<!--                  <span class="table-release_at">23.5.3</span>-->
+<!--                  <span class="table-shen">-->
+<!--                      <span class="access">通过</span>-->
+<!--                      <span class="accessFail">未通过</span>-->
+<!--                  </span>-->
+<!--              </div>-->
+
           </div>
-            <div class="content-box">
-            <table>
-              <tr>
-                <td rowspan="2"><img src="../image/cat.jpeg" class="content-image" alt=""></td>
-                <td>
-                  <h4>博客</h4>
-                  <span class="content-span">内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1内容1</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="section">
-                  <span><i class="eye icon"></i>浏览量</span><span class="content-view">10</span>
-                  <span><i class="thumbs up icon"></i>点赞</span><span class="content-like">243</span>
-                </td>
-              </tr>
-            </table>
-          </div>
+        <div class="noSearch noSearch2">
+            暂未查询到相关文章
+        </div>
+
 
         </div>
     </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--发送请求时在响应头中加入token和longt-->
+    <script src="../JavaScript/Identity.js"></script>
+    <!--    浮窗-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>-->
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+<!--    <script src="../lib/bootstrap.bundle.min.js"></script>-->
+
+    <script src="../JavaScript/AdministratorPage.js"></script>
 </body>
 </html>

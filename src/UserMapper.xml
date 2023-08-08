@@ -47,4 +47,7 @@
     <delete id="delete" parameterType="java.lang.Integer">
         DELETE FROM user WHERE id=#{id}
     </delete>
+    <delete id="deleteUserByUser_id" parameterType="map">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
 </mapper>

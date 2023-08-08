@@ -5,18 +5,25 @@ import java.util.Date;
 
 public class Likes {
     private int id;
-    private int article_id;
+    private String article_id;
     private int user_id;
     private Date create_at;
 
+//    新加
+    private String nickname;
+    private String picture;
+    private String articleTitle;
     public Likes() {
     }
 
-    public Likes(int id, int article_id, int user_id, Date create_at) {
+    public Likes(int id, String article_id, int user_id, Date create_at, String nickname, String picture, String articleTitle) {
         this.id = id;
         this.article_id = article_id;
         this.user_id = user_id;
         this.create_at = create_at;
+        this.nickname = nickname;
+        this.picture = picture;
+        this.articleTitle = articleTitle;
     }
 
     public int getId() {
@@ -27,11 +34,35 @@ public class Likes {
         this.id = id;
     }
 
-    public int getArticle_id() {
+    public String getArticle_id() {
         return article_id;
     }
 
-    public void setArticle_id(int article_id) {
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public void setArticle_id(String article_id) {
         this.article_id = article_id;
     }
 

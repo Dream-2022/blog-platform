@@ -36,6 +36,14 @@ public class DistributeComments extends BaseServletComments{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         CommentTest.selectCommentsForCountByArticle_id(req,resp);
     }
+    //获取关于自己的全部评论
+    public void selectCommentsByUser_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("selectCommentsByUser_id.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        CommentTest.selectCommentsByUser_id(req,resp);
+    }
     //插入评论信息
     public void insertComments(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("insertComments.java");

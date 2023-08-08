@@ -32,6 +32,14 @@ public class DistributeFollows extends BaseServletFollows{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         FollowsTest.selectFollowsByBlogger_id(req,resp);
     }
+    //首页查找我的关注发布的文章（按时间）
+    public void MainPageFollowCountTest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("MainPageFollowCountTest.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        FollowsTest.MainPageFollowCountTest(req,resp);
+    }
     public void insertFollowsByBlogger_idAndFans_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("insertFollowsByBlogger_idAndFans_id.java");
         req.setCharacterEncoding("UTF-8");

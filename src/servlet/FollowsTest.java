@@ -1,5 +1,6 @@
 package servlet;
 
+import bean.Articles;
 import bean.Follows;
 import bean.User;
 import com.google.gson.Gson;
@@ -75,6 +76,33 @@ public class FollowsTest {
         PrintWriter out=resp.getWriter();
         Gson gson=new Gson();
         String dataJson = gson.toJson(users);
+        System.out.println("序列化后："+dataJson);
+        out.print(dataJson);
+    }
+    //首页查看我的关注发布的文章
+    public static void MainPageFollowCountTest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("MainPageFollowCountTest");
+        String fan_id= req.getParameter("user_id");
+        System.out.println(fan_id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("fans_id", fan_id);
+        System.out.println("P:"+params);
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
+        List<Follows> follows=sqlSession.selectList("selectFollowsByFans_id",params);
+        System.out.println("follows:"+follows);
+        List<Articles> articles=new ArrayList<>();
+        SqlSession sqlSession1 = ObtainSqlSession.obtainSqlSession();
+        for (Follows follow : follows) {
+            //通过用户id查找用户信息
+            int blogger_id=follow.getBlogger_id();
+            Map<String, Object> params1 = new HashMap<>();
+            params1.put("user_id", blogger_id);
+            List<Articles> article=sqlSession1.selectList("selectArticlesUserIdByUserIdAndState",params1);
+            articles.addAll(article);
+        }
+        PrintWriter out=resp.getWriter();
+        Gson gson=new Gson();
+        String dataJson = gson.toJson(articles);
         System.out.println("序列化后："+dataJson);
         out.print(dataJson);
     }
