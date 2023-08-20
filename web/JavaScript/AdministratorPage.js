@@ -100,10 +100,11 @@ function ObtainArticle(){
                         console.log(accessBox)
                         accessBox.innerHTML='审核未通过'
                         accessBox.classList.remove('display')
-                        event.target.closest('.table').innerHTML=''
+                        tempDiv.style.display='none'
 
                         setTimeout(()=>
                         {
+                            console.log('审核未通过')
                             accessBox.classList.add('display')
                         },2000)
                     })
@@ -114,6 +115,7 @@ function ObtainArticle(){
     })
 }
 window.addEventListener('DOMContentLoaded', function(){
+    document.querySelector('.headSculpture').src='/upload/'+localStorage.getItem('picture')
     ObtainArticle()
     const selectLabel=document.querySelector('.select-label')
     //读取标签
@@ -522,10 +524,13 @@ function handleSelect() {
 document.querySelector('.text-content1').addEventListener('click',function (){
     document.querySelector('.Active').classList.remove('Active')
     document.querySelector('.text-content1').classList.add('Active')
+    document.querySelector('.Table').style.display='';
+    document.querySelector('.articles-box').style.display='';
     document.querySelector('.published-box').style.display=''
     document.querySelector('.hide-content').style.display=''
     document.querySelector('.table-release_at').style.display=''
     document.querySelector('.table-tou').innerHTML='文章标题'
+    document.querySelector('.table-user').innerHTML='作者id'
 
     document.querySelector('.unpublished').click()
 })
@@ -536,11 +541,14 @@ document.querySelector('.text-content1').addEventListener('click',function (){
 document.querySelector('.text-content2').addEventListener('click',function (){
     document.querySelector('.Active').classList.remove('Active')
     document.querySelector('.text-content2').classList.add('Active')
+    document.querySelector('.Table').style.display='';
+    document.querySelector('.articles-box').style.display='';
     //将上面的隐藏
     document.querySelector('.published-box').style.display='none'
     document.querySelector('.hide-content').style.display='none'
     document.querySelector('.table-release_at').style.display='none'
     //修改样式
+    document.querySelector('.table-user').innerHTML='作者id'
     document.querySelector('.table-tou').innerHTML='用户名'
     //将内容清空
     document.querySelector('.articles-box').innerHTML=''
@@ -566,6 +574,7 @@ document.querySelector('.text-content2').addEventListener('click',function (){
             tempDiv.innerHTML = commentReplyContent;
             const articlesBox = document.querySelector('.articles-box');
             articlesBox.appendChild(tempDiv);
+
 
             //如果点击了删除该用户
             tempDiv.querySelector('.unAccessUser').addEventListener('click',function (event){
@@ -598,10 +607,149 @@ document.querySelector('.text-content2').addEventListener('click',function (){
                 localStorage.setItem('detail-author-id', user_id);
                 window.location.href = "Detail.html";
             });
+            // console.log(document.querySelector('.article-box').innerHTML)
+            // if(document.querySelector('.articles-box').innerHTML===''){
+            //     document.querySelector('.articles-box').classList.remove('noSearch2')
+            // }
         })
     })
+})
 
 
+//点击举报受理
+document.querySelector('.text-content3').addEventListener('click',function (){
+    document.querySelector('.Active').classList.remove('Active')
+    document.querySelector('.text-content3').classList.add('Active')
+    document.querySelector('.Table').style.display='';
+    document.querySelector('.articles-box').style.display='';
+    //将上面的隐藏
+    document.querySelector('.published-box').style.display='none'
+    document.querySelector('.hide-content').style.display='none'
+    document.querySelector('.table-release_at').style.display=''
+
+    //修改样式
+    document.querySelector('.table-tou').innerHTML='被举报者id'
+    document.querySelector('.table-user').innerHTML='举报者id'
+    document.querySelector('.table-textarea').innerHTML='文章概要'
+    document.querySelector('.table-release_at').innerHTML='举报时间'
+
+    //将内容清空
+    document.querySelector('.articles-box').innerHTML=''
+
+
+    //获取所有举报
+    axios({
+        url: '/Blog/Reports/selectReports',
+        method: 'get'
+    }).then(result => {
+        console.log(result)
+        console.log(result.data)
+        result.data.forEach(item=>{
+            console.log(item.report_content)
+            if(item.report_content!==''){
+                const dateObject = new Date(item.create_at);
+                const year = dateObject.getFullYear();
+                const month = dateObject.getMonth() + 1;
+                const day = dateObject.getDate();
+                const hours = dateObject.getHours();
+                const minutes = dateObject.getMinutes();
+                const seconds = dateObject.getSeconds();
+                const formattedDateString = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
+                const commentReplyContent = `
+                      <span class="table-tou">${item.receiveName}</span>
+                      <span class="table-user">${item.userName}</span>
+                      <span class="table-textarea">${item.article_content}</span>
+                      <span class="table-release_at">${formattedDateString}</span>
+                      <span class="table-id">${item.article_id}</span>
+                      <span class="table-report-id">${item.id}</span>
+                      <span class="table-shen">
+                          <span class="access">忽略</span>
+                          <span class="accessFail">打回</span>
+                      </span>
+                `;
+                const tempDiv = document.createElement('div');
+                tempDiv.classList.add('table')
+                tempDiv.innerHTML = commentReplyContent;
+                const articlesBox = document.querySelector('.articles-box');
+                articlesBox.appendChild(tempDiv);
+                document.querySelector('.access').style.display=''
+                document.querySelector('.access').innerHTML='忽略'
+                document.querySelector('.accessFail').style.display='删除'
+                document.querySelector('.accessFail').innerHTML='删除'
+
+                //如果点击了删除,文章状态上面写删除
+                tempDiv.querySelector('.accessFail').addEventListener('click',function (event){
+                    const confirmed =confirm('是否确认打回文章：'+item.article_title)
+                    if(confirmed){
+                        const user_id=event.target.closest('.table').querySelector('.table-id').innerHTML
+                        console.log(user_id)
+                        axios({
+                            url: '/Blog/Articles/updateArticleByArticle_idForState',
+                            method: 'post',
+                            params:{
+                                article_id:item.article_id,
+                                state:'删除'
+                            }
+                        }).then(result1 => {
+                            console.log(result1)
+                            console.log(result1.data)
+                            //将这个盒子删掉
+                            event.target.closest('.table').remove()
+                        })
+                    }
+                })
+                //如果点击了忽略,举报内容清空
+                tempDiv.querySelector('.access').addEventListener('click',function (event){
+                    const confirmed=confirm('是否忽略用户对：'+item.article_title+' 的举报')
+                    if(confirmed){
+                        const user_id=event.target.closest('.table').querySelector('.table-id').innerHTML
+                        console.log(user_id)
+                        axios({
+                            url: '/Blog/Reports/updateReportsByReport_id',
+                            method: 'post',
+                            params:{
+                                id:item.id
+                            }
+                        }).then(result1 => {
+                            console.log(result1)
+                            console.log(result1.data)
+                            //将这个盒子删掉
+                            event.target.closest('.table').remove()
+                        })
+                    }
+
+                })
+
+            }
+
+
+
+
+//删除在文章状态上面写删除，忽略的话，将举报内容清空
+
+            // //如果点击了这个盒子，就进入user_id，receive_id,article_id个人中心
+            // tempDiv.addEventListener('click', function(event) {
+            //     // 判断是否点击了 .unAccessUser，如果是，则不进行后续操作
+            //     if (event.target.classList.contains('unAccessUser')) {
+            //         return;
+            //     }
+            //     const user_id = event.currentTarget.querySelector('.table-id').innerHTML;
+            //     localStorage.setItem('detail-author-id', user_id);
+            //     window.location.href = "Detail.html";
+            // });
+        })
+    })
+})
+
+
+//点击轮播图
+document.querySelector('.text-content4').addEventListener('click',function (){
+    document.querySelector('.Active').classList.remove('Active')
+    document.querySelector('.text-content4').classList.add('Active')
+    document.querySelector('.Table').style.display='none';
+    document.querySelector('.articles-box').style.display='none';
+    document.querySelector('.published-box').style.display='none'
+    document.querySelector('.hide-content').style.display='none'
 })
 
 //点击返回主页

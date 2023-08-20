@@ -24,6 +24,8 @@
         <mapper resource="Label_articleMapper.xml"/>
         <mapper resource="LabelsMapper.xml"/>
         <mapper resource="LikesMapper.xml"/>
+        <mapper resource="MessagesMapper.xml"/>
+        <mapper resource="ReportsMapper.xml"/>
         <mapper resource="UserMapper.xml"/>
         <mapper resource="Collect_articleMapper.xml"/>
     </mappers>

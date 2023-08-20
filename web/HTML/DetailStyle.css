@@ -51,10 +51,30 @@
     background-color: #80A1C5;
     color: white;
 }
+.content-box{
+    position: relative;
+}
+
+.blog-box .content-delete{
+    position: absolute;
+    right:23px;
+    bottom:14px;
+    width: 70px;
+    height: 21px;
+    border: none;
+    background-color: #c9a18e;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 24px;
+    cursor: pointer;
+    margin-left: 297px;
+}
 .blog-box .content-edit{
-    float: right;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    position: absolute;
+    right: 116px;
+    bottom: 14px;
+
     width: 70px;
     height: 21px;
     border: none;
@@ -65,6 +85,9 @@
     border-radius: 24px;
     cursor: pointer;
     margin-left: 297px;
+}
+.content-collect .content-edit{
+    right: 30px;
 }
   .cancelGive{
       float: right;
@@ -98,6 +121,7 @@
     margin-left: 0;
 }
 .content-edit,
+.content-delete,
 .edit-button:hover,
 .follow-button:hover,
 .content-button:hover{
@@ -109,12 +133,12 @@
     transform:translateY(-40px);
     margin-left: 85px;
     display: inline-block;
+    box-shadow:5px 5px 5px -1px rgb(0,0,0,.2);
 }
 .container-content .container-content1 .content-nickname,
 .container-content .container-content1 .content-gender,
 .container-content .container-content1 .content-age，{
     margin-bottom: 10px;
-    font-size: 18px;
 }
 td .content-detail1,
 td .content-detail2,
@@ -122,6 +146,9 @@ td .content-detail3{
     margin-top: 23px;
     width: 736px;
 }
+ tr td .content-detail3{
+     padding-bottom: 17px;
+ }
 span{
     margin-left: 24px;
 }
@@ -138,6 +165,9 @@ span{
     height: 158px;
     box-shadow: 10px 10px 10px -4px rgb(0,0,0,.1);
 }
+ .container-content .container-content2 .blog-box .content-box:first-child{
+     height: 165px;
+ }
  .container-content .container-content2 .collect-article .content-box{
      height: 168px;
  }
@@ -338,6 +368,7 @@ tr td .content-span{
     color: #4c4c4c;
     text-decoration: none;
     padding:0 52px;
+    cursor: pointer;
 }
 .nav .active{
     display:inline-block;
@@ -348,6 +379,7 @@ tr td .content-span{
     padding:0 53px;
     border-top: 3px solid #ffc29c;
     background-color: #f1f1f1;
+    cursor: pointer;
 }
 .nav span{
     margin-left: 0;

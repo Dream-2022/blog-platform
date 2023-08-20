@@ -251,6 +251,7 @@ window.addEventListener('DOMContentLoaded', function() {
         })
     }
     else{
+        const user_id=localStorage.getItem('username')
         //创建编辑器函数，创建工具栏函数
         const { createEditor, createToolbar } = window.wangEditor
         //编辑器配置对象
@@ -281,8 +282,10 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         editorConfig.MENU_CONF['uploadImage'] = {
             filedName:'file',
-            server: '/Blog/upload_image'
-
+            server: '/Blog/upload_image',
+            meta:{
+                userid:user_id
+            }
         }
 
         //创建编辑器

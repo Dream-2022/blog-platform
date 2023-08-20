@@ -47,7 +47,7 @@ exitButton.addEventListener("click", function() {
 });
 
 if(window.location.href==='http://localhost:8080/Blog/HTML/SearchPage.html'){
-    document.querySelector('.search').style.display = 'none';
+    document.querySelector('.searchNavigation').style.display = 'none';
     var labelElement = document.querySelector('label[for="search-button"]');
     var inputElement = document.getElementById('search-button');
 

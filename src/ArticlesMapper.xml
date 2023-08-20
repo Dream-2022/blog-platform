@@ -69,4 +69,7 @@
     <insert id="insertArticle" parameterType="bean.Articles">
         INSERT INTO articles VALUES (#{id},#{user_id},#{title},#{textarea},#{htmlText},#{plainText},#{original},#{avatar},#{state},#{view},#{give},#{collect},#{release_at},#{update_at})
     </insert>
+    <delete id="DeleteArticlesByArticle_id" parameterType="map">
+        DELETE FROM articles WHERE id=#{article_id}
+    </delete>
 </mapper>

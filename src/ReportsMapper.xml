@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Mapper">
+<!--    selectReportsByReceive_id-->
+    <select id="selectReportsByReceive_id" resultType="bean.Reports" parameterType="map">
+        SELECT * FROM reports WHERE receive_id=#{receive_id}
+    </select>
+    <select id="selectReports" resultType="bean.Reports" parameterType="map">
+        SELECT * FROM reports
+    </select>
+    <update id="updateReportsByReport_id" parameterType="map">
+        UPDATE reports SET report_content=#{report_content} WHERE id=#{id}
+    </update>
+    <insert id="insertReports" parameterType="bean.Reports">
+        INSERT INTO reports (user_id, article_id, receive_id,create_at,report_content) VALUES (#{user_id},#{article_id},#{receive_id},#{create_at},#{report_content})
+    </insert>
+</mapper>

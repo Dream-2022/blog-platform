@@ -1,6 +1,5 @@
 package servlet;
 
-import bean.Articles;
 import bean.User;
 import com.google.gson.Gson;
 import controller.DistributeUser;
@@ -8,7 +7,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import tool.JwtTest;
 import tool.JwtTest;
 import tool.ObtainSqlSession;
 import tool.RegisterAccount;

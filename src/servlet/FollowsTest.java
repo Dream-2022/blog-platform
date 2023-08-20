@@ -40,12 +40,13 @@ public class FollowsTest {
         List<Follows> follows=sqlSession.selectList("selectFollowsByFans_id",params);
         System.out.println("follows:"+follows);
         List<User> users=new ArrayList<>();
+        SqlSession sqlSession1 = ObtainSqlSession.obtainSqlSession();
         for (Follows follow : follows) {
             //通过用户id查找用户信息
             int blogger_id=follow.getBlogger_id();
             Map<String, Object> params1 = new HashMap<>();
             params1.put("id", blogger_id);
-            User user=sqlSession.selectOne("selectUserById",params1);
+            User user=sqlSession1.selectOne("selectUserById",params1);
             users.add(user);
         }
         PrintWriter out=resp.getWriter();

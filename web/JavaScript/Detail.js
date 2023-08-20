@@ -62,6 +62,7 @@ function addArticle(blogData,flag){
                           <span><i class="thumbs up icon"></i>点赞</span><span>${blogData.give}</span>
                           <span><i class="star icon"></i> 收藏</span><span>${blogData.collect}</span>
                           <span class="content-id">${blogData.id}</span>
+                          <button class="content-delete">删除</button>
                           <button class="content-edit">编辑</button>
                         </td>
                       </tr>
@@ -71,6 +72,39 @@ function addArticle(blogData,flag){
     // 将contentBox和blogBox依次添加到blogListContainer中
     blogListContainer.appendChild(contentBox);
 
+    //如果是喜欢里面，是别人的文章，将删除删去
+    if(document.querySelector('.nav-give').classList.contains('active')){
+        contentBox.querySelector('.content-delete').style.display='none'
+    }
+    else{
+        //如果点击了删除按钮，将文章删除
+        contentBox.querySelector('.content-delete').addEventListener('click',function (event){
+            console.log('点击了删除文章')
+            const confirmValue=confirm('确认删除文章：'+blogData.title+'吗？')
+            if(confirmValue){
+                console.log('确认删除')
+                axios({
+                    url:'/Blog/Articles/DeleteArticlesByArticle_id',
+                    params:{
+                        article_id:blogData.id
+                    }
+                }).then(result1 => {
+                    console.log(result1)
+                    console.log(result1.data)
+                    //将盒子删除
+                    alert('删除成功')
+                    contentBox.remove()
+
+                })
+
+
+            }
+            else{
+                console.log('取消删除')
+            }
+        })
+    }
+
     //如果是从是用户访问别人的个人中心，则将创建的文章盒子的’编辑‘删掉
     const editActive=document.querySelector('.nav-Audit')
     let detailid=localStorage.getItem('detail-author-id')
@@ -78,6 +112,7 @@ function addArticle(blogData,flag){
     if(editActive.classList.contains('active')&&detailId!==null&&Id!==detailid){
         //满足条件，将编辑隐藏
         contentBox.querySelector('.content-edit').style.display='none'
+        contentBox.querySelector('.content-delete').style.display='none'
     }
 
 
@@ -869,6 +904,7 @@ parentElement.addEventListener('click', function(event) {
                           <span><i class="star icon"></i> 收藏</span><span>${blogData.collect}</span>
                           <span class="content-id">${blogData.id}</span>
                           <button class="content-edit">编辑</button>
+                         
                         </td>
                       </tr>
                     </table>
@@ -1505,7 +1541,7 @@ parentElement.addEventListener('click', function(event) {
 if(document.querySelector('.blog-box')!==null){
     document.querySelector('.blog-box').addEventListener('click', function(event) {
         // 检查点击的元素是否为 content-box 盒子
-        if (event.target.closest('.content-box')&& !event.target.closest('.content-edit')&&!event.target.closest('.cancelGive')) {
+        if (event.target.closest('.content-box')&& !event.target.closest('.content-edit')&&!event.target.closest('.cancelGive')&&!event.target.closest('.content-delete')) {
             var contentBox = event.target.closest('.content-box');
             var contentId = contentBox.querySelector('.content-id');
             var text = contentId.textContent;

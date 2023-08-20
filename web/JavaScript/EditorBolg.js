@@ -258,7 +258,7 @@ articleSaveButton.addEventListener('click', function() {
                 console.log(result.data);
                 //提示和跳转
                 //将文章id更新，不重复上传
-
+                alert('保存成功')
             })
 
         }
@@ -411,7 +411,7 @@ articleSaveButton.addEventListener('click', function() {
                 console.log(result.data);
                 //提示和跳转
                 //将文章id更新，不重复上传
-
+                alert('保存成功')
             })
 
         }
@@ -776,6 +776,7 @@ articleSendButton.addEventListener('click', function() {
                 //提示和跳转
                 // //提示(保存成功)和跳转
                 localStorage.removeItem("EditorPage")
+                alert('发布成功')
                 window.location.replace('../MainPage.html')
                 console.log('22')
             })

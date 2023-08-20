@@ -1,6 +1,9 @@
 package servlet;
 
-import bean.*;
+import bean.Articles;
+import bean.Column_article;
+import bean.Label_article;
+import bean.User;
 import com.google.gson.Gson;
 import org.apache.ibatis.session.SqlSession;
 import tool.ObtainSqlSession;
@@ -16,8 +19,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ArticlesTest {
@@ -771,5 +772,20 @@ public class ArticlesTest {
         // 将 JSON 字符串写入响应
         resp.getWriter().write(avatar1);
     }
+    //用户删除自己的文章
+    public static void DeleteArticlesByArticle_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String article_id= req.getParameter("article_id");
+        Map<String, Object> params = new HashMap<>();
+        params.put("article_id", article_id);
+        System.out.println(article_id);
+        SqlSession sqlSession = ObtainSqlSession.obtainSqlSession();
 
+        int result=sqlSession.delete("DeleteArticlesByArticle_id",params);
+        //提交事务
+        sqlSession.commit();
+        //处理结果
+        System.out.println("删除文章："+result);
+        //释放资源
+        sqlSession.close();
+    }
 }

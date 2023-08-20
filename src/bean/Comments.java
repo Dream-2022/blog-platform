@@ -14,13 +14,14 @@ public class Comments {
     private int up_level;
     private int num;
     private int receiver_id;
+    private String receiver_nickname;
     private Date create_at;
 
 
     public Comments() {
     }
 
-    public Comments(int id, String article_id, int user_id, String content, String nickname, String picture, String articleTitle, int up_level, int num, int receiver_id, Date create_at) {
+    public Comments(int id, String article_id, int user_id, String content, String nickname, String picture, String articleTitle, int up_level, int num, int receiver_id, String receiver_nickname, Date create_at) {
         this.id = id;
         this.article_id = article_id;
         this.user_id = user_id;
@@ -31,6 +32,7 @@ public class Comments {
         this.up_level = up_level;
         this.num = num;
         this.receiver_id = receiver_id;
+        this.receiver_nickname = receiver_nickname;
         this.create_at = create_at;
     }
 
@@ -90,6 +92,14 @@ public class Comments {
         this.articleTitle = articleTitle;
     }
 
+    public String getReceiver_nickname() {
+        return receiver_nickname;
+    }
+
+    public void setReceiver_nickname(String receiver_nickname) {
+        this.receiver_nickname = receiver_nickname;
+    }
+
     public int getUser_id() {
         return user_id;
     }
@@ -125,16 +135,17 @@ public class Comments {
     @Override
     public String toString() {
         return "Comments{" +
-                "id=" + id + '\'' +
+                "id=" + id +
                 ", article_id='" + article_id + '\'' +
                 ", user_id=" + user_id +
                 ", content='" + content + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", picture='" + picture + '\'' +
                 ", articleTitle='" + articleTitle + '\'' +
-                ", up_level=" + up_level + '\'' +
-                ", num=" + num + '\'' +
-                ", receiver_id=" + receiver_id + '\'' +
+                ", up_level=" + up_level +
+                ", num=" + num +
+                ", receiver_id=" + receiver_id +
+                ", receiver_nickname='" + receiver_nickname + '\'' +
                 ", create_at=" + create_at +
                 '}';
     }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Mapper">
+    <select id="selectDistinctIds" resultType="int">
+        SELECT DISTINCT CASE
+        WHEN receiver_id = #{id} THEN sender_id
+        WHEN sender_id = #{id} THEN receiver_id
+        END AS target_id
+        FROM message
+        WHERE receiver_id = #{id} OR sender_id = #{id};
+    </select>
+    <select id="selectMessageList" resultType="int">
+        SELECT *
+        FROM message
+        WHERE
+        (receiver_id = #{receiver_id} AND sender_id = #{sender_id})
+        OR
+        (receiver_id = #{sender_id} AND sender_id = #{receiver_id});
+    </select>
+<!--    selectMessagesBySender_idAndReceiver_id-->
+    <select id="selectMessagesBySender_idAndReceiver_id" resultType="bean.Message">
+        SELECT *
+        FROM message
+        WHERE (receiver_id = #{receiver_id} AND sender_id = #{sender_id})
+        OR (receiver_id = #{sender_id} AND sender_id = #{receiver_id})
+    </select>
+<!--    insertMessage-->
+    <insert id="insertMessage" parameterType="map">
+        INSERT INTO message (receiver_id, sender_id, time, content) VALUES (#{receiver_id},#{sender_id},#{time}, #{content})
+    </insert>
+</mapper>

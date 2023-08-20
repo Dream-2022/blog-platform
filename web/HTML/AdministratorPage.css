@@ -21,7 +21,7 @@
     /*border-radius: 24px;*/
     cursor: pointer;
     outline: none;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 select {
     padding: 8px;
@@ -119,6 +119,12 @@ select {
     display: none;
 
 }
+.table-report-id{
+    display: none;
+}
+.table-report-id{
+    display: none;
+}
 .noSearch2{
     font-size: 18px;
     justify-items: center;
@@ -136,7 +142,7 @@ select {
 .table  .unAccessUser{
     background-color: #d29f9f;
     padding: 5px 10px;
-    margin-left: 19px;
+    margin-left: 11px;
     cursor: pointer;
 }
 /*返回*/

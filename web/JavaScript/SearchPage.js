@@ -28,7 +28,7 @@ function addArticles(content){
                             <td rowspan="2"><img src=${item.avatar} class="content-image" alt=""></td>
                             <td>
                                 <h3>${item.title}</h3>
-                                <span class="content-span">${item.plainText}</span>
+                                <span class="content-span">${item.textarea}</span>
                             </td>
                         </tr>
                         <tr>
@@ -254,7 +254,7 @@ document.querySelector('.search-label').addEventListener('click',function (){
                                 <td rowspan="2"><img src=${item.avatar} class="content-image" alt=""></td>
                                 <td>
                                     <h3>${item.title}</h3>
-                                    <span class="content-span">${item.plainText}</span>
+                                    <span class="content-span">${item.textarea}</span>
                                 </td>
                             </tr>
                             <tr>

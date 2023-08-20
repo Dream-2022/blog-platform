@@ -207,4 +207,12 @@ public class DistributeArticles extends BaseServletArticles{
         resp.setHeader("content-type","text/html;charset=UTF-8");
         ArticlesTest.selectArticlesByUser_idForAdmin(req,resp);
     }
+    //用户自己删除文章
+    public void DeleteArticlesByArticle_id(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("HttpServletRequest req, HttpServletResponse resp.java");
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.setHeader("content-type","text/html;charset=UTF-8");
+        ArticlesTest.DeleteArticlesByArticle_id(req,resp);
+    }
 }

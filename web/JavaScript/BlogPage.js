@@ -10,6 +10,24 @@ let collectId;//收藏id
 //打开页面时，将文章信息导入
 //还有从articles表中读出点赞数，收藏数，浏览量
 //作者名得改成文章作者（通过user_id从user表中拿数据）
+const styleSheets = document.styleSheets;
+
+// 遍历样式表(删除背景样式)
+for (const styleSheet of styleSheets) {
+    // 获取样式表中的规则
+    const rules = styleSheet.rules || styleSheet.cssRules;
+
+    // 遍历规则
+    for (const rule of rules) {
+        // 判断是否是 body::before 这个选择器
+        if (rule.selectorText === 'body::before') {
+            // 删除该选择器的样式（方法一）
+            styleSheet.deleteRule(rule);
+            // 或者将该选择器的样式设置为空字符串（方法二）
+            // rule.style.cssText = '';
+        }
+    }
+}
 window.addEventListener('DOMContentLoaded', function() {
     //从likes表查找该用户是否点赞(通过user_id,article_id查找是否存在）
     let article_id=localStorage.getItem("key")
@@ -23,75 +41,94 @@ window.addEventListener('DOMContentLoaded', function() {
             article_id
         }
     }).then(result => {
-            console.log("Blog/Articles/BlogTest:"+result);
-            articles=result.data;
+        console.log("Blog/Articles/BlogTest:"+result);
+        articles=result.data;
 
-            // 进行后续处理，根据实际需求操作--------------从数据库中拿article_id对应的文章（修改）
-            for (let articlesKey in articles) {
-                if(articles[articlesKey].id===key){
-                    blog=articles[articlesKey];
-                    console.log(blog)
-                    console.log("找到了")
-                    console.log(blog)
-                    console.log(blog.title)
+        // 进行后续处理，根据实际需求操作--------------从数据库中拿article_id对应的文章（修改）
+        for (let articlesKey in articles) {
+            if(articles[articlesKey].id===key){
+                blog=articles[articlesKey];
+                console.log(blog)
+                console.log("找到了")
+                console.log(blog)
+                console.log(blog.title)
 
-                    viewCount=blog.view
-                    console.log("blog.view:"+blog.view)
-                    console.log("blog.give:"+blog.give)
-                    console.log("viewCount:"+viewCount)
+                viewCount=blog.view
+                console.log("blog.view:"+blog.view)
+                console.log("blog.give:"+blog.give)
+                console.log("viewCount:"+viewCount)
 
-                    //打开页面之后让浏览量自增
-                    console.log("viewCount:"+viewCount)
-                    view=parseInt(viewCount)+1
-                    console.log("parseInt(viewCount)+1:"+parseInt(viewCount)+1)
+                //打开页面之后让浏览量自增
+                console.log("viewCount:"+viewCount)
+                view=parseInt(viewCount)+1
+                console.log("parseInt(viewCount)+1:"+parseInt(viewCount)+1)
 
-                    console.log("article_id"+article_id+";view"+view)
-                    console.log(viewCount)
-                    axios({
-                        url:'/Blog/Articles/giveView',
-                        method: 'post',
-                        params:{
-                            id:article_id,
-                            view
-                        }
-                    }).then(result=>{
-                        console.log(result)
-                        console.log("新增浏览量结果："+result.data);
-                    })
-
-                    //如果文章状态不是’发布‘，就禁用点赞和收藏
-                    if(blog.state!=='发布'){
-                        let divElementGive=document.querySelector('.detail-give')
-                        let divElementCollect=document.querySelector('.detail-collect')
-                        divElementGive.removeAttribute('onclick');
-                        outlineCollectElement.setAttribute('data-bs-toggle', null);
+                console.log("article_id"+article_id+";view"+view)
+                console.log(viewCount)
+                axios({
+                    url:'/Blog/Articles/giveView',
+                    method: 'post',
+                    params:{
+                        id:article_id,
+                        view
                     }
+                }).then(result=>{
+                    console.log(result)
+                    console.log("新增浏览量结果："+result.data);
+                })
 
-                    document.querySelector('.content-title ').innerHTML=blog.title
-                    document.querySelector('.content-author').innerHTML=localStorage.getItem("nickname")
-                    let time=blog.update_at
-                    // 将字符串解析为Date对象
-                    let date = new Date(time);
-                    // 定义日期格式化选项
-                    let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-                    // 格式化日期
-                    let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
-                    console.log(formattedDate); // 输出：2023/07/10
-                    document.querySelector('.content-time').innerHTML='发布于'+formattedDate
-                    document.querySelector('.content-view').innerHTML=view
-                    console.log("blog.give:"+blog.give)
-                    document.querySelector('.content-give').innerHTML=blog.give
-                    document.querySelector('.article-give').innerHTML=blog.give
+                //如果文章状态不是’发布‘，就禁用点赞和收藏
+                // if(blog.state!=='发布'){
+                //     let divElementGive=document.querySelector('.detail-give')
+                //     let divElementCollect=document.querySelector('.detail-collect')
+                //     divElementGive.removeAttribute('onclick');
+                //     outlineCollectElement.setAttribute('data-bs-toggle', null);
+                // }
+
+                document.querySelector('.content-title ').innerHTML=blog.title
+
+                document.querySelector('.content-author').innerHTML=localStorage.getItem("nickname")
+                console.log(blog.user_id)
+                console.log(blog)
+                document.querySelector('.content-author-id ').innerHTML=blog.user_id
+                let time=blog.update_at
+                // 将字符串解析为Date对象
+                let date = new Date(time);
+                // 定义日期格式化选项
+                let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+                // 格式化日期
+                let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
+                console.log(formattedDate); // 输出：2023/07/10
+                document.querySelector('.content-time').innerHTML='发布于'+formattedDate
+                document.querySelector('.content-view').innerHTML=view
+                console.log("blog.give:"+blog.give)
+                document.querySelector('.content-give').innerHTML=blog.give
+                document.querySelector('.article-give').innerHTML=blog.give
+                if(blog.state==='发布'){
+                    document.querySelector('.content-state').innerHTML='公开'
+                }
+                else{
                     document.querySelector('.content-state').innerHTML=blog.state
-                    document.querySelector('.content-content').innerHTML=blog.htmlText
-                    likeCount=blog.give
-                    collectCount=blog.collect
+                }
+                document.querySelector('.content-content').innerHTML=blog.htmlText
+                likeCount=blog.give
+                collectCount=blog.collect
 
-                    console.log("likeCount:"+likeCount+"collectCount:"+collectCount)
+                //渲染举报弹窗
+                document.querySelector('.report-title').innerHTML='<em>"'+blog.title+'"</em>'
+                document.querySelector('.report-article_id').innerHTML=blog.id
+                document.querySelector('.report-user_id').innerHTML=blog.user_id
+                console.log("likeCount:"+likeCount+"collectCount:"+collectCount)
+
+                console.log(document.querySelector('.content-state').innerHTML)
+                if(document.querySelector('.content-state').innerHTML!='公开'){
+                    document.querySelector('.outline-box').style.display='none'
+                    document.querySelector('.comment-ccc').style.display='none'
                 }
             }
+        }
 
-        })
+    })
         .catch(error => {
             console.error(error);
         });
@@ -130,7 +167,8 @@ window.addEventListener('DOMContentLoaded', function() {
             user_id,
             article_id
         }
-    }).then(result=>{
+    })
+        .then(result=>{
         console.log(result)
         console.log(result.data)
         console.log(result.data.success)
@@ -145,9 +183,9 @@ window.addEventListener('DOMContentLoaded', function() {
             collectCount=result.data.count
 
             //将点赞处的状态改为已收藏
-             isCollected=!isCollected;
-             document.querySelector(".outline-collect").innerHTML='<i class="star icon"></i>收藏'
-             collectElement.classList.add("collected");
+            isCollected=!isCollected;
+            document.querySelector(".outline-collect").innerHTML='<i class="star icon"></i>收藏'
+            collectElement.classList.add("collected");
 
             outlineCollectElement.setAttribute('data-bs-toggle', null);
         }
@@ -163,7 +201,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             article_id
         }
-    }).then(result=>{
+    })
+        .then(result=>{
         console.log(result)
         console.log(result.data)
 
@@ -185,7 +224,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             article_id
         }
-    }).then(result=>{
+    })
+        .then(result=>{
         console.log(result)
         console.log(result.data)
 
@@ -207,13 +247,15 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             article_id
         }
-    }).then(result=>{
+    })
+        .then(result=>{
         console.log(result)
         console.log(result.data)
         console.log("作者："+result.data.nickname);
         document.querySelector('.content-author').innerHTML=result.data.nickname
         document.querySelector('.detail-author-nickname').innerHTML=result.data.nickname
         document.querySelector('.detail-author-id').innerHTML=result.data.id
+        document.querySelector('.content-author-id ').innerHTML=result.data.id
         console.log("result:"+result.data.picture)
         if(result.data.picture!==null){
             console.log("result:"+result.data.picture)
@@ -228,7 +270,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             user_id
         }
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data);
         const collects = result.data;
@@ -280,7 +323,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             article_id
         }
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data)
         document.querySelector('.article-comment').innerHTML=result.data
@@ -288,6 +332,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     const constPicture=localStorage.getItem('picture')
     document.querySelector('.comment-avatar').src='/upload/'+constPicture
+
+
+    //从数据库选择一级评论,然后往下面找到他的子级评论，如果是回复加上@用户名
+
+
     //创建评论盒子
     function createComment(commentBoxContain,item,picture,nickname,id){
 
@@ -308,8 +357,10 @@ window.addEventListener('DOMContentLoaded', function() {
                                 <img src=${picture} class="comment-box-avatar" alt="">
                             </div>
                             <div class="left">
-                                <span class="comment-nickname">${nickname}</span><br>
+                                <span class="comment-nickname">${nickname}</span>
+                                <span class="comment-reply-nickname"></span><br>
                                 <span class="comment-element">${item.content}</span><br>
+                                <span class="comment-comment_id">${item.id}</span>
                                 <span class="comment-wen">发布于</span>
                                 <span class="comment-time">${formattedDate}</span>
                                 <span class="comment-id">${id}</span>
@@ -318,7 +369,7 @@ window.addEventListener('DOMContentLoaded', function() {
                                 <span class="comment-reply">回复</span>
                             </div>
                         </div>
-                        
+
                         <div class="comment-containBox"></div>
 
                         <div class="up_level-box"></div>
@@ -326,8 +377,23 @@ window.addEventListener('DOMContentLoaded', function() {
 
         const tempDiv = document.createElement('div');
         tempDiv.classList.add('comment-boxes')
-        let marginLeft=40
-        let widthBox=830-(item.num-1)*40
+
+        let marginLeft
+        if(item.num===1){
+            marginLeft=0
+        }
+        else if(item.num===2){
+            marginLeft=40
+        }else{
+            marginLeft=0
+        }
+        let widthBox
+        if(item.num===1){
+            widthBox=790
+        }
+        else{
+            widthBox=790-40
+        }
         tempDiv.style.marginLeft=marginLeft+'px'
         tempDiv.innerHTML = htmlContent;
 
@@ -336,18 +402,27 @@ window.addEventListener('DOMContentLoaded', function() {
         const commentReplyBox = tempDiv.querySelector('.comment-reply');
         // 将评论框内容插入comment-box-contain中
         commentBoxContain.appendChild(tempDiv);
+        console.log(document.querySelector('.content-author-id').innerHTML)
+        console.log(item.receiver_id)
+        console.log(document.querySelector('.content-author-id').innerHTML!=item.receiver_id)
+        if(document.querySelector('.content-author-id').innerHTML!=item.receiver_id){
+            tempDiv.querySelector('.comment-reply-nickname').innerHTML=`回复 ${item.receiver_nickname}`
+        }
         // 如果是九级评论，就将回复隐藏
         console.log('commentContent.num'+item.num)
-        if(item.num===9){
-            tempDiv.querySelector('.comment-reply').style.display='none'
-        }
+        // if(item.num===9){
+        //     tempDiv.querySelector('.comment-reply').style.display='none'
+        // }
 
         tempDiv.querySelector('.comment-box').style.width=widthBox+'px'
 
         document.querySelector('.comment-ccc').style.display='none'
 
 
-        function ReplyBox(tempDiv){
+
+
+        //回复
+        function ReplyBox(tempDiv,comment_id,num){
             let constPicture=localStorage.getItem('picture')
             if(constPicture===''){
                 constPicture="../image/headSculpture.jpeg"
@@ -361,8 +436,9 @@ window.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="comment-form">
                         <div class="comment-wrapper">
+                            <div class="comment-id"></div>
                              <textarea class="comment_content" placeholder="请输入回复" maxlength="100"></textarea>
-                          
+
                         </div>
                         <div class="comment-content2">
                             <span class="comment-wen">可输入&nbsp100&nbsp个字符</span>
@@ -371,23 +447,7 @@ window.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
             const commentReplyTextareaBox=tempDiv.querySelector('.comment-containBox')
-            // //监听区域的字数
-            // const commentContentccc = tempDiv.querySelector('.comment-containBox')
-            // const commentContentcc=commentContentccc.querySelector('.comment_content')
-            //
-            // if(commentContentcc){
-            //     console.log('进去1')
-            //     const commentContentc=commentContentccc.querySelector('.comment-form')
-            //     const commentContent=commentContentc.querySelector('.comment-wrapper')
-            //     commentContentcc.addEventListener('input', function() {
-            //         console.log('进去2')
-            //         const inputText = commentContentcc.value;
-            //         const inputLength = 100-inputText.length;
-            //         console.log(inputLength)
-            //
-            //         commentContentcc.querySelector('.comment-count').innerHTML = inputLength+'';
-            //     });
-            // }
+
 
             //原有的内容是否为空（评论区）
             if(commentReplyTextareaBox.innerHTML==='') {
@@ -409,8 +469,8 @@ window.addEventListener('DOMContentLoaded', function() {
                         let receiver_id=commentCommentBox.querySelector('.comment-id').innerHTML
                         let user_id=localStorage.getItem('id')
                         let content=commentContent.value
-                        let num=item.num+1
-                        let up_level=item.id
+                        num++;
+                        let up_level=comment_id
                         console.log("receiver_id:"+receiver_id+'article_id:'+article_id+"user_id:"+user_id+'content：'+content+'num:'+num+'up_level:'+up_level)
                         axios({
                             url:'/Blog/Comments/insertComments',
@@ -430,13 +490,18 @@ window.addEventListener('DOMContentLoaded', function() {
                             let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
                             let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
+                            let Picture='/upload/'+localStorage.getItem('picture')
+                            let Nickname=localStorage.getItem('nickname')
                             const htmlContent1 = `
                                 <div class="comment-box">
                                     <div class="left">
-                                        <img src=${picture} class="comment-box-avatar" alt="">
+                                        <img src=${Picture} class="comment-box-avatar" alt="">
                                     </div>
                                     <div class="left">
-                                        <span class="comment-element">${commentContent.content}</span><br>
+                                        <span class="comment-nickname">${Nickname}</span>
+                                        <span class="comment-reply-nickname"></span><br>
+                                        <span class="comment-element">${commentContent.content}</span>
+                                        <span class="comment-comment_id">${commentContent.id}</span><br>
                                         <span class="comment-wen">发布于</span>
                                         <span class="comment-time">${formattedDate}</span>
                                         <span class="comment-id">${id}</span>
@@ -445,27 +510,52 @@ window.addEventListener('DOMContentLoaded', function() {
                                         <span class="comment-reply">回复</span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="comment-containBox"></div>
-        
+
                                 <div class="up_level-box"></div>
                              `;
 
                             const tempDiv1 = document.createElement('div');
                             tempDiv1.classList.add('comment-boxes')
-                            let marginLeft=40
-                            let widthBox=830-(commentContent.num-1)*40
+
+                            let marginLeft
+                            if(commentContent.num===1){
+                                marginLeft=0
+                            }
+                            else if(commentContent.num===2){
+                                marginLeft=40
+                            }else{
+                                marginLeft=0
+                            }
+                            console.log(commentContent.num)
+                            let widthBox
+                            if(commentContent.num===1){
+                                widthBox=790
+                            }
+                            else{
+                                widthBox=790-40
+                            }
                             tempDiv1.style.marginLeft=marginLeft+'px'
                             tempDiv1.innerHTML = htmlContent1;
                             const commentBoxContain1=tempDiv.querySelector('.up_level-box')
                             commentBoxContain1.appendChild(tempDiv1);
 
+                            console.log(document.querySelector('.content-author-id').innerHTML)
+                            console.log(item)
+                            console.log(item.receiver_id)
+                            console.log(document.querySelector('.content-author-id').innerHTML!=item.receiver_id)
+
+                            if(document.querySelector('.content-author-id').innerHTML!=item.receiver_id){
+                                tempDiv1.querySelector('.comment-reply-nickname').innerHTML=`回复 ${item.receiver_nickname}`
+                            }
+
                             tempDiv1.querySelector('.comment-box').style.width=widthBox+'px'
                             // 如果是九级评论，就将回复隐藏
                             console.log('commentContent.num'+commentContent.num)
-                            if(commentContent.num===9){
-                                tempDiv1.querySelector('.comment-reply').style.display='none'
-                            }
+                            // if(commentContent.num===9){
+                            //     tempDiv1.querySelector('.comment-reply').style.display='none'
+                            // }
                             //接着将评论框区域删除
                             commentContent.innerHTML=''
                             const commentReplyBox = tempDiv1.querySelector('.comment-reply');
@@ -473,7 +563,8 @@ window.addEventListener('DOMContentLoaded', function() {
                             //添加回复事件
                             commentReplyBox.addEventListener('click',event=>{
                                 console.log('点击')
-                                ReplyBox(tempDiv1)
+                                console.log(commentContent.id)
+                                ReplyBox(tempDiv1,commentContent.id,commentContent.num)
                             })
                         })
                     }
@@ -484,7 +575,8 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         }
         commentReplyBox.addEventListener('click',event=>{
-            ReplyBox(tempDiv)
+            console.log(item.id)
+            ReplyBox(tempDiv,item.id,item.num)
 
         })
         //设置点击回复和输入框之外的部分，将评论区删除
@@ -498,7 +590,6 @@ window.addEventListener('DOMContentLoaded', function() {
                     item.innerHTML=''
                 }
             })
-
         })
 
 
@@ -552,7 +643,8 @@ window.addEventListener('DOMContentLoaded', function() {
         params:{
             article_id
         }
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data)
         result.data.forEach(item=>{
@@ -576,6 +668,9 @@ window.addEventListener('DOMContentLoaded', function() {
 
         })
     })
+
+
+
 });
 
 //添加一级评论
@@ -583,75 +678,79 @@ document.querySelector('.comment-confirm1').addEventListener('click',function ()
     const tempDiv=document.querySelector('.comment-contain')
     const commentConfirm=tempDiv.querySelector('.comment-confirm1')
 
-        console.log('点击commentConfirm')
-        const commentContent = tempDiv.querySelector('.comment_content1')
-        console.log('内容：' + commentContent.value)
-        if (commentContent.value !== '') {
-            //提交事件给后端，新增评论
-            const commentCommentBox = tempDiv.querySelector('.comment-box')
-            let article_id = localStorage.getItem('key')
-            //通过文章id找到作者
+    console.log('点击commentConfirm')
+    const commentContent = tempDiv.querySelector('.comment_content1')
+    console.log('内容：' + commentContent.value)
+    if (commentContent.value !== '') {
+        //提交事件给后端，新增评论
+        const commentCommentBox = tempDiv.querySelector('.comment-box')
+        let article_id = localStorage.getItem('key')
+        //通过文章id找到作者
+        axios({
+            url: '/Blog/Articles/selectArticlesUserIdByArticleId',
+            params: {
+                article_id
+            }
+        }).then(result => {
+            console.log(result)
+            console.log(result.data)
+            let receiver_id = result.data.id
+            let user_id = localStorage.getItem('id')
+            let content = commentContent.value
+            let num =  1
+            let up_level = -1
+            console.log("receiver_id:" + receiver_id + 'article_id:' + article_id + "user_id:" + user_id + 'content：' + content + 'num:' + num + 'up_level:' + up_level)
             axios({
-                url: '/Blog/Articles/selectArticlesUserIdByArticleId',
+                url: '/Blog/Comments/insertComments',
+                method: 'post',
                 params: {
-                    article_id
+                    receiver_id, article_id, user_id, content, num, up_level
                 }
-            }).then(result => {
-                console.log(result)
-                console.log(result.data)
-                let receiver_id = result.data.id
-                let user_id = localStorage.getItem('id')
-                let content = commentContent.value
-                let num =  1
-                let up_level = -1
-                console.log("receiver_id:" + receiver_id + 'article_id:' + article_id + "user_id:" + user_id + 'content：' + content + 'num:' + num + 'up_level:' + up_level)
+            }).then(Result => {
+                console.log(Result)
+                const id=localStorage.getItem('id')
+                console.log(id)
+                //从user表找到头像
                 axios({
-                    url: '/Blog/Comments/insertComments',
+                    url: '/Blog/user/selectUserById',
                     method: 'post',
                     params: {
-                        receiver_id, article_id, user_id, content, num, up_level
+                        id
                     }
-                }).then(Result => {
+                }).then(result1 => {
+                    console.log(result1)
+                    console.log(result1.data)
+                    insertBox(result1,Result)
+                })
+                function insertBox(result1,Result){
+                    let picture
+                    console.log(result1)
+                    if(result1.data.picture===''){
+                        picture='../image/headSculpture.jpeg'
+                    }
+                    else{
+                        picture='/upload/'+result1.data.picture
+                    }
                     console.log(Result)
-                    const id=localStorage.getItem('id')
-                    console.log(id)
-                    //从user表找到头像
-                    axios({
-                        url: '/Blog/user/selectUserById',
-                        method: 'post',
-                        params: {
-                            id
-                        }
-                    }).then(result1 => {
-                        console.log(result1)
-                        console.log(result1.data)
-                        insertBox(result1,Result)
-                    })
-                    function insertBox(result1,Result){
-                        let picture
-                        console.log(result1)
-                        if(result1.data.picture===''){
-                            picture='../image/headSculpture.jpeg'
-                        }
-                        else{
-                            picture='/upload/'+result1.data.picture
-                        }
-                        console.log(Result)
-                        console.log(Result.data)
-                        let commentContentzzz = Result.data
-                        //将刚刚评论的加到页面上，将评论框删除
-                        let time = commentContentzzz.create_at;
-                        let date = new Date(time);
-                        let options = {year: 'numeric', month: '2-digit', day: '2-digit'};
-                        let id = localStorage.getItem('id')
-                        let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
-                        const htmlContent1 = `
+                    console.log(Result.data)
+                    let commentContentzzz = Result.data
+                    //将刚刚评论的加到页面上，将评论框删除
+                    let time = commentContentzzz.create_at;
+                    let date = new Date(time);
+                    let options = {year: 'numeric', month: '2-digit', day: '2-digit'};
+                    let id = localStorage.getItem('id')
+                    let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
+                    let nickname=localStorage.getItem('nickname')
+                    const htmlContent1 = `
                                 <div class="comment-box">
                                     <div class="left">
                                         <img src='${picture}' class="comment-box-avatar" alt="">
                                     </div>
                                     <div class="left">
+                                        <span class="comment-nickname">${nickname}</span>
+                                        <span class="comment-reply-nickname"></span><br>
                                         <span class="comment-element">${commentContentzzz.content}</span><br>
+                                        <span class="comment-comment_id">${commentContentzzz.id}</span>
                                         <span class="comment-wen">发布于</span>
                                         <span class="comment-time">${formattedDate}</span>
                                         <span class="comment-id">${id}</span>
@@ -660,30 +759,187 @@ document.querySelector('.comment-confirm1').addEventListener('click',function ()
                                         <span class="comment-reply">回复</span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="comment-containBox"></div>
-        
+
                                 <div class="up_level-box"></div>
                              `;
 
-                        const tempDiv1 = document.createElement('div');
-                        tempDiv1.classList.add('comment-boxes')
-                        tempDiv1.innerHTML = htmlContent1;
+                    const tempDiv1 = document.createElement('div');
+                    tempDiv1.classList.add('comment-boxes')
+                    tempDiv1.innerHTML = htmlContent1;
 
-                        const commentBoxContain1 = document.querySelector('.comment-box-contain')
-                        commentBoxContain1.appendChild(tempDiv1);
-                        tempDiv1.style.marginLeft='40px'
-                        //接着将评论框区域删除
-                        commentContent.innerHTML = ''
-                        commentContent.value = '';
+                    const commentBoxContain1 = document.querySelector('.comment-box-contain')
+                    commentBoxContain1.appendChild(tempDiv1);
+                    //接着将评论框区域删除
+                    commentContent.innerHTML = ''
+                    commentContent.value = '';
 
-                        const commentContentCount = document.querySelector('.comment-count1')
-                        commentContentCount.innerHTML=100
+                    const commentContentCount = document.querySelector('.comment-count1')
+                    commentContentCount.innerHTML=100
+                    console.log('715行')
+                    function ReplyBox(tempDiv1,comment_id,num){
+                        let constPicture=localStorage.getItem('picture')
+                        if(constPicture===''){
+                            constPicture="../image/headSculpture.jpeg"
+                        }
+                        else{
+                            constPicture='/upload/'+constPicture
+                        }
+                        const commentReplyBox=document.createElement('div')
+                        const commentReplyContent=`
+                                <div class="user-img">
+                                    <img src='${constPicture}' class="comment-avatar" alt="">
+                                </div>
+                                <div class="comment-form">
+                                    <div class="comment-wrapper">
+                                        <div class="comment-id"></div>
+                                         <textarea class="comment_content" placeholder="请输入回复" maxlength="100"></textarea>
+
+                                    </div>
+                                    <div class="comment-content2">
+                                        <span class="comment-wen">可输入&nbsp100&nbsp个字符</span>
+                                        <input type="submit" class="comment-confirm" value="评论">
+                                    </div>
+                                </div>
+                            `;
+
+                        //!!!!!!!没有新增盒子
+                        // commentReplyBox.innerHTML=commentReplyContent
+                        // tempDiv1.appendChild(commentReplyBox)
+                        const commentReplyTextareaBox=tempDiv1.querySelector('.comment-containBox')
+
+
+                        //原有的内容是否为空（评论区）
+                        console.log(commentReplyTextareaBox.innerHTML)
+                        if(commentReplyTextareaBox.innerHTML==='') {
+                            const commentReplyTextarea = document.createElement('div')
+                            commentReplyTextarea.innerHTML = commentReplyContent
+                            commentReplyTextarea.classList.add('comment-contain')
+                            commentReplyTextareaBox.appendChild(commentReplyTextarea)
+
+                            //点击评论事件（先判断评论输入的内容是否为空）
+                            const commentConfirm=tempDiv.querySelector('.comment-confirm')
+                            console.log(commentConfirm)
+                            commentConfirm.addEventListener('click',event=>{
+                                console.log('点击commentConfirm')
+                                const commentContent=tempDiv.querySelector('.comment_content')
+                                console.log('内容：'+commentContent.value)
+                                if(commentContent.value!=''){
+                                    //提交事件给后端，新增评论
+                                    const commentCommentBox=tempDiv.querySelector('.comment-box')
+                                    let article_id=localStorage.getItem('key')
+                                    let receiver_id=commentCommentBox.querySelector('.comment-id').innerHTML
+                                    let user_id=localStorage.getItem('id')
+                                    let content=commentContent.value
+                                    num++;
+                                    let up_level=comment_id
+                                    console.log("receiver_id:"+receiver_id+'article_id:'+article_id+"user_id:"+user_id+'content：'+content+'num:'+num+'up_level:'+up_level)
+                                    axios({
+                                        url:'/Blog/Comments/insertComments',
+                                        method: 'post',
+                                        params:{
+                                            receiver_id,article_id,user_id,content,num,up_level
+                                        }
+                                    }).then(Result=>{
+                                        console.log(Result)
+                                        console.log(Result.data)
+                                        let commentContent=Result.data
+
+
+                                        //将刚刚评论的加到页面上，将评论框删除
+                                        let time = commentContent.create_at;
+                                        let date = new Date(time);
+                                        let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+
+                                        let formattedDate = new Intl.DateTimeFormat('zh-CN', options).format(date);
+                                        const htmlContent1 = `
+                                            <div class="comment-box">
+                                                <div class="left">
+                                                    <img src=${picture} class="comment-box-avatar" alt="">
+                                                </div>
+                                                <div class="left">
+                                                    <span class="comment-nickname">${nickname}</span>
+                                                    <span class="comment-reply-nickname"></span><br>
+                                                    <span class="comment-element">${commentContent.content}</span>
+                                                    <span class="comment-comment_id">${commentContent.id}</span><br>
+                                                    <span class="comment-wen">发布于</span>
+                                                    <span class="comment-time">${formattedDate}</span>
+                                                    <span class="comment-id">${id}</span>
+                                                </div>
+                                                <div class="right">
+                                                    <span class="comment-reply">回复</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="comment-containBox"></div>
+
+                                            <div class="up_level-box"></div>
+                                         `;
+
+                                        const tempDiv1 = document.createElement('div');
+                                        tempDiv1.classList.add('comment-boxes')
+                                        let marginLeft
+                                        if(num===1){
+                                            marginLeft=0
+                                        }
+                                        else{
+                                            marginLeft=40
+                                        }
+
+                                        let   widthBox=790
+                                        tempDiv1.style.marginLeft=marginLeft+'px'
+                                        tempDiv1.innerHTML = htmlContent1;
+                                        const commentBoxContain1=tempDiv.querySelector('.up_level-box')
+                                        commentBoxContain1.appendChild(tempDiv1);
+
+
+                                        console.log(document.querySelector('.content-author-id').innerHTML)
+                                        console.log(document.querySelector('.content-author-id').innerHTML!=commentContent.receiver_id)
+
+                                        if(document.querySelector('.content-author-id').innerHTML!=commentContent.receiver_id){
+                                            tempDiv1.querySelector('.comment-reply-nickname').innerHTML=`回复 ${commentContent.receiver_nickname}`
+                                        }
+                                        tempDiv1.querySelector('.comment-box').style.width=widthBox+'px'
+                                        // tempDiv1.querySelector('.comment-reply-nickname').innerHTML=localStorage.getItem('nickname')
+                                        // 如果是九级评论，就将回复隐藏
+                                        console.log('commentContent.num'+commentContent.num)
+                                        console.log('commentContent'+widthBox)
+                                        console.log('commentContent'+tempDiv1.querySelector('.comment-box').style.width)
+                                    //    if(commentContent.num===9){
+                                    //        tempDiv1.querySelector('.comment-reply').style.display='none'
+                                    //    }
+                                        //接着将评论框区域删除
+                                        commentContent.innerHTML=''
+                                        const commentReplyBox = tempDiv1.querySelector('.comment-reply');
+                                        console.log(commentReplyBox)
+                                        //添加回复事件
+                                        commentReplyBox.addEventListener('click',event=>{
+                                            console.log('点击')
+                                            console.log(commentContent.id)
+                                            ReplyBox(tempDiv1,commentContent.id,commentContent.num)
+                                        })
+                                    })
+                                }
+                            })
+                        }
+                        else{
+                            commentReplyTextareaBox.innerHTML=''
+                        }
                     }
-                })
+//comment-confirm1
+                    const  commentReplyBox=document.querySelector('.comment-confirm1')
+                    console.log(commentReplyBox)
+                    commentReplyBox.addEventListener('click',event=>{
+                        console.log(commentContent.id)
+                        ReplyBox(tempDiv,commentContent.id,commentContent.num)
 
+                    })
+                }
             })
-        }
+
+        })
+    }
 })
 
 //监听区域的字数
@@ -707,6 +963,7 @@ document.querySelector('.detail-author').addEventListener('click',function (){
 //把点赞user_id,article_id，时间插入likes表
 //把articles表中的give字段+1
 function toggleLike() {
+
     var likeElement = document.querySelector(".detail-give");
     const user_id=localStorage.getItem("id")
     let article_id=localStorage.getItem("key")
@@ -786,11 +1043,11 @@ contentCollectList.addEventListener('click', function (){
             console.log(result.data);
             collectId=result.data
             document.querySelector('.prompt').innerHTML=`已收藏至 ${collectName}`
-             setTimeout(() => {
+            setTimeout(() => {
                 document.querySelector('.btn-close').click()
-                 document.querySelector('.prompt').innerHTML='&nbsp'
+                document.querySelector('.prompt').innerHTML='&nbsp'
                 // 这里可以执行进一步操作，比如将收藏夹名称发送到服务器或显示在页面上等等
-             }, 1000);
+            }, 1000);
 
             //设置收藏按钮处于点击状态
             document.querySelector(".outline-collect").innerHTML='<i class="star icon"></i>收藏'
@@ -811,53 +1068,53 @@ contentCollectList.addEventListener('click', function (){
 
 
 
-    const outlineCollectElement = document.querySelector('.outline-collect');
-    //如果处于收藏状态，继续点击为取消收藏
+const outlineCollectElement = document.querySelector('.outline-collect');
+//如果处于收藏状态，继续点击为取消收藏
+if(isCollected){
+    outlineCollectElement.setAttribute('data-bs-toggle', 'modal');
+    console.log("isCollected:"+isCollected)
+}
+
+const modal = document.querySelector(".my-box");
+document.querySelector('.detail-collect').addEventListener('click',function (event){
+
+    document.querySelector('.my-box').addEventListener('click', function (event) {
+        // Stop the event from propagating to parent elements (e.g., .detail-collect)
+        event.stopPropagation();
+
+    });
+    console.log("isCollected"+isCollected)
     if(isCollected){
+        collectCount--;
+        console.log('is'+isCollected)
+        const collectElement=document.querySelector('.detail-collect')
+        collectElement.classList.remove("collected");
+        document.querySelector(".outline-collect").innerHTML='<i class="star outline icon"></i>收藏'
+        isCollected = !isCollected;
+        document.querySelector(".article-collect").textContent = collectCount;
         outlineCollectElement.setAttribute('data-bs-toggle', 'modal');
-        console.log("isCollected:"+isCollected)
-    }
 
-    const modal = document.querySelector(".my-box");
-    document.querySelector('.detail-collect').addEventListener('click',function (event){
 
-        document.querySelector('.my-box').addEventListener('click', function (event) {
-            // Stop the event from propagating to parent elements (e.g., .detail-collect)
-            event.stopPropagation();
-
+        console.log("1111111:"+collectId+":"+key)
+        //接下来从数据库删除收藏的记录
+        axios({
+            url:'/Blog/CollectArticle/deleteCollectArticleByCollectIdAndArticleId',
+            params:{
+                collect_id:collectId,article_id:key
+            }
+        }).then(result => {
+            console.log(result)
+            console.log(result.data);
+        }) .catch(error => {
+            console.error(error);
         });
-        console.log("isCollected"+isCollected)
-         if(isCollected){
-            collectCount--;
-            console.log('is'+isCollected)
-            const collectElement=document.querySelector('.detail-collect')
-            collectElement.classList.remove("collected");
-            document.querySelector(".outline-collect").innerHTML='<i class="star outline icon"></i>收藏'
-            isCollected = !isCollected;
-            document.querySelector(".article-collect").textContent = collectCount;
-            outlineCollectElement.setAttribute('data-bs-toggle', 'modal');
-
-
-            console.log("1111111:"+collectId+":"+key)
-            //接下来从数据库删除收藏的记录
-             axios({
-                 url:'/Blog/CollectArticle/deleteCollectArticleByCollectIdAndArticleId',
-                 params:{
-                     collect_id:collectId,article_id:key
-                 }
-             }).then(result => {
-                 console.log(result)
-                 console.log(result.data);
-             }) .catch(error => {
-                 console.error(error);
-             });
-         }
-         else{
-             console.log("NO")
-             outlineCollectElement.setAttribute('data-bs-toggle', null);
-             document.querySelector('.detail-collect').click()
-         }
-    })
+    }
+    else{
+        console.log("NO")
+        outlineCollectElement.setAttribute('data-bs-toggle', null);
+        document.querySelector('.detail-collect').click()
+    }
+})
 
 
 
@@ -973,3 +1230,38 @@ document.querySelector('.detail-comment').addEventListener('click',function (eve
     }
 })
 
+
+//点击举报文章
+document.querySelector('.report-button').addEventListener('click',function (event){
+    event.defaultPrevented;
+    console.log('点击举报')
+    const user_id=localStorage.getItem('id')
+    const article_id=document.querySelector('.report-article_id').innerHTML
+    const receive_id=document.querySelector('.report-user_id').innerHTML
+    const report_content=document.querySelector('.report-content').value
+    console.log(report_content)
+    if(report_content!==''){
+        //传到后端
+        axios({
+            url:'/Blog/Reports/insertReports',
+            method: 'post',
+            params:{
+                user_id,
+                article_id,
+                receive_id,
+                report_content
+            }
+        }).then(result=>{
+            console.log(result)
+            console.log(result.data);
+
+            //清空举报框
+            document.querySelector(".report-content").value=''
+        })
+    }
+    else{
+        console.log('输入为空')
+        document.querySelector(".report-content").placeholder = "举报内容不能为空";
+    }
+
+})

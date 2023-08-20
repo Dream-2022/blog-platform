@@ -41,6 +41,16 @@ public class CommentTest {
         List<Comments> comments =sqlSession.selectList("selectCommentsByUp_level",params);
         System.out.println("comments:"+comments);
 
+        //通过receive_id找到receive_nickname传过去
+        for (Comments comment : comments) {
+            params.put("id",comment.getReceiver_id());
+            System.out.println("kkk"+params);
+            System.out.println(comment.getReceiver_id());
+            User user1=sqlSession.selectOne("selectUserById",params);
+            comment.setReceiver_nickname(user1.getNickname());
+            System.out.println("user1"+user1);
+        }
+
         //序列化传过去
         PrintWriter out=resp.getWriter();
         Gson gson=new Gson();
@@ -85,6 +95,13 @@ public class CommentTest {
             System.out.println(user);
             comment.setNickname(user.getNickname());
             comment.setPicture(user.getPicture());
+
+            params.put("id",comment.getReceiver_id());
+            System.out.println("kkk"+params);
+            System.out.println(comment.getReceiver_id());
+            User user1=sqlSession.selectOne("selectUserById",params);
+            comment.setReceiver_nickname(user1.getNickname());
+            System.out.println("user1"+user1);
 
             //找到article中的title
             params.remove("id");

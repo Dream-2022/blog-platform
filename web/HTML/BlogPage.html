@@ -149,16 +149,19 @@
     <nav>
         <ul>
             <li class="left"><i class="fire icon"></i>博客园</li>
-
-            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
-            <li><a href="MessagePage.html"><i class="bell icon"></i>消息</a></li>
             <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+            <li><a href="MessagePage.html"><i class="bell icon"></i>消息</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
 
 
             <li>
-                <input type="text" id="acc" class="search" placeholder="查询" name="search">
-                <label for="search-button"><i class="search icon" style="color: white"></i></label>
-                <input type="button" id="search-button" value="搜索">
+                <span class="searchNavigation">
+                    <input type="text" id="acc" class="search" placeholder="请输入关键词，查找文章" name="search">
+                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                    <input type="button" id="search-button" value="搜索">
+                </span>
+
             </li>
             <li>
                 <div class="content-container">
@@ -193,6 +196,7 @@
         <div class="container-title2">
             <span class="content-red">原创</span>
             <span class="content-author">作者</span>
+            <span class="content-author-id">作者</span>
             <span class="content-time">2023年7月17日09:08:17</span>
             <span><i class="eye icon"></i><span class="content-view">69</span></span>
             <span><i class="heart icon"></i><span class="content-give">8</span></span>
@@ -279,6 +283,40 @@
             <div class="detail-comment">
                 <span class="comment-style"><i class="comment outline icon outline-comment"></i>评论</span>
                 <span class="article-comment">2</span>
+            </div>
+            <div class="detail-report">
+                <span class="outline-collect" type="button" data-bs-toggle="modal" data-bs-target=".reportBox">文章涉及侵权内容?点击举报</span>
+
+                <!--    弹框标签-->
+                <!--    bootstrap的modal弹框：添加modal类名（默认隐藏）-->
+                <div class="modal reportBox" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">举报该文章</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="report-wen1">
+                                    <span class="report-title"><em>数据结构</em></span><span>&nbsp涉嫌抄袭？侵权？</span>
+                                    <span class="report-article_id"></span>
+                                    <span class="report-user_id"></span>
+                                </div>
+                                <div class="modal-content-report">
+                                    <span class="report-wen2">举报原因:</span><br>
+                                    <textarea class="report-content" placeholder="请填写举报原因"></textarea>
+                                </div>
+                            </div>
+                            <span class="prompt">&nbsp</span>
+                            <div class="report-footer">
+                                <button type="button" class="btn btn-secondary report-cancel" data-bs-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary report-button">确认</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
 
         </div>

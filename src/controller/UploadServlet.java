@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import tool.ImageWatermark;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,6 +26,7 @@ public class UploadServlet extends HttpServlet {
         // 设置请求字符集
         request.setCharacterEncoding("UTF-8");
 
+        String userid=request.getParameter("userid");
         // 获取上传的文件
         Part part = request.getPart("wangeditor-uploaded-image");
         String fileName=getFileName(part);
@@ -47,6 +49,7 @@ public class UploadServlet extends HttpServlet {
             // 将文件写入保存路径
             part.write(savePath);
             System.out.println(savePath);
+            ImageWatermark.setSY(savePath,"author_id:"+userid);
             // 返回上传成功信息
             System.out.println(path+fileName);
             Map<String,Object> data=new HashMap<>();

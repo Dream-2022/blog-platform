@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Page</title>
+    <!--  图标-->
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
+    <link rel="stylesheet" href="../HTML/Navigation.css">
+    <link rel="stylesheet" href="../HTML/Dropdown.css">
+    <link rel="stylesheet" href="../HTML/MessagePage.css">
+    <style>
+        .message-box-private{
+            display: flex;
+            justify-content: space-between;
+            height: 500px;
+        }
+        .message-box-private-left{
+            height: 500px;
+            width: 28%;
+            padding: 10px;
+            overflow-y:scroll;
+        }
+        .message-box1-search{
+            margin-bottom: 10px;
+        }
+        .message-box1-search-button{
+            margin-left: 141px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .message-box1-search-button i.icon{
+            margin: 0 0.5rem 0 18px;
+        }
+        .message-box1-search-button:hover{
+            color: #797979;
+        }
+        .message-box-private-right{
+            height: 500px;
+            width: 72%;
+            flex-direction:column
+        }
+        .message-box1-user{
+            padding: 3px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .user-headSculpture,
+        .message-box2-image{
+            width: 35px;
+            height: 35px;
+            margin-left: 10px;
+            border-radius: 20px;
+        }
+
+        .user-nickname{
+            line-height: 35px;
+            margin-left: 10px;
+        }
+        .message-box2-record{
+            height: 69%;
+            padding: 5px;
+            overflow-y:scroll;
+        }
+        .message-box2-sending{
+            height: 27%;
+            padding: 5px;
+            border-top:1px solid #868686;
+            position: relative;
+        }
+        .message-box2-input{
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+        .message-box2-user{
+            justify-content:center;
+            display: flex;
+            font-size: 16px;
+        }
+        .message-box2-content-left{
+            display: flex;
+            justify-content:flex-start;
+            margin-left: 30px;
+        }
+        .message-box2-content-right{
+            display: flex;
+            justify-content:flex-end;
+            margin-right: 30px;
+        }
+        .message-box2-time{
+            display: flex;
+            justify-content:center;
+            color: #6b6b6b;
+            font-size: 12px;
+        }
+        .message-box2-content1{
+            line-height: 35px;
+            display: inline-block;
+            margin-left: 10px;
+            background-color: #ececec;
+            border-radius: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .message-box2-content2{
+            line-height: 35px;
+            display: inline-block;
+            margin-left: 10px;
+            background-color: #c8f3be;
+            border-radius: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .message-box2-confirm{
+            background-color: #cccccc;
+            position: absolute;
+            right: 33px;
+            bottom: 10px;
+            padding: 5px 8px 5px 8px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<!--导航栏-->
+<header class="header-box">
+    <nav>
+        <ul>
+            <li class="left"><i class="fire icon"></i>博客园</li>
+            <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+            <li><a href="MessagePage.html"><i class="bell icon"></i>消息</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
+
+
+            <li>
+                <span class="searchNavigation">
+                    <input type="text" id="acc" class="search" placeholder="请输入关键词，查找文章" name="search">
+                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                    <input type="button" id="search-button" value="搜索">
+                </span>
+
+            </li>
+            <li>
+                <div class="content-container">
+                    <div class="text image-container">
+                        <img class="ui avatar image" id="headSculpture" src="../image/headSculpture.jpeg" alt="">
+                        <span class="nickname">未登录</span>
+                    </div>
+                    <!--下拉框-->
+                    <div class="content-dropdown">
+                        <div>
+                            <span class="Nickname">用户名</span>
+                            <span><a href="../HTML/Detail.html" class="Detail">个人中心</a></span>
+                            <span><a href="../HTML/MessagePage.html" class="Message">消息记录</a></span>
+                            <span><a href="../HTML/ContentPage.html" class="Content">内容管理</a></span>
+                            <span class="exit">退出登录</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="../HTML/EditorPage.html"><i class="location arrow icon"></i>发布</a></li>
+        </ul>
+
+
+    </nav>
+
+</header>
+<div class="box">
+    <div class="title">
+        <h4>消息中心</h4>
+    </div>
+    <div class="classification">
+        <span class="content-comment active">评论</span>
+        <span class="content-give">点赞</span>
+        <span class="content-collect">收藏</span>
+        <span class="content-fan">粉丝</span>
+        <span class="content-blog">博客</span>
+        <span class="content-private">私信</span>
+    </div>
+    <div class="message-content">
+
+        <div class="message-box-private">
+
+            <div class="message-box-private-left">
+                <div class="message-box1-search">
+                    <span class="message-box1-search-button"><i class="search icon"></i>搜索用户</span>
+                </div>
+                <div class="message-box1-users">
+                    <div class="message-box1-user">
+                        <div>
+                            <img src="../image/headSculpture.jpeg" class="user-headSculpture" alt="">
+                        </div>
+                        <div class="user-nickname">
+                            <span>昵称</span>
+                        </div>
+                    </div>
+                    <div class="message-box1-user">
+                        <div>
+                            <img src="../image/headSculpture.jpeg" class="user-headSculpture" alt="">
+                        </div>
+                        <div class="user-nickname">
+                            <span>昵称</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-box-private-right">
+<!--                <div class="message-box2-user"><div>正在和昵称聊天</div></div>-->
+<!--                <div class="message-box2-record">-->
+<!--                    <div class="message-box2-left">-->
+<!--                        <div class="message-box2-time">23.12.2 12:3:42</div>-->
+<!--                        <div class="message-box2-content-left">-->
+<!--                            <img src="../image/headSculpture.jpeg" class="message-box2-image" alt="">-->
+<!--                            <span class="message-box2-content1">123</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="message-box2-right">-->
+<!--                        <div class="message-box2-time">23.12.2 12:3:42</div>-->
+<!--                        <div class="message-box2-content-right">-->
+<!--                            <span class="message-box2-content2">123</span>-->
+<!--                            <img src="../image/headSculpture.jpeg" class="message-box2-image" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                <div class="message-box2-sending">-->
+<!--                    <textarea class="message-box2-input"-->
+<!--                              maxlength="200"-->
+<!--                              οnchange="this.value=this.value.substring(0, 200)"-->
+<!--                              οnkeydοwn="this.value=this.value.substring(0, 200)"-->
+<!--                              οnkeyup="this.value=this.value.substring(0, 200)"-->
+<!--                              placeholder="请输入……"></textarea>-->
+<!--                    <div class="message-box2-confirm">发送</div>-->
+<!--                </div>-->
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--发送请求时在响应头中加入token和longt-->
+<script src="../JavaScript/Identity.js"></script>
+<script>const token=localStorage.getItem('token')</script>
+<!--导航栏下拉框-->
+<script src="../JavaScript/Dropdown.js"></script>
+<!--渲染页面信息（登录之后存在localStorage）-->
+<script src="../JavaScript/Navigation.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

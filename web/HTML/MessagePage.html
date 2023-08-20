@@ -6,6 +6,8 @@
     <!--  图标-->
     <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
     <link rel="stylesheet" href="../HTML/Navigation.css">
+<!--    弹窗-->
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
     <link rel="stylesheet" href="../HTML/Dropdown.css">
     <link rel="stylesheet" href="../HTML/MessagePage.css">
 </head>
@@ -15,16 +17,19 @@
     <nav>
         <ul>
             <li class="left"><i class="fire icon"></i>博客园</li>
-
-            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
-            <li><a href="MessagePage.html"><i class="bell icon"></i>消息</a></li>
             <li><a href="../MainPage.html"><i class="home icon"></i>首页</a></li>
+
+            <li><a href="MessagePage.html"><i class="bell icon"></i>消息</a></li>
+            <li><a href="#"><i class="clipboard icon"></i>历史</a></li>
 
 
             <li>
-                <input type="text" id="acc" class="search" placeholder="查询" name="search">
-                <label for="search-button"><i class="search icon" style="color: white"></i></label>
-                <input type="button" id="search-button" value="搜索">
+                <span class="searchNavigation">
+                    <input type="text" id="acc" class="search" placeholder="请输入关键词，查找文章" name="search">
+                    <label for="search-button"><i class="search icon" style="color: white"></i></label>
+                    <input type="button" id="search-button" value="搜索">
+                </span>
+
             </li>
             <li>
                 <div class="content-container">
@@ -61,6 +66,7 @@
             <span class="content-collect">收藏</span>
             <span class="content-fan">粉丝</span>
             <span class="content-blog">博客</span>
+            <span class="content-private">私信</span>
         </div>
         <div class="message-content">
             <div class="message-box-fan">
@@ -145,6 +151,62 @@
 <!--                    </tr>-->
                 </table>
             </div>
+<!--            <div class="message-box-private">-->
+
+<!--                <div class="message-box-private-left">-->
+<!--                    <div class="message-box1-search">-->
+<!--                        <span class="message-box1-search-button"><i class="search icon"></i>搜索用户</span>-->
+<!--                    </div>-->
+<!--                    <div class="message-box1-users">-->
+<!--                        <div class="message-box1-user">-->
+<!--                            <div>-->
+<!--                                <img src="../image/headSculpture.jpeg" class="user-headSculpture" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="user-nickname">-->
+<!--                                <span>昵称</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="message-box1-user">-->
+<!--                            <div>-->
+<!--                                <img src="../image/headSculpture.jpeg" class="user-headSculpture" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="user-nickname">-->
+<!--                                <span>昵称</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="message-box-private-right">-->
+<!--                    <div class="message-box2-user"><div>正在和昵称聊天</div></div>-->
+<!--                    <div class="message-box2-record">-->
+<!--                        <div class="message-box2-left">-->
+<!--                            <div class="message-box2-time">23.12.2 12:3:42</div>-->
+<!--                            <div class="message-box2-content-left">-->
+<!--                                <img src="../image/headSculpture.jpeg" class="message-box2-image" alt="">-->
+<!--                                <span class="message-box2-content1">123</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="message-box2-right">-->
+<!--                            <div class="message-box2-time">23.12.2 12:3:42</div>-->
+<!--                            <div class="message-box2-content-right">-->
+<!--                                <span class="message-box2-content2">123</span>-->
+<!--                                <img src="../image/headSculpture.jpeg" class="message-box2-image" alt="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                    <div class="message-box2-sending">-->
+<!--                    <textarea class="message-box2-input"-->
+<!--                              maxlength="200"-->
+<!--                              οnchange="this.value=this.value.substring(0, 200)"-->
+<!--                              οnkeydοwn="this.value=this.value.substring(0, 200)"-->
+<!--                              οnkeyup="this.value=this.value.substring(0, 200)"-->
+<!--                              placeholder="请输入……"></textarea>-->
+<!--                        <div class="message-box2-confirm">发送</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -155,6 +217,9 @@
 <script src="../JavaScript/Dropdown.js"></script>
 <!--渲染页面信息（登录之后存在localStorage）-->
 <script src="../JavaScript/Navigation.js"></script>
+<!--弹窗-->
+<script src="../lib/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="../JavaScript/MessagePage.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -55,6 +55,12 @@ body{
 .message-box-give .blog-name{
     font-size: 16px;
 }
+.message-box-comment .blog-name,
+.message-box-comment .nickname
+{
+    font-size: 13px;
+    color: #696969;
+}
 
 .active{
     border-bottom: 2px solid #eacd9f;
@@ -66,6 +72,13 @@ body{
     font-size: 13px;
     color: #ccc;
 
+}
+.blog-article_title{
+    color: #cccccc;
+    font-size: 13px;
+}
+.blog-content{
+    font-size: 16px;
 }
 .message-box-blog .blog-name{
     font-size: 16px;
@@ -93,4 +106,175 @@ body{
 .comment-id,
 .fan-user_id{
     display: none;
+}
+
+
+/*私信*/
+ .message-box-private{
+     display: flex;
+     justify-content: space-between;
+     height: 500px;
+ }
+.message-box-private-left{
+    height: 500px;
+    width: 28%;
+    padding: 10px;
+    overflow-y:scroll;
+}
+.message-box1-search{
+    margin-bottom: 10px;
+}
+.message-box1-search-button{
+    margin-left: 127px;
+    cursor: pointer;
+    display: inline-block;
+}
+.message-box1-search-button i.icon{
+    margin: 0 0.5rem 0 18px;
+}
+.message-box1-search-button:hover{
+    color: #797979;
+}
+.message-box-private-right{
+    height: 500px;
+    width: 72%;
+    flex-direction:column
+}
+.message-box1-user{
+    padding: 3px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+.user-headSculpture,
+.message-box2-image{
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+.user-nickname{
+    line-height: 35px;
+    margin-left: 10px;
+}
+.message-box2-record{
+    height: 369px;
+    padding: 5px;
+    overflow-y:scroll;
+}
+.message-box2-sending{
+    height: 112px;
+    padding: 5px;
+    border-top:1px solid #868686;
+    position: relative;
+}
+.message-box2-input{
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+.message-box2-user{
+    justify-content:center;
+    display: flex;
+    font-size: 16px;
+}
+.message-box2-content-left{
+    display: flex;
+    justify-content:flex-start;
+    margin-left: 30px;
+}
+.message-box2-content-right{
+    display: flex;
+    justify-content:flex-end;
+    margin-right: 30px;
+}
+.message-box2-time{
+    display: flex;
+    justify-content:center;
+    color: #6b6b6b;
+    font-size: 12px;
+}
+.message-box2-content1{
+    line-height: 35px;
+    display: inline-block;
+    margin-left: 10px;
+    background-color: #ececec;
+    border-radius: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.message-box2-content2{
+    line-height: 35px;
+    display: inline-block;
+    margin-left: 10px;
+    background-color: #c8f3be;
+    border-radius: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.message-box2-confirm{
+    background-color: #cccccc;
+    position: absolute;
+    right: 33px;
+    bottom: 10px;
+    padding: 5px 8px 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.message-box2-userId,
+.message-box2-userImage{
+    display: none;
+}
+.modal-body{
+    padding: 30px 20px;
+}
+.content-search{
+    width: 414px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.wen-search{
+    margin-top: 16px;
+    display: inline-block;
+}
+.button-search{
+    display: inline-block;
+    height: 26px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #cccccc;
+    padding: 3px 5px;
+}
+
+/*弹窗中的样式*/
+.user-search-image{
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+.user-search{
+    margin-top: 5px;
+    position: relative;
+}
+.user-search:hover{
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+.user-search span{
+    margin-left: 8px;
+    cursor: pointer;
+}
+.user-search-private{
+    background-color: #cccccc;
+    display: inline-block;
+    position: absolute;
+    right: 8px;
+    margin-top: 4px;
+    padding: 2px 4px;
+    border-radius: 4px;
 }
