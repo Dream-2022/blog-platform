@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.Mapper">
+    <select id="selectRotationChart" resultType="bean.RotationChart">
+        SELECT * FROM rotation_chart
+    </select>
+    <update id="updateRotationChartUpState1" parameterType="map">
+        UPDATE rotation_chart SET state = 0 WHERE state = #{state2};
+    </update>
+
+    <update id="updateRotationChartUpState2" parameterType="map">
+        UPDATE rotation_chart SET state = #{state2} WHERE state = #{state1};
+    </update>
+    <update id="updateRotationChartUpState3" parameterType="map">
+        UPDATE rotation_chart SET state = #{state1} WHERE state = 0;
+    </update>
+    <update id="updateRotationChartContent" parameterType="map">
+        UPDATE rotation_chart SET content = #{content} WHERE state = #{state};
+    </update>
+<!--    insertRotationChart-->
+    <insert id="insertRotationChart" parameterType="map">
+        INSERT INTO rotation_chart (state, content)
+        SELECT COALESCE(MAX(state), 0) + 1, #{content}
+        FROM rotation_chart;
+    </insert>
+    <delete id="deleteRotationChart" parameterType="map">
+        DELETE FROM rotation_chart WHERE state=#{state}
+    </delete>
+</mapper>

@@ -241,6 +241,7 @@ footer{
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
+    width: 100%;
 }
 .slider {
     width: 330px;
@@ -260,7 +261,7 @@ footer{
 .content-id{
     position :absolute;
     top :153px;
-display :none;
+    display :none;
 }
 .slider-item {
     width: 1000px;

@@ -122,18 +122,18 @@
       <div id="slider-body">
         <div class="slider">
           <div class="slider-content">
-            <div class="slider-item" id="slider-item1">
-              <img src="image/image3.jpg" alt="Image 1">
-            </div>
-            <div class="slider-item">
-              <img src="image/image4.jpg" alt="Image 2">
-            </div>
-            <div class="slider-item">
-              <img src="image/image2.jpg" alt="Image 2">
-            </div>
-            <div class="slider-item">
-              <img src="image/image7.jpg" alt="Image 4">
-            </div>
+<!--            <div class="slider-item" id="slider-item1">-->
+<!--              <img src="image/image3.jpg" alt="Image 1">-->
+<!--            </div>-->
+<!--            <div class="slider-item">-->
+<!--              <img src="image/image4.jpg" alt="Image 2">-->
+<!--            </div>-->
+<!--            <div class="slider-item">-->
+<!--              <img src="image/image2.jpg" alt="Image 2">-->
+<!--            </div>-->
+<!--            <div class="slider-item">-->
+<!--              <img src="image/image7.jpg" alt="Image 4">-->
+<!--            </div>-->
           </div>
         </div>
     </div>
@@ -169,23 +169,6 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!--轮播图-->
-<script>
-  const slider = document.querySelector('.slider');
-  const sliderContent = document.querySelector('.slider-content');
-  const sliderItems = document.querySelectorAll('.slider-item');
-  let currentIndex = 0;
-  let interval;
-  function startSlider() {
-    interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % sliderItems.length;
-      updateSlider();
-    }, 3000);
-  }
-  function updateSlider() {
-    sliderContent.style.transform = `translateX(-${currentIndex * (100 / sliderItems.length)}%)`;
-  }
-  startSlider();
-</script>
 <!--发送请求时在响应头中加入token和longt-->
 <script src="JavaScript/Identity.js"></script>
 <!--导航栏下拉框-->

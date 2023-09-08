@@ -225,6 +225,42 @@ window.addEventListener('DOMContentLoaded', function() {
             })
 
         })
+
+    //显示轮播图
+    axios({
+        url: '/Blog/RotationChart/selectRotationChart',
+        method: 'get'
+    })
+        .then(result => {
+            console.log(result)
+            console.log(result.data)
+            document.querySelector('.slider-content').innerHTML = ''
+            let flag = 1
+            result.data.forEach(item => {
+                var sliderImageDiv = document.createElement('div')
+                sliderImageDiv.classList.add('slider-item')
+                sliderImageDiv.innerHTML = `
+                    <img src=${item.content} alt="Image 1">
+                    <span class="rotationChart-id">${item.id}</span>
+                `;
+                document.querySelector('.slider-content').appendChild(sliderImageDiv)
+            })
+            const slider = document.querySelector('.slider');
+            const sliderContent = document.querySelector('.slider-content');
+            const sliderItems = document.querySelectorAll('.slider-item');
+            let currentIndex = 0;
+            let interval;
+            function startSlider() {
+                interval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % sliderItems.length;
+                    updateSlider();
+                }, 3000);
+            }
+            function updateSlider() {
+                sliderContent.style.transform = `translateX(-${currentIndex * (100 / sliderItems.length)}%)`;
+            }
+            startSlider();
+        })
 });
 //点击标签
 document.querySelector('.labelList').addEventListener('click',function (event){

@@ -70,6 +70,7 @@ public class MyWebSocketEndpoint {
                 System.out.println("userSessions:"+userSessions);
                 //设置消息的状态,给接收者和发送者都显示
                 mess.setMessageType(4);//成功接收到消息，需要判断，是自己发送的，还是别人发送的
+                System.out.println("userSessions"+userSessions);
                 Session receiverSession=userSessions.get(String.valueOf(mess.getReceiver_id()));
                 System.out.println("receiverSession:"+receiverSession);
 

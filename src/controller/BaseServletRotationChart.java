@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
-public class BaseServletUser extends HttpServlet {
+public class BaseServletRotationChart extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("进入BaseServletUser类中");
+        System.out.println("BaseServletReports中");
         String uri = req.getRequestURI();
         // 最后一个'/'后的内容
         String methodName = uri.substring(uri.lastIndexOf('/') + 1);

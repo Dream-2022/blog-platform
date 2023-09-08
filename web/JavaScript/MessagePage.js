@@ -459,6 +459,7 @@ document.querySelector('.content-blog').addEventListener('click',function () {
 let list//左侧好友列表
 let myFriendData=new Map();
 let curToUserid;
+let userid=localStorage.getItem('id')
 function myFriend(searchImage,searchNickname,searchId){
       //将该用户加入好友框,如果聊天框中已经有该好友，就直接右侧进入聊天框就好，左侧不需要重复加入
       //判重
@@ -498,7 +499,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
       document.querySelector('.active').classList.remove('active')
       document.querySelector('.content-private').classList.add('active')
       document.querySelector('.message-content').innerHTML = ''
-      let userid=localStorage.getItem('id')
+
       //获取该用户的用户列表
 
       axios({
@@ -507,7 +508,8 @@ document.querySelector('.content-private').addEventListener('click',function (){
             params:{
                   id:userid
             }
-      }).then(result => {
+      })
+          .then(result => {
             console.log(result)
             console.log(result.data)
             if(result.data.isSuccess==1){
@@ -564,6 +566,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
       //点击了消息页面(处理点击左侧好友列表，处理点击发送消息)
       document.querySelector('.message-content').addEventListener('click',function (event){
             console.log('点击了message-content页面')
+            console.log('点击处理点击左侧好友列表')
             //判断是不是点击了左侧聊天好友
             if(event.target.classList.contains('message-box1-user')){
                   //点击用户，进入相应聊天框，先清空右侧
@@ -571,7 +574,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                   console.log(event.target.querySelector('.searchId').innerHTML)
 
                   //将右侧聊天框添加好,先清除
-                  document.querySelector('.message-box-private-right').innerHTML=''
+                  // document.querySelector('.message-box-private-right').innerHTML=''
 
                   let searchNickname=event.target.querySelector('.searchNickname').innerHTML
                   let searchId=event.target.querySelector('.searchId').innerHTML
@@ -609,7 +612,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                         url: '/Blog/user/selectUserById',
                         method: 'get',
                         params:{
-                              id:event.target.querySelector('.searchId').innerHTML
+                              id:event.target.querySelector('.searchId').textContent
                         }
                   }).then(result1 => {
                         console.log(result1)
@@ -638,8 +641,12 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                           `;
                         messagePrivate.appendChild(rightContent);
                         //获取消息（先从sessionStock中获取，然后没有就从数据库中读取）
-                        if(sessionStorage.getItem(event.target.querySelector('.searchId').innerHTML)){
-                              document.querySelector('.message-box2-record').innerHTML=sessionStorage.getItem('searchId')
+                        console.log(event.target.querySelector('.searchId').textContent)
+                        let searchId=event.target.querySelector('.searchId').textContent
+                        if(sessionStorage.getItem(event.target.querySelector('.searchId').textContent)){
+                              console.log('log')
+                              console.log(sessionStorage.getItem(searchId))
+                              document.querySelector('.message-box2-record').innerHTML=sessionStorage.getItem(searchId)
 
 
                         }
@@ -648,7 +655,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                     url: '/Blog/Fail/selectMessagesBySender_idAndReceiver_id',
                                     method: 'get',
                                     params:{
-                                          receiver_id:event.target.querySelector('.searchId').innerHTML,
+                                          receiver_id:event.target.querySelector('.searchId').textContent,
                                           sender_id:localStorage.getItem('id')
                                     }
                               })
@@ -659,11 +666,11 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                               console.log(item)
                                               //如果本人是发送者,聊天记录在右侧
                                               let ChildMessage=document.querySelector('.message-box2-record')
-                                              console.log(event.target.querySelector('.searchId').innerHTML)
-                                              console.log(receiver_id)
+                                              console.log(event.target.querySelector('.searchId').textContent)
+                                              //console.log(receiver_id)
                                               console.log(item.receiver_id)
                                               console.log(item.sender_id)
-                                              if(event.target.querySelector('.searchId').innerHTML==item.receiver_id){
+                                              if(localStorage.getItem('id')==item.sender_id){
                                                     console.log('如果本人是发送者,聊天记录在右侧')
                                                     let rightChildMessage=document.createElement('div')
                                                     let picture='/upload/'+localStorage.getItem('picture')
@@ -676,38 +683,40 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                                                       </div>
                                                                   `;
                                                     ChildMessage.appendChild(rightChildMessage)
-                                                    let sessionStockRecord=sessionStorage.getItem(receiver_id)+rightChildMessage.innerHTML
-                                                    console.log("11111222"+sessionStorage.getItem(receiver_id))
-                                                    if(sessionStorage.getItem(receiver_id)){
-                                                          sessionStorage.setItem(receiver_id,sessionStockRecord)
+                                                    let sessionStockRecord=sessionStorage.getItem(item.receiver_id)+rightChildMessage.innerHTML
+                                                    console.log("11111222"+sessionStorage.getItem(item.receiver_id))
+                                                    console.log(item.receiver_id)
+                                                    if(sessionStorage.getItem(item.receiver_id)){
+                                                          sessionStorage.setItem(item.receiver_id,sessionStockRecord)
                                                     }
                                                     else{
-                                                          sessionStorage.setItem(receiver_id,rightChildMessage.innerHTML)
+                                                          sessionStorage.setItem(item.receiver_id,rightChildMessage.innerHTML)
                                                     }
                                               }
-                                              else if(event.target.querySelector('.searchId').innerHTML==item.sender_id){
+                                             else {
                                                     //本人是接受者
                                                     console.log('本人是接受者.')
-                                                    let picture=document.querySelector('.message-box2-userImage').innerHTML
+                                                    let picture=document.querySelector('.message-box2-userImage').textContent
                                                     console.log(picture)
-                                                    console.log('/upload/'+picture)
                                                     let leftChildMessage=document.createElement('div')
                                                     leftChildMessage.classList.add('message-box2-left')
                                                     leftChildMessage.innerHTML=`
                                                                       <div class="message-box2-time">${item.timeStr}</div>
                                                                       <div class="message-box2-content-left">
-                                                                          <img src=${picture} class="message-box2-image" alt="">
+                                                                          <img src="${picture}" class="message-box2-image" alt="">
                                                                           <span class="message-box2-content1">${item.content}</span>
                                                                       </div>
                                                                   `;
                                                     ChildMessage.appendChild(leftChildMessage)
-                                                    let sessionStockRecord=sessionStorage.getItem(receiver_id)+leftChildMessage.innerHTML
-                                                    console.log("11111"+sessionStorage.getItem(receiver_id))
-                                                    if(sessionStorage.getItem(receiver_id)){
-                                                          sessionStorage.setItem(receiver_id,sessionStockRecord)
+
+                                                    let sessionStockRecord=sessionStorage.getItem(item.sender_id)+leftChildMessage.innerHTML
+                                                    console.log("11111"+sessionStorage.getItem(item.sender_id))
+                                                    console.log(item.sender_id)
+                                                    if(sessionStorage.getItem(item.sender_id)){
+                                                          sessionStorage.setItem(item.sender_id,sessionStockRecord)
                                                     }
                                                     else{
-                                                          sessionStorage.setItem(receiver_id,leftChildMessage.innerHTML)
+                                                          sessionStorage.setItem(item.sender_id,leftChildMessage.innerHTML)
                                                     }
                                               }
                                         })
@@ -838,13 +847,16 @@ document.querySelector('.content-private').addEventListener('click',function (){
                               console.log(result1.data)
                               let picture='/upload/'+result1.data.picture
                               myFriend(picture,result1.data.nickname,result1.data.id)
-                        })
+                        })//message
+                        console.log(data.receiver_avatar)
+                        let picture=document.querySelector('.message-box2-userImage').textContent
+
                         console.log('进入2')
                         str=`
                               <div class="message-box2-left">
                                   <div class="message-box2-time">${data.timeStr}</div>
                                   <div class="message-box2-content-left">
-                                      <img src=${data.receiver_avatar} class="message-box2-image" alt="">
+                                      <img src=${picture} class="message-box2-image" alt="">
                                       <span class="message-box2-content1">${data.content}</span>
                                   </div>
                               </div>
@@ -856,6 +868,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                   console.log(data)
                   console.log(data.receiver_id)
                   console.log(data.sender_id)
+
                   if(data.receiver_id!=userid&&sessionStorage.getItem(data.receiver_id)){
                         console.log('data.receiver_id!==userid&&sessionStorage.getItem(data.receiver_id)')
                         //如果sessionStorage里面有(我是发送者)
@@ -863,6 +876,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                         let pp=sessionStorage.getItem(data.receiver_id);
                         pp+=str;
                         sessionStorage.setItem(data.receiver_id,pp)
+                        console.log('000000000000000000发送者，')
                   }
                   else if(data.sender_id!=userid&&sessionStorage.getItem(data.sender_id)){
                         console.log('data.sender_id!==userid&&sessionStorage.getItem(data.sender_id)')
@@ -870,12 +884,19 @@ document.querySelector('.content-private').addEventListener('click',function (){
                         console.log('如果sessionStorage里面有sender_id')
                         let pp=sessionStorage.getItem(data.sender_id);
                         pp+=str;
-                        sessionStorage.setItem(data.receiver_id,pp)
+                        console.log('000000000000000000接受者，')
+                        sessionStorage.setItem(data.sender_id,pp)
                   }
-                  else{
-                        console.log('sessionStorage.setItem(data.receiver_id,str)')
+                  else if(data.receiver_id!=userid){
+                        console.log('000000000000000000发送者')
                         sessionStorage.setItem(data.receiver_id,str)
                   }
+                  else if(data.sender_id!=userid){
+                        console.log('000000000000000000接受者')
+                        console.log('sessionStorage.setItem(data.receiver_id,str)')
+                        sessionStorage.setItem(data.sender_id,str)
+                  }
+
 
 
                   console.log('receiver_id:'+receiver_id+"data.sender_id"+data.sender_id+"data.receiver_id:"+data.receiver_id)
@@ -1098,12 +1119,15 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                           `;
                                     messagePrivate.appendChild(rightContent);
 
-                                    let receiver_id=document.querySelector('.message-box2-userId').innerHTML
+                                    const receiver_id=document.querySelector('.message-box2-userId').textContent
+                                    console.log(receiver_id)
                                     let sender_id=localStorage.getItem('id')//本人
-                                    var sessionReceiverData=sessionStorage.getItem(receiver_id)
-                                    console.log(sessionReceiverData)
-                                    if(sessionReceiverData){
+                                    let sessionReceiverData=sessionStorage.getItem(receiver_id)
+                                    //console.log(sessionReceiverData)
+                                    console.log(sessionStorage.getItem(receiver_id))
+                                    if(sessionStorage.getItem(receiver_id)){
                                           //将数据取出来,显示在页面上
+                                          console.log('有值')
                                           document.querySelector('.message-box2-record').innerHTML= sessionReceiverData
                                     }
 
@@ -1128,7 +1152,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                                           console.log(receiver_id)
                                                           console.log(item.receiver_id)
                                                           console.log(item.sender_id)
-                                                          if(sender_id==item.sender_id){
+                                                          if(localStorage.getItem('id')===item.sender_id){
                                                                 console.log('如果本人是发送者,聊天记录在右侧')
                                                                 let rightChildMessage=document.createElement('div')
                                                                 let picture='/upload/'+localStorage.getItem('picture')
@@ -1143,6 +1167,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                                                 ChildMessage.appendChild(rightChildMessage)
                                                                 let sessionStockRecord=sessionStorage.getItem(receiver_id)+rightChildMessage.innerHTML
                                                                 console.log("11111222"+sessionStorage.getItem(receiver_id))
+                                                                console.log("11111222"+receiver_id)
                                                                 if(sessionStorage.getItem(receiver_id)){
                                                                       sessionStorage.setItem(receiver_id,sessionStockRecord)
                                                                 }
@@ -1150,10 +1175,10 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                                                       sessionStorage.setItem(receiver_id,rightChildMessage.innerHTML)
                                                                 }
                                                           }
-                                                          else if(sender_id==item.receiver_id){
+                                                          else {
                                                                 //本人是接受者
                                                                 console.log('本人是接受者.')
-                                                                let picture=document.querySelector('.message-box2-userImage').innerHTML
+                                                                let picture=document.querySelector('.message-box2-userImage').textContent
                                                                 console.log(picture)
                                                                 console.log('/upload/'+picture)
                                                                 let leftChildMessage=document.createElement('div')
@@ -1168,6 +1193,7 @@ document.querySelector('.content-private').addEventListener('click',function (){
                                                                 ChildMessage.appendChild(leftChildMessage)
                                                                 let sessionStockRecord=sessionStorage.getItem(receiver_id)+leftChildMessage.innerHTML
                                                                 console.log("11111"+sessionStorage.getItem(receiver_id))
+                                                                console.log("11111"+receiver_id)
                                                                 if(sessionStorage.getItem(receiver_id)){
                                                                       sessionStorage.setItem(receiver_id,sessionStockRecord)
                                                                 }

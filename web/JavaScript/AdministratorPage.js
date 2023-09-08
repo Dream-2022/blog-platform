@@ -122,7 +122,8 @@ window.addEventListener('DOMContentLoaded', function(){
     axios({
         url: '/Blog/Labels/ObtainLabelTest',
         method: 'get'
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data)
         //将所有标签加入标签栏
@@ -144,7 +145,8 @@ window.addEventListener('DOMContentLoaded', function(){
     axios({
         url: '/Blog/Articles/MainPageTest',
         method: 'get'
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data)
         //加载年的下拉框
@@ -182,6 +184,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
         });
     })
+
+
 })
 
 //点击未审核按钮
@@ -641,7 +645,8 @@ document.querySelector('.text-content3').addEventListener('click',function (){
     axios({
         url: '/Blog/Reports/selectReports',
         method: 'get'
-    }).then(result => {
+    })
+        .then(result => {
         console.log(result)
         console.log(result.data)
         result.data.forEach(item=>{
@@ -722,34 +727,403 @@ document.querySelector('.text-content3').addEventListener('click',function (){
 
             }
 
-
-
-
-//删除在文章状态上面写删除，忽略的话，将举报内容清空
-
-            // //如果点击了这个盒子，就进入user_id，receive_id,article_id个人中心
-            // tempDiv.addEventListener('click', function(event) {
-            //     // 判断是否点击了 .unAccessUser，如果是，则不进行后续操作
-            //     if (event.target.classList.contains('unAccessUser')) {
-            //         return;
-            //     }
-            //     const user_id = event.currentTarget.querySelector('.table-id').innerHTML;
-            //     localStorage.setItem('detail-author-id', user_id);
-            //     window.location.href = "Detail.html";
-            // });
         })
     })
 })
+function addWatermark(imgSrc, watermarkText) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = imgSrc;
 
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            console.log('w'+img.width)
+            console.log('h',img.height)
+            const ctx = canvas.getContext('2d');
 
-//点击轮播图
+            ctx.drawImage(img, 0, 0);
+
+            ctx.font = "40px Arial";
+            ctx.fillStyle = "rgba(255,253,53,0.9)";
+            console.log(watermarkText)
+            const textWidth = ctx.measureText(watermarkText).width;
+            const xPosition = (img.width - textWidth-30);
+            const yPosition = (img.height - 30)
+
+            ctx.fillText(watermarkText, xPosition, yPosition);
+
+            resolve(canvas.toDataURL('image/jpeg'));
+        };
+
+        img.onerror = function() {
+            reject("Error loading image.");
+        };
+    });
+}
+
+//点击轮播图(2-6张)
 document.querySelector('.text-content4').addEventListener('click',function (){
     document.querySelector('.Active').classList.remove('Active')
     document.querySelector('.text-content4').classList.add('Active')
-    document.querySelector('.Table').style.display='none';
-    document.querySelector('.articles-box').style.display='none';
-    document.querySelector('.published-box').style.display='none'
-    document.querySelector('.hide-content').style.display='none'
+    if(document.querySelector('.Table')){
+        document.querySelector('.Table').style.display='none';
+    }
+    if(document.querySelector('.articles-box')){
+        document.querySelector('.articles-box').style.display='none';
+    }
+    if(document.querySelector('.published-box')){
+        document.querySelector('.published-box').style.display='none'
+    }
+    if(document.querySelector('.hide-content')){
+        document.querySelector('.hide-content').style.display='none'
+    }
+
+    document.querySelector('.container-box2').innerHTML=`
+        <div class="slider-box">
+            <div class="preview">轮播图预览</div><br><br>
+            <div id="slider-body">
+                <div class="slider">
+                  <div class="slider-content">
+                    <div class="slider-item" id="slider-item1">
+                      <img src="../image/image3.jpg" alt="Image 1">
+                    </div>
+                    <div class="slider-item">
+                      <img src="../image/image4.jpg" alt="Image 2">
+                    </div>
+                    <div class="slider-item">
+                      <img src="../image/image2.jpg" alt="Image 2">
+                    </div>
+                    <div class="slider-item">
+                      <img src="../image/image7.jpg" alt="Image 4">
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="slider-images">
+<!--               <div class="slider-image">-->
+<!--                    <img src="../image/title.png" class="image1" alt="">-->
+<!--                    <div class="overlay">-->
+<!--                        <button class="up-img"><i class="angle double up icon"></i>向上调整</button>-->
+<!--                        <button class="update-img"><i class="sync alternate icon"></i>更换图片</button>-->
+<!--                        <button class="down-img"><i class="angle double down icon"></i>向下调整</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="addImageButton">添加图片</div>
+            <input type="file" class="uploadAddImageButton" placeholder="未选择" style="display: none">
+        </div>
+        
+    `;
+
+        //获取数据库中的图片，添加进页面
+        axios({
+            url: '/Blog/RotationChart/selectRotationChart',
+            method: 'get'
+        })
+            .then(result => {
+                console.log(result)
+                console.log(result.data)
+                document.querySelector('.slider-content').innerHTML=''
+                let flag=1
+                result.data.forEach(item=>{
+                    var sliderImageDiv=document.createElement('div')
+                    sliderImageDiv.classList.add('slider-item')
+                    sliderImageDiv.innerHTML=`
+                    <img src=${item.content} alt="Image 1">
+                    <span class="rotationChart-id">${item.id}</span>
+                `;
+                    document.querySelector('.slider-content').appendChild(sliderImageDiv)
+                    //下方的图片展示
+                    var classImage=`image${item.id}`
+                    var classOverlay=`overlay${item.state}`
+                    var uploadImage=`uploadImage${item.state}`
+                    var presentImageDiv=document.createElement('div')
+                    presentImageDiv.classList.add('slider-image')
+                    presentImageDiv.innerHTML=`
+                    <img src=${item.content} class=${classImage} alt="">
+                    <div class="overlay ${classOverlay}">
+                        <button class="up-img"><i class="angle double up icon"></i>向上调整</button>
+                        <button class="update-img"><i class="sync alternate icon"></i>更换图片</button>
+                        <button class="delete-img"><i class="x icon"></i>删除图片</button>
+                        <button class="down-img"><i class="angle double down icon"></i>向下调整</button>
+                        <input class=${uploadImage} type="file" class="upload" placeholder="未选择" style="display: none">
+                    </div>
+                `;
+                    document.querySelector('.slider-images').appendChild(presentImageDiv)
+                    console.log(presentImageDiv)
+
+                    let thisOverlay = presentImageDiv.querySelector(`.${classOverlay}`);
+                    console.log(thisOverlay)
+
+                    presentImageDiv.addEventListener('mouseenter', function() {
+                        thisOverlay.style.display = 'block';
+                    });
+
+                    presentImageDiv.addEventListener('mouseleave', function() {
+                        thisOverlay.style.display = 'none';
+                    });
+                    console.log(result.data.length)
+
+                    //四个按钮的点击事件
+                    presentImageDiv.querySelector('.up-img').addEventListener('click',function (){
+                        //修改数据库
+                        let numberPart
+                        if (presentImageDiv) {
+                            console.log(presentImageDiv)
+                            const className = presentImageDiv.querySelector('.overlay').className;
+                            console.log(className)
+                            const match = className.match(/\d+/);
+                            if (match) {
+                                numberPart = match[0];
+                                console.log(numberPart); // 这就是您想要的数字
+                            }
+                        }
+                        console.log(numberPart)
+                        axios({
+                            url: '/Blog/RotationChart/updateRotationChartUpState',
+                            method: 'post',
+                            params:{
+                                state:numberPart
+                            }
+                        }).then(result1 => {
+                            console.log(result1)
+
+                            //点击向上调整
+                            document.querySelector('.text-content4').click()
+                        })
+
+                    })
+                    //点击向下调整
+                    presentImageDiv.querySelector('.down-img').addEventListener('click',function (){
+                        //修改数据库
+                        let numberPart
+                        if (presentImageDiv) {
+                            console.log(presentImageDiv)
+                            const className = presentImageDiv.querySelector('.overlay').className;
+                            console.log(className)
+                            const match = className.match(/\d+/);
+                            if (match) {
+                                numberPart = match[0];
+                                console.log(numberPart); // 这就是您想要的数字
+                            }
+                        }
+                        console.log(numberPart)
+                        numberPart++
+                        axios({
+                            url: '/Blog/RotationChart/updateRotationChartUpState',
+                            method: 'post',
+                            params:{
+                                state:numberPart
+                            }
+                        }).then(result1 => {
+                            console.log(result1)
+
+                            //点击向上调整
+                            document.querySelector('.text-content4').click()
+                        })
+
+                    })
+                    //点击更换图片
+                    presentImageDiv.querySelector('.update-img').addEventListener('click',function (){
+                        presentImageDiv.querySelector(`.${uploadImage}`).click();
+                    })
+                    document.querySelector(`.${uploadImage}`).onchange = function(e) {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const originalFilename = file.name; // 获取原始文件名
+                            const extension = originalFilename.slice(((originalFilename.lastIndexOf(".") - 1) >>> 0) + 2); // 获取文件扩展名
+                            const baseFilename = originalFilename.replace(`.${extension}`, ''); // 获取不带扩展名的文件名
+                            const time =new Date().getTime();
+                            const newFilename = `${baseFilename}_水印_${time}.${extension}`; // 添加"_水印"到文件名
+
+                            const reader = new FileReader();
+                            reader.readAsDataURL(file);
+                            reader.onloadend = function() {
+                                const userNickname=localStorage.getItem('nickname')
+                                console.log(userNickname)
+                                addWatermark(reader.result, '博客园 '+userNickname).then(modifiedImg => {
+                                    presentImageDiv.querySelector(`.${classImage}`).src = modifiedImg;
+
+                                    fetch(modifiedImg)
+                                        .then(res => res.blob())
+                                        .then(blob => {
+                                            const modifiedFile = new File([blob], newFilename, {
+                                                type: "image/jpeg",
+                                                lastModified: new Date()
+                                            });
+
+                                            const formData = new FormData();
+                                            formData.append('avatar', modifiedFile);
+
+                                            let numberPart
+                                            if (presentImageDiv) {
+                                                console.log(presentImageDiv)
+                                                const className = presentImageDiv.querySelector('.overlay').className;
+                                                console.log(className)
+                                                const match = className.match(/\d+/);
+                                                if (match) {
+                                                    numberPart = match[0];
+                                                    console.log(numberPart); // 这就是您想要的数字
+                                                }
+                                            }
+                                            console.log(numberPart)
+                                            axios({
+                                                url: '/Blog/Articles/Avatar',
+                                                method: 'POST',
+                                                data: formData
+                                            }).then(result => {
+                                                console.log("返回了什么：" + result);
+                                                console.log("图片路径:" + result.data);
+                                                let avatar = '/upload/' + result.data;
+                                                //接着将图片更新到数据库，然后点击‘轮播图’
+                                                axios({
+                                                    url: '/Blog/RotationChart/updateRotationChartContent',
+                                                    method: 'POST',
+                                                    params:{
+                                                        state:numberPart,
+                                                        content:avatar
+                                                    }
+                                                }).then(result3 => {
+                                                    console.log(result3);
+                                                    console.log(result3.data);
+                                                    document.querySelector('.text-content4').click()
+                                                })
+                                            });
+                                        });
+                                });
+                            };
+                        }
+                    };
+                    //点击删除图片
+                    presentImageDiv.querySelector('.delete-img').addEventListener('click',function (){
+                        let numberPart
+                        if (presentImageDiv) {
+                            console.log(presentImageDiv)
+                            const className = presentImageDiv.querySelector('.overlay').className;
+                            console.log(className)
+                            const match = className.match(/\d+/);
+                            if (match) {
+                                numberPart = match[0];
+                                console.log(numberPart); // 这就是您想要的数字
+                            }
+                        }
+                        console.log(numberPart)
+                        axios({
+                            url: '/Blog/RotationChart/deleteRotationChart',
+                            method: 'POST',
+                            params:{
+                                state:numberPart
+                            }
+                        }).then(result => {
+                            console.log(result);
+                            document.querySelector('.text-content4').click()
+                        })
+                    })
+                    //第一张图片和最后一张图片要隐藏一个按钮
+                    if(flag===1){
+                        presentImageDiv.querySelector('.up-img').style.display='none'
+                    }
+                    if(flag===result.data.length){
+                        presentImageDiv.querySelector('.down-img').style.display='none'
+                    }
+                    flag++
+                });
+                let deleteImg=document.querySelectorAll('.delete-img')
+                if(flag===2){
+                    //隐藏删除按钮
+                    deleteImg.forEach(item=>{
+                        item.style.display='none'
+                    })
+                }
+                else{
+                    deleteImg.forEach(item=>{
+                        item.style.display=''
+                    })
+                }
+                slider()
+            })
+
+    document.querySelector('.addImageButton').addEventListener('click',function (){
+        document.querySelector('.uploadAddImageButton').click();
+    })
+    document.querySelector('.uploadAddImageButton').onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const originalFilename = file.name; // 获取原始文件名
+            const extension = originalFilename.slice(((originalFilename.lastIndexOf(".") - 1) >>> 0) + 2); // 获取文件扩展名
+            const baseFilename = originalFilename.replace(`.${extension}`, ''); // 获取不带扩展名的文件名
+            const time =new Date().getTime();
+            const newFilename = `${baseFilename}_水印_${time}.${extension}`; // 添加"_水印"到文件名
+
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function() {
+                const userNickname=localStorage.getItem('nickname')
+                console.log(userNickname)
+                addWatermark(reader.result, '博客园 '+userNickname).then(modifiedImg => {
+                    // document.querySelector(`.${classImage}`).src = modifiedImg;
+
+                    fetch(modifiedImg)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            const modifiedFile = new File([blob], newFilename, {
+                                type: "image/jpeg",
+                                lastModified: new Date()
+                            });
+
+                            const formData = new FormData();
+                            formData.append('avatar', modifiedFile);
+
+                            axios({
+                                url: '/Blog/Articles/Avatar',
+                                method: 'POST',
+                                data: formData
+                            }).then(result => {
+                                console.log("返回了什么：" + result);
+                                console.log("图片路径:" + result.data);
+                                let avatar = '/upload/' + result.data;
+                                //接着将图片更新到数据库，然后点击‘轮播图’
+                                axios({
+                                    url: '/Blog/RotationChart/insertRotationChart',
+                                    method: 'POST',
+                                    params:{
+                                        content:avatar
+                                    }
+                                }).then(result3 => {
+                                    console.log(result3);
+                                    console.log(result3.data);
+                                    slider()
+                                    document.querySelector('.text-content4').click()
+
+                                })
+                            });
+                        });
+                });
+            };
+        }
+    };
+    //轮播图
+    function slider(){
+        const slider = document.querySelector('.slider');
+        const sliderContent = document.querySelector('.slider-content');
+        const sliderItems = document.querySelectorAll('.slider-item');
+        let currentIndex = 0;
+        let interval;
+        function startSlider() {
+            interval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % sliderItems.length;
+                updateSlider();
+            }, 3000);
+        }
+        function updateSlider() {
+            sliderContent.style.transform = `translateX(-${currentIndex * (100 / sliderItems.length)}%)`;
+        }
+        startSlider();
+    }
+
+
 })
 
 //点击返回主页

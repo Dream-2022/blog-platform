@@ -26,6 +26,7 @@
         <mapper resource="LikesMapper.xml"/>
         <mapper resource="MessagesMapper.xml"/>
         <mapper resource="ReportsMapper.xml"/>
+        <mapper resource="RotationChartMapper.xml"/>
         <mapper resource="UserMapper.xml"/>
         <mapper resource="Collect_articleMapper.xml"/>
     </mappers>

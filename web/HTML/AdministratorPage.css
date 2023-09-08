@@ -157,3 +157,123 @@ select {
 .hide-content{
     margin-top: 10px;
 }
+/*轮播图*/
+.preview,
+.addImageButton{
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 17px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.addImageButton{
+    border-radius: 5px;
+    background-color: #cccccc;
+    width: 103px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    margin-left: 350px;
+}
+#slider-body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    width: 334px;
+    margin-left: 245px;
+}
+.slider {
+    width: 330px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: inline-flex;
+    border-radius: 10px 10px 10px 10px; /* 调整圆角半径大小 */
+}
+
+.slider-content {
+    display: flex;
+    width: fit-content;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+.slider-item {
+    width: 1000px;
+    height: 388.88px;
+    flex-shrink: 0;
+}
+
+.slider-item img {
+    width: 350px;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.slider-image img{
+    width: 333px;
+    height: 212px;
+    border-radius: 10px;
+    padding: 5px;
+    object-fit: cover;
+}
+.slider-images{
+    display: flex;
+    margin-left: 76px;
+    flex-wrap: wrap; /* 允许换行 */
+    justify-content: center;
+}
+.slider-button{
+    width: 103px;
+    height: 33px;
+    border-radius: 10px;
+    background-color: #cccccc;
+    display: flex;
+    line-height: 33px;
+    justify-content: center;
+}
+.button{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.slider-images{
+     position: relative;
+     display: inline-block;
+ }
+.slider-image{
+    position: relative;
+}
+/*轮播图图片*/
+.overlay{
+    position: absolute;
+    top: 20px;
+    left: 5px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.up-img,
+.down-img,
+.update-img,
+.delete-img{
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: #cccccc;
+    display: block;
+    margin: 10px;
+}
+.up-img:hover,
+.down-img:hover,
+.update-img:hover,
+.delete-img:hover{
+    background-color: #e8e6e6;
+}
